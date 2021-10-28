@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdnFabioRamos.Api", "AdnFabioRamos.Api\AdnFabioRamos.Api.csproj", "{9E1C295C-A6BC-4E0F-809C-780E7188458D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdnFabioRamos.Domain", "AdnFabioRamos.Domain\AdnFabioRamos.Domain.csproj", "{7750BB95-1B90-4B4D-9E8D-442678DC0C0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdnFabioRamos.Infrastructure", "AdnFabioRamos.Infrastructure\AdnFabioRamos.Infrastructure.csproj", "{6C4219AA-2A5E-4FA9-AC72-27FB2CEF3B33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdnFabioRamos.Application", "AdnFabioRamos.Application\AdnFabioRamos.Application.csproj", "{CCABDFB6-DC04-47A7-AFDB-795196E30EF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdnFabioRamos.Domain.Tests", "AdnFabioRamos.Domain.Tests\AdnFabioRamos.Domain.Tests.csproj", "{25ABC6DD-4565-4553-8976-56E419B5F4F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdnFabioRamos.Api.Tests", "AdnFabioRamos.Api.Tests\AdnFabioRamos.Api.Tests.csproj", "{1F45287F-61F3-4C26-AFE6-6322FA14D0C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E1C295C-A6BC-4E0F-809C-780E7188458D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E1C295C-A6BC-4E0F-809C-780E7188458D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E1C295C-A6BC-4E0F-809C-780E7188458D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E1C295C-A6BC-4E0F-809C-780E7188458D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7750BB95-1B90-4B4D-9E8D-442678DC0C0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7750BB95-1B90-4B4D-9E8D-442678DC0C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7750BB95-1B90-4B4D-9E8D-442678DC0C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7750BB95-1B90-4B4D-9E8D-442678DC0C0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C4219AA-2A5E-4FA9-AC72-27FB2CEF3B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C4219AA-2A5E-4FA9-AC72-27FB2CEF3B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C4219AA-2A5E-4FA9-AC72-27FB2CEF3B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C4219AA-2A5E-4FA9-AC72-27FB2CEF3B33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCABDFB6-DC04-47A7-AFDB-795196E30EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCABDFB6-DC04-47A7-AFDB-795196E30EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCABDFB6-DC04-47A7-AFDB-795196E30EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCABDFB6-DC04-47A7-AFDB-795196E30EF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25ABC6DD-4565-4553-8976-56E419B5F4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25ABC6DD-4565-4553-8976-56E419B5F4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25ABC6DD-4565-4553-8976-56E419B5F4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25ABC6DD-4565-4553-8976-56E419B5F4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F45287F-61F3-4C26-AFE6-6322FA14D0C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F45287F-61F3-4C26-AFE6-6322FA14D0C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F45287F-61F3-4C26-AFE6-6322FA14D0C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F45287F-61F3-4C26-AFE6-6322FA14D0C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
