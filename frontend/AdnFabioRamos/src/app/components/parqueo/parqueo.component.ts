@@ -48,26 +48,32 @@ export class ParqueoComponent implements OnInit {
 
   }
 
-  guardar(modal: any) {
+  async guardar(modal: any) {
     if (confirm(`¿Asignar el parqueo de “${this.movp_seleccionado.tipt_tipo}” numero “${this.movp_seleccionado.numero}” al vehículo con placa “${this.movp_seleccionado.movp_placa}”?`)) {
-      var esta_en_pico_placa = true;
-      //Consultar el picoplaca
-      if (!esta_en_pico_placa) {
-        alert(`El vehiculo con placa “${this.movp_seleccionado.movp_placa}” no esta en Pico Placa`);
-      } else {
-        this._VehiculosDisponiblesParqueoService.postMovimientoParqueo(new MovimientoVehiculoPost(
-          this.movp_seleccionado.par_codigo, this.movp_seleccionado.movp_placa, this.movp_seleccionado.tipt_codigo, ((this.movp_seleccionado.movp_cilindraje) ? this.movp_seleccionado.movp_cilindraje : 0), this.movp_seleccionado.numero
-        )).subscribe(
-          respon => {
-            alert("Parqueo reservado con éxito");
-            this.cargarCeldas();
-            modal.close('Save click');
-          },
-          error => {
-            console.log(error);
+
+      await this._VehiculosDisponiblesParqueoService.consultarPicoPlaca(this.movp_seleccionado.tipt_codigo, this.movp_seleccionado.movp_placa).subscribe(
+        respon => {
+          if (!respon.permitir_salir_ahora) {
+            alert(`El vehiculo con placa “${this.movp_seleccionado.movp_placa}” no esta en Pico Placa, los dias permitidos son: “${respon.dias_permitidos_salir}”`);
+          } else {
+            this._VehiculosDisponiblesParqueoService.postMovimientoParqueo(new MovimientoVehiculoPost(
+              this.movp_seleccionado.par_codigo, this.movp_seleccionado.movp_placa, this.movp_seleccionado.tipt_codigo, ((this.movp_seleccionado.movp_cilindraje) ? this.movp_seleccionado.movp_cilindraje : 0), this.movp_seleccionado.numero
+            )).subscribe(
+              respon => {
+                alert("Parqueo reservado con éxito");
+                this.cargarCeldas();
+                modal.close('Save click');
+              },
+              error => {
+                console.log(error);
+              }
+            );
           }
-        );
-      }
+        },
+        error => {
+          console.log(error);
+        }
+      );
     }
   }
 
@@ -78,8 +84,7 @@ export class ParqueoComponent implements OnInit {
         this.movp_seleccionado.movp_placa, 0
       )).subscribe(
         respon => {
-          console.log(respon);
-          alert("Ticket generado con éxito");
+          alert("Ticket generado con éxito, TOTAL A PAGAR: " + respon.movp_total_pagar);
           this.cargarCeldas();
           modal.close('Save click');
         },

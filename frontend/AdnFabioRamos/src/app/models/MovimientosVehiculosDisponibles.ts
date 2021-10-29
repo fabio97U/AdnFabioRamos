@@ -1,3 +1,5 @@
+import { Guid } from "guid-typescript";
+
 export class MovimientosVehiculosDisponibles {
     constructor(
         public par_codigo: number,
@@ -9,7 +11,7 @@ export class MovimientosVehiculosDisponibles {
         public cap_valor_dia: number,
         
         public numero: number, 
-        public movp_codigo: number, 
+        public movp_codigo: Guid, 
         public movp_codpar: number, 
         public movp_placa: string, 
         public movp_codtipt: number, 

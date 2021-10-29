@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 import { Global } from './global';
 
 import { MovimientosVehiculosDisponibles } from '../models/MovimientosVehiculosDisponibles';
-import { PicoPlaca } from '../models/PicoPlaca';
+import { RespuestaPicoPlaca } from '../models/RespuestaPicoPlaca';
 import { MovimientoVehiculoPost } from '../models/MovimientoVehiculoPost';
 import { MovimientoVehiculoPut } from '../models/MovimientoVehiculoPut';
 
@@ -23,8 +23,8 @@ import { MovimientoVehiculoPut } from '../models/MovimientoVehiculoPut';
     return this._httpClient.get<Array<MovimientosVehiculosDisponibles>>(Global.url_api + "/movp_movimiento_parqueo/codpar/1");
   }
 
-  consultarPicoPlaca(placa: string): Observable<PicoPlaca> {
-    return this._httpClient.get<PicoPlaca>(Global.url_api + "");
+  consultarPicoPlaca(tipo_vehiculo: number, placa: string): Observable<RespuestaPicoPlaca> {
+    return this._httpClient.get<RespuestaPicoPlaca>(Global.url_api + "/dpp_detalle_pico_placa/consultarPicoPlaca/" + tipo_vehiculo + "/" + placa);
   }
 
   postMovimientoParqueo(movp: MovimientoVehiculoPost): Observable<MovimientoVehiculoPost> {

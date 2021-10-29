@@ -40,14 +40,14 @@
         <form (ngSubmit)="onSumbit()" #userForm="ngForm">
             <div class="row" *ngIf="movp_seleccionado.movp_codigo">
                 <div class="col-sm">
-                    <label>Codigo del parqueo: {{movp_seleccionado.movp_codigo}}</label>
+                    <label>Codigo: {{movp_seleccionado.movp_codigo}}</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="movp_placa">Placa: </label>
-                        <input type="text" name="movp_placa" #movp_placas="ngModel" class="form-control"
+                        <input type="text" name="movp_placa" #movp_placas="ngModel" class="form-control" autocomplete="off"
                             [(ngModel)]="movp_seleccionado.movp_placa" required pattern="[0-9]+"
                             disabled="{{movp_seleccionado.movp_codigo?true:false}}" />
                         <small *ngIf="!movp_placas.valid && movp_placas.touched" class="text-danger">
@@ -60,7 +60,7 @@
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="movp_cilindraje">Cilindraje: </label>
-                        <input type="number" name="movp_cilindraje" #movp_cilindraje="ngModel" class="form-control"
+                        <input type="number" name="movp_cilindraje" #movp_cilindraje="ngModel" class="form-control" autocomplete="off"
                             [(ngModel)]="movp_seleccionado.movp_cilindraje" required pattern="[0-9]+"
                             disabled="{{movp_seleccionado.movp_codigo?true:false}}" />
                         <small *ngIf="!movp_cilindraje.valid && movp_cilindraje.touched" class="text-danger">
@@ -95,4 +95,3 @@
         </div>
     </div>
 </ng-template>
-<pre>{{ closeResult }}</pre>
