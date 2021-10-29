@@ -1,4 +1,5 @@
 using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -22,6 +23,7 @@ namespace AdnFabioRamos.Api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -45,6 +47,39 @@ namespace AdnFabioRamos.Api
                 .FirstOrDefault(x => x.Name.Equals("AdnFabioRamos.Application", StringComparison.InvariantCulture));
 
             services.AddAutoMapper(Assembly.Load(applicationAssemblyName.FullName));
+
+            services.AddDbContext<Adn_CeibaContext>();
+            services.AddDbContext<Adn_CeibaContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
+
+            //// ********************
+            //// Setup CORS
+            //// ********************
+            //var corsBuilder = new CorsPolicyBuilder();
+            //corsBuilder.AllowAnyHeader();
+            //corsBuilder.AllowAnyMethod();
+            //corsBuilder.AllowAnyOrigin(); // For anyone access.
+            ////corsBuilder.WithOrigins("http://localhost:4200"); // for a specific url. Don't add a forward slash on the end!
+            ////corsBuilder.AllowCredentials();
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+            //});
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
+
             services.AddDomainServices();
             services.AddControllers( options => {
                 options.Filters.Add(typeof(AppExceptionFilterAttribute));
@@ -54,11 +89,22 @@ namespace AdnFabioRamos.Api
             services.AddHealthChecks()
                 .AddDbContextCheck<AdnFabioRamos.Infrastructure.Persistence.PersistenceContext>()
                 .ForwardToPrometheus();
+
+            services.AddScoped<ICapacidadRepository, CapacidadRespository>();
+            services.AddScoped<IDetallePicoPlaca, DetallePicoPlacaRepository>();
+            services.AddScoped<IMovimientoParqueo, MovimientoParqueo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //// ********************
+            //// USE CORS - might not be required.
+            //// ********************
+            //app.UseCors("SiteCorsPolicy");
+            app.UseCors(MyAllowSpecificOrigins);
+            //app.UseCors("AllowOrigin");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

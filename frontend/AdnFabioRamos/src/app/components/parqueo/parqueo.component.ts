@@ -84,7 +84,7 @@ export class ParqueoComponent implements OnInit {
         this.movp_seleccionado.movp_placa, 0
       )).subscribe(
         respon => {
-          alert("Ticket generado con éxito, TOTAL A PAGAR: " + respon.movp_total_pagar);
+          alert("Ticket generado con éxito, TOTAL A PAGAR: $ " + respon.movp_total_pagar);
           this.cargarCeldas();
           modal.close('Save click');
         },
