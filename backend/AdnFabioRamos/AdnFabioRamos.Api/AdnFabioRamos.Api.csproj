@@ -23,4 +23,6 @@
     <PackageReference Include="prometheus-net.AspNetCore.HealthChecks" Version="4.2.0" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>
