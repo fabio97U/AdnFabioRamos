@@ -81,10 +81,17 @@ namespace AdnFabioRamos.Api
             });
 
             services.AddDomainServices();
-            services.AddControllers( options => {
+            services.AddControllers(options =>
+            {
                 options.Filters.Add(typeof(AppExceptionFilterAttribute));
             });
-            services.AddSwaggerDocument();
+            services.AddSwaggerDocument(settings =>
+            {
+                settings.Title = "Adn API Fabio Ramos";
+                settings.Description = "API que consume la aplicacion frondend en Angular";
+                settings.Version = "1.0";
+            });
+
             services.AddResponseCompression();
             services.AddHealthChecks()
                 .AddDbContextCheck<AdnFabioRamos.Infrastructure.Persistence.PersistenceContext>()

@@ -26,7 +26,7 @@ namespace AdnFabioRamos.Application.CQRS.Movp
 
             public async Task<IEnumerable<sp_movimientos_parqueoResult>> Handle(GetMovimientosParqueByIdQuery request, CancellationToken cancellationToken)
             {
-                return await _repositorio.Getmovp_movimiento_x_parqueo(request.codigo_parqueo);
+                return _repositorio.Getmovp_movimiento_x_parqueo(request.codigo_parqueo);
             }
 
             private Task<IEnumerable<sp_movimientos_parqueoResult>> NotFound(object p)

@@ -1,4 +1,5 @@
-﻿using AdnFabioRamos.Domain.Ports;
+﻿using AdnFabioRamos.Application.Utilidades;
+using AdnFabioRamos.Domain.Ports;
 using AdnFabioRamos.Infrastructure.Persistence;
 using estacionamiento_adn.Models.DTOs;
 using MediatR;
@@ -27,6 +28,8 @@ namespace AdnFabioRamos.Application.CQRS.Movp
 
             public async Task<MovimientoVehiculoPutDTO> Handle(GenerarTicket request, CancellationToken cancellationToken)
             {
+                ParqueoLogica.calcularTotalPagar(request.movimientoVehiculoPutDTO);
+
                 return await _repository.PutGenerarTicket(request.id, request.movimientoVehiculoPutDTO);
             }
         }

@@ -7,6 +7,7 @@ import { VehiculosDisponiblesParqueo } from 'src/app/models/VehiculosDisponibles
 import { VehiculosDisponiblesParqueoService } from '../../services/vehiculos-disponibles-parqueo.service';
 import { MovimientoVehiculoPost } from 'src/app/models/MovimientoVehiculoPost';
 import { MovimientoVehiculoPut } from 'src/app/models/MovimientoVehiculoPut';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-parqueo',
@@ -81,10 +82,23 @@ export class ParqueoComponent implements OnInit {
     if (confirm(`¿Generar el ticket de pago parqueadero número “${this.movp_seleccionado.numero}” (${this.movp_seleccionado.tipt_tipo})?`)) {
       this._VehiculosDisponiblesParqueoService.putMovimientoParqueo(new MovimientoVehiculoPut(
         this.movp_seleccionado.tipt_codigo, this.movp_seleccionado.cap_valor_hora, this.movp_seleccionado.cap_valor_dia, this.movp_seleccionado.movp_codigo,
-        this.movp_seleccionado.movp_placa, 0
+        this.movp_seleccionado.movp_placa, this.movp_seleccionado.movp_cilindraje, this.movp_seleccionado.movp_hora_entrada
       )).subscribe(
         respon => {
-          alert("Ticket generado con éxito, TOTAL A PAGAR: $ " + respon.movp_total_pagar);
+          alert(`
+                          *Ticket generado con éxito*
+          Hora de salida: ${respon.hora_salida.toLocaleString()}
+          Valor hora: ${respon.cap_valor_hora}
+          Valor dia: ${respon.cap_valor_dia}
+          TOTAL DE HORAS: ${respon.cantidad_horas}
+          ----------*----------
+          Dias 9h: ${respon.dias_9h}
+          Total a pagar: ${respon.total_pagar_dias_9h}
+          ----------*----------
+          Horas restantes: ${respon.horas_restantes}
+          Total a pagar: ${respon.total_pagar_horas_restantes}
+          ----------*----------
+          TOTAL A PAGAR (dias + horas): ${respon.cantidad_pagar}`);
           this.cargarCeldas();
           modal.close('Save click');
         },
@@ -106,7 +120,6 @@ export class ParqueoComponent implements OnInit {
     this._VehiculosDisponiblesParqueoService.getParqueos().subscribe(
       respon => {
         this.lista_movp = respon;
-
       },
       error => {
         console.log(error);
@@ -114,7 +127,6 @@ export class ParqueoComponent implements OnInit {
     );
   }
   open(content: any, movp: MovimientosVehiculosDisponibles): void {
-
     this.movp_seleccionado = movp;
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
