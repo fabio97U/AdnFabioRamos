@@ -1,6 +1,8 @@
 ﻿using AdnFabioRamos.Domain.Ports;
 using AdnFabioRamos.Infrastructure.Persistence;
+using estacionamiento_adn.Models;
 using estacionamiento_adn.Models.DTOs;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,21 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             );
 
             return respuesta;
+        }
+
+        public async Task<dpp_detalle_pico_placa> PostDetallePicoPlaca(dpp_detalle_pico_placa dpp_Detalle_Pico_Placa)
+        {
+            _context.dpp_detalle_pico_placa.Add(dpp_Detalle_Pico_Placa);
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return dpp_Detalle_Pico_Placa;
         }
     }
 }

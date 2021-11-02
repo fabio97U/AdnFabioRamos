@@ -37,7 +37,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             var movp = new movp_movimiento_parqueo();
 
             _mapper.Map(_movp, movp);
-
+            
             _context.movp_movimiento_parqueo.Add(movp);
             try
             {

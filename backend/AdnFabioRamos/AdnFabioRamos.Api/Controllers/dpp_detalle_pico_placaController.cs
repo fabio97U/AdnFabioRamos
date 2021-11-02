@@ -24,5 +24,10 @@ namespace AdnFabioRamos.Api.Controllers
         [HttpGet("consultarPicoPlaca/{tipo_vehiculo}/{placa}")]
         public Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa)
          => _Mediator.Send(new GetDetallePicoPlacaByPlacaVehiculoQuery { tipo_vehiculo = tipo_vehiculo, placa = placa });
+
+
+        [HttpPost]
+        public Task<dpp_detalle_pico_placa> Postdpp_detalle_pico_placa(dpp_detalle_pico_placa dpp_detalle_pico_placa)
+         => _Mediator.Send(new PostDetallePicoPlaca { _dpp_detalle_pico_placa = dpp_detalle_pico_placa });
     }
 }

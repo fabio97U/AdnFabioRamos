@@ -12,13 +12,17 @@ namespace AdnFabioRamos.Application
             CreateMap<AdnFabioRamos.Application.Person.Queries.PersonDto, AdnFabioRamos.Domain.Entities.Person>();
 
 
-
             SourceMemberNamingConvention = new LowerUnderscoreNamingConvention();
             DestinationMemberNamingConvention = new PascalCaseNamingConvention();
 
             AllowNullCollections = true;
             CreateMap<movp_movimiento_parqueo, MovimientoVehiculoPostDTO>();
-            CreateMap<MovimientoVehiculoPostDTO, movp_movimiento_parqueo>();
+
+
+            CreateMap<MovimientoVehiculoPostDTO, movp_movimiento_parqueo>()
+                .ForMember(
+                dest => dest.movp_hora_entrada,
+                org => org.MapFrom(src => src.fecha_ingreso));
         }
     }
 }

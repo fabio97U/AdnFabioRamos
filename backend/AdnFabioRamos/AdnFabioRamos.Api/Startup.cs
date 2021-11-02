@@ -23,7 +23,7 @@ namespace AdnFabioRamos.Api
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        readonly string _politicaCors = "MipoliticaCors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -71,7 +71,7 @@ namespace AdnFabioRamos.Api
 
             services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
+                options.AddPolicy(name: _politicaCors,
                     builder =>
                     {
                         builder.WithOrigins("http://localhost:4200")
@@ -109,7 +109,7 @@ namespace AdnFabioRamos.Api
             //// USE CORS - might not be required.
             //// ********************
             //app.UseCors("SiteCorsPolicy");
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(_politicaCors);
             //app.UseCors("AllowOrigin");
 
             if (env.IsDevelopment())
@@ -139,7 +139,6 @@ namespace AdnFabioRamos.Api
             });
 
             app.UseResponseCompression();
-
         }
     }
 }

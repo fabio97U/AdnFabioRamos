@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Linq;
 
 namespace AdnFabioRamos.Api.Tests
 {
     public class WebapiAppFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
     {
-          protected override IHostBuilder CreateHostBuilder()
+        protected override IHostBuilder CreateHostBuilder()
         {
 
             return Host.CreateDefaultBuilder()
@@ -18,21 +19,20 @@ namespace AdnFabioRamos.Api.Tests
                 {
                     builder.UseStartup<Startup>().ConfigureServices(services =>
                     {
-                        var dbCtxOpts = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<PersistenceContext>));
+                        var dbCtxOpts = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<Adn_CeibaContext>));
 
                         if (dbCtxOpts != null)
                         {
                             services.Remove(dbCtxOpts);
                         }
 
-                        services.AddDbContext<PersistenceContext>(options =>
+                        services.AddDbContext<Adn_CeibaContext>(options =>
                         {
-                            options.UseInMemoryDatabase("TestDb");
-                        });                        
-                       
+                            options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True;multipleactiveresultsets=true;Connection Timeout=0");
+                            //options.UseInMemoryDatabase(Guid.NewGuid().ToString());
+                        });
                     });
                 });
-            
         }
     }
 }

@@ -9,5 +9,6 @@ namespace estacionamiento_adn.Models.DTOs
         public int movp_codtipt { get; set; }
         public int movp_cilindraje { get; set; }
         public int movp_parqueo_numero { get; set; }
+        public DateTime fecha_ingreso { get; set;  } = DateTime.Now;
     }
 }
