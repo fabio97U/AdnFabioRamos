@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using AdnFabioRamos.Application.Utilidades;
+using Microsoft.Extensions.DependencyInjection;
+using AdnFabioRamos.Infrastructure.Persistence;
 
 namespace AdnFabioRamos.Api.Tests
 {
@@ -21,8 +23,18 @@ namespace AdnFabioRamos.Api.Tests
         public ParqueoTest()
         {
             _AppFactory = new WebapiAppFactory<Startup>();
-
             TestClient = _AppFactory.CreateClient();
+            SeedDataBase(_AppFactory.Services);
+        }
+
+        void SeedDataBase(IServiceProvider provider)
+        {
+            using (var scope = provider.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<Adn_CeibaContext>();
+                DBInicializer.Initialize(services);
+            }
         }
 
         [TestMethod]

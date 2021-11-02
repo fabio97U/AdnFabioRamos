@@ -13,11 +13,11 @@ namespace AdnFabioRamos.Api.Tests
     {
         protected override IHostBuilder CreateHostBuilder()
         {
-
-            return Host.CreateDefaultBuilder()
+            var host = 
+            Host.CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(builder =>
                 {
-                    builder.UseStartup<Startup>().ConfigureServices(services =>
+                    builder.UseStartup<TStartup>().ConfigureServices(services =>
                     {
                         var dbCtxOpts = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<Adn_CeibaContext>));
 
@@ -28,11 +28,15 @@ namespace AdnFabioRamos.Api.Tests
 
                         services.AddDbContext<Adn_CeibaContext>(options =>
                         {
-                            options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True;multipleactiveresultsets=true;Connection Timeout=0");
-                            //options.UseInMemoryDatabase(Guid.NewGuid().ToString());
+                            //options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True;multipleactiveresultsets=true;Connection Timeout=0");
+                            options.UseInMemoryDatabase(Guid.NewGuid().ToString());
                         });
                     });
                 });
+
+            
+
+            return host;
         }
     }
 }
