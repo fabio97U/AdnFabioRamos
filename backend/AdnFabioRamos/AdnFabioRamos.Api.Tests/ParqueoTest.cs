@@ -51,7 +51,8 @@ namespace AdnFabioRamos.Api.Tests
             respuestaPicoPlaca = System.Text.Json.JsonSerializer.Deserialize<RespuestaPicoPlaca>(response);
 
             //Verificacion
-            Assert.AreEqual(true, respuestaPicoPlaca.permitir_salir_ahora);
+            //Assert.AreEqual(true, respuestaPicoPlaca.permitir_salir_ahora);
+            Assert.AreEqual(false, respuestaPicoPlaca.permitir_salir_ahora);
         }
 
         [TestMethod]
