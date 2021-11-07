@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <ProjectGuid>94851f54-f598-46d7-82c3-14723673e8d2</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\AdnFabioRamos.Domain\AdnFabioRamos.Domain.csproj" />

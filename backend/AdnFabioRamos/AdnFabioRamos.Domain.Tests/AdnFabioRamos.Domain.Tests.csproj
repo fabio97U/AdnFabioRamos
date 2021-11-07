@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <ProjectGuid>17422cf8-5198-42eb-abd9-99057e313ab7</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
