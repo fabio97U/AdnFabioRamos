@@ -40,7 +40,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             _context.DetallePicoPlaca.Add(dpp_Detalle_Pico_Placa);
             try
             {
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {

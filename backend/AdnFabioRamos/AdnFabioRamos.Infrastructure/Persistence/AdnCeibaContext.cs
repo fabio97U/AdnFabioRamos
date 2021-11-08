@@ -10,10 +10,6 @@ namespace AdnFabioRamos.Infrastructure.Persistence
 {
     public partial class AdnCeibaContext: DbContext
     {
-        public AdnCeibaContext()
-        {
-        }
-
         public AdnCeibaContext(DbContextOptions<AdnCeibaContext> options)
             : base(options)
         {
@@ -49,9 +45,6 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 entity.HasKey(e => e.Codigo)
                     .HasName("PK__DetalleP__06370DAD42C8A42E");
 
-                entity.HasIndex(e => new { e.Digito, e.DiaSemana, e.HoraInicio, e.HoraFin })
-                    .HasName("index_detalle_pico_placa");
-
                 entity.Property(e => e.DiaSemana).HasComment("1: Lunes ... 7: Domingo");
 
                 entity.Property(e => e.Digito).HasDefaultValueSql("((1))");
@@ -75,11 +68,6 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 entity.HasKey(e => e.Codigo)
                     .HasName("PK__Movimien__06370DAD8FDEB7C5");
 
-                entity.HasIndex(e => new { e.HoraEntrada, e.HoraSalida })
-                    .HasName("index_entrada_salida");
-
-                entity.HasIndex(e => new { e.CodigoParqueo, e.Placa, e.CodigoTipoTransporte })
-                    .HasName("index_busqueda_placa");
 
                 entity.Property(e => e.Codigo).HasDefaultValueSql("(newid())");
 

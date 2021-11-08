@@ -86,7 +86,7 @@ namespace AdnFabioRamos.Api
 
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, Microsoft.Extensions.Hosting.IHostEnvironment env)
         {
             app.UseCors(_politicaCors);
 

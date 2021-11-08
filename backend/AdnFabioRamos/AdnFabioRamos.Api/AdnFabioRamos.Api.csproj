@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AdnFabioRamos.Domain\AdnFabioRamos.Domain.csproj" />
     <ProjectReference Include="..\AdnFabioRamos.Infrastructure\AdnFabioRamos.Infrastructure.csproj" />
     <ProjectReference Include="..\AdnFabioRamos.Application\AdnFabioRamos.Application.csproj" />
