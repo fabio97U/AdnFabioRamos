@@ -22,16 +22,6 @@ namespace AdnFabioRamos.Api.Filters
         {
             if (context != null)
             {
-                switch (context.Exception)
-                {
-                    case AppException:
-                        context.HttpContext.Response.StatusCode = ((int)HttpStatusCode.BadRequest);
-                        return;
-                    default:
-                        context.HttpContext.Response.StatusCode = ((int)HttpStatusCode.InternalServerError);
-                        break;
-                }
-
                 _Logger.LogError(context.Exception, context.Exception.Message, new[] { context.Exception.StackTrace });
 
                 var msg = new
