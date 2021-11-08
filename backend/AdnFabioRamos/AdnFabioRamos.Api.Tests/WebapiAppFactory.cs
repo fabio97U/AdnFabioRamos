@@ -19,14 +19,14 @@ namespace AdnFabioRamos.Api.Tests
                 {
                     builder.UseStartup<TStartup>().ConfigureServices(services =>
                     {
-                        var dbCtxOpts = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<Adn_CeibaContext>));
+                        var dbCtxOpts = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<AdnCeibaContext>));
 
                         if (dbCtxOpts != null)
                         {
                             services.Remove(dbCtxOpts);
                         }
 
-                        services.AddDbContext<Adn_CeibaContext>(options =>
+                        services.AddDbContext<AdnCeibaContext>(options =>
                         {
                             //options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True;multipleactiveresultsets=true;Connection Timeout=0");
                             options.UseInMemoryDatabase(Guid.NewGuid().ToString());

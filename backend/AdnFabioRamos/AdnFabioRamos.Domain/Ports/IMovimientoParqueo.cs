@@ -2,8 +2,6 @@
 using estacionamiento_adn.Models.DTOs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Domain.Ports
@@ -11,7 +9,7 @@ namespace AdnFabioRamos.Domain.Ports
     public interface IMovimientoParqueo
     {
         IEnumerable<SpMovimientosParqueoResult> Getmovp_movimiento_x_parqueo(int id);
-        Task<MovimientoVehiculoPostDTO> Post_GuardarMovimientoVehiculo(MovimientoVehiculoPostDTO _movp);
-        Task<MovimientoVehiculoPutDTO> PutGenerarTicket(Guid id, MovimientoVehiculoPutDTO movp);
+        Task<MovimientoVehiculoPostDto> Post_GuardarMovimientoVehiculo(MovimientoVehiculoPostDto _movp);
+        Task<MovimientoVehiculoPutDto> PutGenerarTicket(Guid id, MovimientoVehiculoPutDto movp);
     }
 }

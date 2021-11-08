@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Application.CQRS.Cap
 {
-    public class GetCapacidadByIdQuery: IRequest<IEnumerable<VehiculosDisponiblesParqueoDTO>>
+    public class GetCapacidadByIdQuery: IRequest<IEnumerable<VehiculosDisponiblesParqueoDto>>
     {
         public int CodigoParqueo { get; set; }
-        public class GetCapacidadQueryHandler: IRequestHandler<GetCapacidadByIdQuery, IEnumerable<VehiculosDisponiblesParqueoDTO>>
+        public class GetCapacidadQueryHandler: IRequestHandler<GetCapacidadByIdQuery, IEnumerable<VehiculosDisponiblesParqueoDto>>
         {
             private readonly ICapacidadRepository _capacidadRepository;
             public GetCapacidadQueryHandler(ICapacidadRepository capacidadRepository)
@@ -18,7 +18,7 @@ namespace AdnFabioRamos.Application.CQRS.Cap
                 _capacidadRepository = capacidadRepository;
             }
             
-            public async Task<IEnumerable<VehiculosDisponiblesParqueoDTO>> Handle(GetCapacidadByIdQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<VehiculosDisponiblesParqueoDto>> Handle(GetCapacidadByIdQuery request, CancellationToken cancellationToken)
             {
                 return await _capacidadRepository.GetCapacidadxPorParqueo(request.CodigoParqueo);
             }

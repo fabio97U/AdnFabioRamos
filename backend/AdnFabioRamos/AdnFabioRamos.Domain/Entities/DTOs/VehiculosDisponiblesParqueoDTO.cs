@@ -1,6 +1,6 @@
 ﻿namespace estacionamiento_adn.Models.DTOs
 {
-    public class VehiculosDisponiblesParqueoDTO
+    public class VehiculosDisponiblesParqueoDto
     {
         public int CodigoParqueo { get; set; }
         public string ParqueoNombre { get; set; } = "";

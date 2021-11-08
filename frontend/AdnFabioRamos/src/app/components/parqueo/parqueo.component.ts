@@ -94,8 +94,8 @@ export class ParqueoComponent implements OnInit {
           Valor dia: ${respon.ValorDia}
           TOTAL DE HORAS: ${respon.CantidadHoras}
           ----------*----------
-          Dias 9h: ${respon.Dias9h}
-          Total a pagar: ${respon.TotalPagarDias9h}
+          Dias 9h: ${respon.Dias9H}
+          Total a pagar: ${respon.TotalPagarDias9H}
           ----------*----------
           Horas restantes: ${respon.HorasRestantes}
           Total a pagar: ${respon.TotalPagarHorasRestantes}

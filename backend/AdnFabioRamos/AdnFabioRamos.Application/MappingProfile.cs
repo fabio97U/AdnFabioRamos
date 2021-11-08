@@ -12,10 +12,10 @@ namespace AdnFabioRamos.Application
             DestinationMemberNamingConvention = new PascalCaseNamingConvention();
 
             AllowNullCollections = true;
-            CreateMap<MovimientoParqueo, MovimientoVehiculoPostDTO>();
+            CreateMap<MovimientoParqueo, MovimientoVehiculoPostDto>();
 
 
-            CreateMap<MovimientoVehiculoPostDTO, MovimientoParqueo>()
+            CreateMap<MovimientoVehiculoPostDto, MovimientoParqueo>()
                 .ForMember(
                 dest => dest.HoraEntrada,
                 org => org.MapFrom(src => src.FechaIngreso));

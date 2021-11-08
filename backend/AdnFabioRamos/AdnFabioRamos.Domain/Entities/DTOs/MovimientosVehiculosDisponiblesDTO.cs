@@ -2,7 +2,7 @@
 
 namespace estacionamiento_adn.Models.DTOs
 {
-    public class MovimientosVehiculosDisponiblesDTO
+    public class MovimientosVehiculosDisponiblesDto
     {
         public int CodigoParqueo { get; set; }
         public string NombreParqueo { get; set; } = "";

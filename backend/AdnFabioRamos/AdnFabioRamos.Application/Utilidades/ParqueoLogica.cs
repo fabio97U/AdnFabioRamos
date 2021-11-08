@@ -5,14 +5,14 @@ namespace AdnFabioRamos.Application.Utilidades
 {
     public static class ParqueoLogica
     {
-        public static MovimientoVehiculoPutDTO CalcularTotalPagar(MovimientoVehiculoPutDTO movp)
+        public static MovimientoVehiculoPutDto CalcularTotalPagar(MovimientoVehiculoPutDto movp)
         {
             const int TotalHorasDia = 9;
             const int CilindrajeMaximo = 500;
             const int MontoExtraCilindrajeMaximo = 2000;
             if (movp == null)
             {
-                return new MovimientoVehiculoPutDTO();
+                return new MovimientoVehiculoPutDto();
             }
 
             var hora_entrada = movp.HoraEntrada;
@@ -24,13 +24,13 @@ namespace AdnFabioRamos.Application.Utilidades
 
             var cantidad_dias_9h = (movp.CantidadHoras / TotalHorasDia);
 
-            movp.Dias9h = Math.Truncate(cantidad_dias_9h);//1
-            movp.HorasRestantes = Math.Truncate(movp.CantidadHoras - (Convert.ToDouble(movp.Dias9h) * TotalHorasDia));//3
+            movp.Dias9H = Math.Truncate(cantidad_dias_9h);//1
+            movp.HorasRestantes = Math.Truncate(movp.CantidadHoras - (Convert.ToDouble(movp.Dias9H) * TotalHorasDia));//3
 
-            movp.TotalPagarDias9h = movp.Dias9h * movp.ValorDia;
+            movp.TotalPagarDias9H = movp.Dias9H * movp.ValorDia;
             movp.TotalPagarHorasRestantes = movp.HorasRestantes * movp.ValorHora;
 
-            movp.CantidadPagar = movp.TotalPagarDias9h + movp.TotalPagarHorasRestantes;
+            movp.CantidadPagar = movp.TotalPagarDias9H + movp.TotalPagarHorasRestantes;
 
 
             if (movp.CodigoTipoTransporte == 1 && movp.Cilindraje > CilindrajeMaximo && movp.CantidadPagar > 0)//Es moto

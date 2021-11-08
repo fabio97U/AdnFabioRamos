@@ -13,14 +13,14 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 {
     public class MovimientoParqueo : IMovimientoParqueo
     {
-        readonly Adn_CeibaContext _context;
-        private readonly Adn_CeibaContextProcedures _contextProcedures;
+        readonly AdnCeibaContext _context;
+        private readonly AdnCeibaContextProcedures _contextProcedures;
         private readonly IMapper _mapper;
 
-        public MovimientoParqueo(Adn_CeibaContext context, IMapper mapper)
+        public MovimientoParqueo(AdnCeibaContext context, IMapper mapper)
         {
             _context = context;
-            _contextProcedures = new Adn_CeibaContextProcedures(context);
+            _contextProcedures = new AdnCeibaContextProcedures(context);
             _mapper = mapper;
         }
 
@@ -31,7 +31,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             return movp_movimiento_parqueo;
         }
 
-        public async Task<MovimientoVehiculoPostDTO> Post_GuardarMovimientoVehiculo(MovimientoVehiculoPostDTO _movp)
+        public async Task<MovimientoVehiculoPostDto> Post_GuardarMovimientoVehiculo(MovimientoVehiculoPostDto _movp)
         {
             var movp = new estacionamiento_adn.Models.MovimientoParqueo();
 
@@ -50,7 +50,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             return _movp;
         }
 
-        public async Task<MovimientoVehiculoPutDTO> PutGenerarTicket(Guid id, MovimientoVehiculoPutDTO movp)
+        public async Task<MovimientoVehiculoPutDto> PutGenerarTicket(Guid id, MovimientoVehiculoPutDto movp)
         {
             var movp_movimiento_parqueo = await _context.MovimientoParqueo.FindAsync(id);
 

@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Infrastructure.Persistence
 {
-    public partial class Adn_CeibaContext: DbContext
+    public partial class AdnCeibaContext: DbContext
     {
-        public Adn_CeibaContext()
+        public AdnCeibaContext()
         {
         }
 
-        public Adn_CeibaContext(DbContextOptions<Adn_CeibaContext> options)
+        public AdnCeibaContext(DbContextOptions<AdnCeibaContext> options)
             : base(options)
         {
         }

@@ -9,7 +9,7 @@ namespace AdnFabioRamos.Domain.Services
     public class CapacidadService
     {
         readonly ICapacidadRepository _repository;
-        public async Task<IEnumerable<VehiculosDisponiblesParqueoDTO>> GetCapacidadxPorParqueo(int codigo_parqueo)
+        public async Task<IEnumerable<VehiculosDisponiblesParqueoDto>> GetCapacidadxPorParqueo(int codigo_parqueo)
         {
             return await _repository.GetCapacidadxPorParqueo(codigo_parqueo);
         }

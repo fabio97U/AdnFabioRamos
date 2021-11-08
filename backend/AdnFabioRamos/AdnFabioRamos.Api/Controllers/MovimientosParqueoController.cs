@@ -24,11 +24,11 @@ namespace AdnFabioRamos.Api.Controllers
         public Task<IEnumerable<SpMovimientosParqueoResult>> Getmovp_movimiento_x_parqueo(int id) => _Mediator.Send(new GetMovimientosParqueByIdQuery { CodigoParqueo = id });
 
         [HttpPost("GuardarMovimientoVehiculo")]
-        public Task<MovimientoVehiculoPostDTO> Post_GuardarMovimientoVehiculo(MovimientoVehiculoPostDTO _movp)
+        public Task<MovimientoVehiculoPostDto> Post_GuardarMovimientoVehiculo(MovimientoVehiculoPostDto _movp)
          => _Mediator.Send(new CreateMovimiento { MovimientoVehiculo = _movp });
 
         [HttpPut("GenerarTicket/{id}")]
-        public Task<MovimientoVehiculoPutDTO> PutGenerarTicket(Guid id, MovimientoVehiculoPutDTO movp)
+        public Task<MovimientoVehiculoPutDto> PutGenerarTicket(Guid id, MovimientoVehiculoPutDto movp)
          => _Mediator.Send(new GenerarTicket { IdParqueo = id, MovimientoVehiculoPut = movp });
     }
 }

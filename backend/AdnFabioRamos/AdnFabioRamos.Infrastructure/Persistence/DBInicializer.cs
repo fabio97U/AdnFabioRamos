@@ -12,7 +12,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var _context = new Adn_CeibaContext(serviceProvider.GetRequiredService<DbContextOptions<Adn_CeibaContext>>()))
+            using (var _context = new AdnCeibaContext(serviceProvider.GetRequiredService<DbContextOptions<AdnCeibaContext>>()))
             {
                 // Tipos de transporte
                 if (_context.TipoTransporte.Any())

@@ -43,8 +43,8 @@ namespace AdnFabioRamos.Api
 
             services.AddAutoMapper(Assembly.Load(applicationAssemblyName.FullName));
 
-            services.AddDbContext<Adn_CeibaContext>();
-            services.AddDbContext<Adn_CeibaContext>(options =>
+            services.AddDbContext<AdnCeibaContext>();
+            services.AddDbContext<AdnCeibaContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddCors(options =>

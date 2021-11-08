@@ -165,7 +165,7 @@ begin
 	select @codpp = Codigo from pp.PicoPlaca where YEAR(GETDATE()) = Anio
 
 	select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, 
-	DiaSemana, dia_nombre, Digito, DigitoInicioFinal, salida, tipo 
+	DiaSemana, dia_nombre 'DiaNombre', Digito, DigitoInicioFinal, salida 'Salida', tipo 'Tipo'
 	from (
 		--Devuelve >= 1 rows cuando puede salir el vehiculo @tipo_vehiculo con placas @placa
 		select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, DiaSemana, Digito, DigitoInicioFinal,

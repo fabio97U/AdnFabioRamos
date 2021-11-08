@@ -9,10 +9,10 @@
         public string HoraInicio { get; set; } = "";
         public string HoraFin { get; set; } = "";
         public int DiaSemana { get; set; }
-        public string dia_nombre { get; set; } = "";
+        public string DiaNombre { get; set; } = "";
         public short Digito { get; set; }
         public string DigitoInicioFinal { get; set; } = "";
-        public string salida { get; set; } = "";
-        public int tipo { get; set; }
+        public string Salida { get; set; } = "";
+        public int Tipo { get; set; }
     }
 }

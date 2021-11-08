@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace AdnFabioRamos.Application.CQRS.Movp
 {
 
-    public class GenerarTicket : IRequest<MovimientoVehiculoPutDTO>
+    public class GenerarTicket : IRequest<MovimientoVehiculoPutDto>
     {
         public Guid IdParqueo { get; set; }
-        public MovimientoVehiculoPutDTO MovimientoVehiculoPut { get; set; } = new MovimientoVehiculoPutDTO();
+        public MovimientoVehiculoPutDto MovimientoVehiculoPut { get; set; } = new MovimientoVehiculoPutDto();
 
-        public class GenerarTicketHandler : IRequestHandler<GenerarTicket, MovimientoVehiculoPutDTO>
+        public class GenerarTicketHandler : IRequestHandler<GenerarTicket, MovimientoVehiculoPutDto>
         {
             private readonly IMovimientoParqueo _repository;
             public GenerarTicketHandler(IMovimientoParqueo repository)
@@ -22,7 +22,7 @@ namespace AdnFabioRamos.Application.CQRS.Movp
                 _repository = repository;
             }
 
-            public async Task<MovimientoVehiculoPutDTO> Handle(GenerarTicket request, CancellationToken cancellationToken)
+            public async Task<MovimientoVehiculoPutDto> Handle(GenerarTicket request, CancellationToken cancellationToken)
             {
                 ParqueoLogica.CalcularTotalPagar(request.MovimientoVehiculoPut);
 

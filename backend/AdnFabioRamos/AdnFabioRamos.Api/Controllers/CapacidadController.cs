@@ -19,6 +19,6 @@ namespace AdnFabioRamos.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public Task<IEnumerable<VehiculosDisponiblesParqueoDTO>> GetCapacidad(int id) => _Mediator.Send(new GetCapacidadByIdQuery { CodigoParqueo = id });
+        public Task<IEnumerable<VehiculosDisponiblesParqueoDto>> GetCapacidad(int id) => _Mediator.Send(new GetCapacidadByIdQuery { CodigoParqueo = id });
     }
 }

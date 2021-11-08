@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Application.CQRS.Movp
 {
-    public class CreateMovimiento : IRequest<MovimientoVehiculoPostDTO>
+    public class CreateMovimiento : IRequest<MovimientoVehiculoPostDto>
     {
-        public MovimientoVehiculoPostDTO MovimientoVehiculo { get; set; } = new MovimientoVehiculoPostDTO();
-        public class CreateMovimientoHandler : IRequestHandler<CreateMovimiento, MovimientoVehiculoPostDTO>
+        public MovimientoVehiculoPostDto MovimientoVehiculo { get; set; } = new MovimientoVehiculoPostDto();
+        public class CreateMovimientoHandler : IRequestHandler<CreateMovimiento, MovimientoVehiculoPostDto>
         {
             private readonly IMovimientoParqueo _repository;
             public CreateMovimientoHandler(IMovimientoParqueo repository)
@@ -17,7 +17,7 @@ namespace AdnFabioRamos.Application.CQRS.Movp
                 _repository = repository;
             }
 
-            public async Task<MovimientoVehiculoPostDTO> Handle(CreateMovimiento request, CancellationToken cancellationToken)
+            public async Task<MovimientoVehiculoPostDto> Handle(CreateMovimiento request, CancellationToken cancellationToken)
             {
                 return await _repository.Post_GuardarMovimientoVehiculo(request.MovimientoVehiculo);
             }

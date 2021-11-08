@@ -13,9 +13,9 @@ export class MovimientoVehiculoPut {
 
         public HoraSalida: Date = new Date(),
         public CantidadHoras: number = 0.0,
-        public Dias9h: number = 0.0,
+        public Dias9H: number = 0.0,
         public HorasRestantes: number = 0.0,
-        public TotalPagarDias9h: number = 0.0,
+        public TotalPagarDias9H: number = 0.0,
         public TotalPagarHorasRestantes: number = 0.0,
         public CantidadPagar: number = 0.0,
     ) { }

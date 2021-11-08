@@ -32,7 +32,7 @@ namespace AdnFabioRamos.Api.Tests
             using (var scope = provider.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<Adn_CeibaContext>();
+                var context = services.GetRequiredService<AdnCeibaContext>();
                 DBInicializer.Initialize(services);
             }
         }
