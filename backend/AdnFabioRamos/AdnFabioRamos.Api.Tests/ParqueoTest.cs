@@ -77,7 +77,7 @@ namespace AdnFabioRamos.Api.Tests
         public void IngresarVehiculoParqueo(int movp_codpar, string movp_placa, int movp_codtipt, int movp_cilindraje, int movp_parqueo_numero)
         {
             //Preparacion
-            var movp = new MovimientoVehiculoPostDTO()
+            var movp = new MovimientoVehiculoPostDto()
             {
                 CodigoParqueo = movp_codpar,
                 Cilindraje = movp_cilindraje,
@@ -92,7 +92,7 @@ namespace AdnFabioRamos.Api.Tests
 
             var c = this.TestClient.PostAsync($"api/MovimientosParqueo/GuardarMovimientoVehiculo", stringContent).Result;
             var response = c.Content.ReadAsStringAsync().Result;
-            var respuestaMovp = System.Text.Json.JsonSerializer.Deserialize<MovimientoVehiculoPostDTO>(response);
+            var respuestaMovp = System.Text.Json.JsonSerializer.Deserialize<MovimientoVehiculoPostDto>(response);
 
             //Verificacion
             Assert.AreEqual(true, c.IsSuccessStatusCode);
@@ -105,7 +105,7 @@ namespace AdnFabioRamos.Api.Tests
         public void ValidarSalidaVehiculoParqueo(int tipt_codigo, int cap_valor_hora, int cap_valor_dia, int movp_cilindraje, int horas, int valor_esperado)
         {
             //Preparacion
-            var movpPut = new MovimientoVehiculoPutDTO()
+            var movpPut = new MovimientoVehiculoPutDto()
             {
                 CodigoTipoTransporte = tipt_codigo,
                 ValorHora = cap_valor_hora,
