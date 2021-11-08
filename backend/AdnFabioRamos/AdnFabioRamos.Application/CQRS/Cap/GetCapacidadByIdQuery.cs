@@ -20,11 +20,6 @@ namespace AdnFabioRamos.Application.CQRS.Cap
 
             public async Task<IEnumerable<VehiculosDisponiblesParqueoDto>> Handle(GetCapacidadByIdQuery request, CancellationToken cancellationToken)
             {
-                if (request == null)
-                {
-                    request = new GetCapacidadByIdQuery();
-                }
-
                 return await _capacidadRepository.GetCapacidadxPorParqueo(request.CodigoParqueo);
             }
         }

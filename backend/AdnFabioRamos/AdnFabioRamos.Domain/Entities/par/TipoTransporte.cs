@@ -10,10 +10,8 @@ namespace estacionamiento_adn.Models
         [Key]
         public int Codigo { get; set; }
         [Required]
-        [StringLength(50)]
         public string Tipo { get; set; } = "";
         [Required]
-        [StringLength(75)]
         public string Descripcion { get; set; } = "";
         [Column(TypeName = "datetime")]
         public DateTime? FechaCreacion { get; set; }

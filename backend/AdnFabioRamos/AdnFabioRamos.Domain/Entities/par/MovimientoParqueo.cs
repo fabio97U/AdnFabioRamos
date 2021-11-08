@@ -11,7 +11,6 @@ namespace estacionamiento_adn.Models
         public Guid Codigo { get; set; }
         public int CodigoParqueo { get; set; }
         [Required]
-        [StringLength(50)]
         public string Placa { get; set; } = "";
         public int CodigoTipoTransporte { get; set; }
         /// <summary>

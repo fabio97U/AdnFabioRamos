@@ -11,7 +11,6 @@ namespace estacionamiento_adn.Models
         public int Codigo { get; set; }
         public int Anio { get; set; }
         [Required]
-        [StringLength(255)]
         public string Descripcion { get; set; } = "";
         [Column(TypeName = "datetime")]
         public DateTime? FechaCreacion { get; set; }

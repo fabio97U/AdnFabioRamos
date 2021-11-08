@@ -30,7 +30,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
         }
     }
 
-    public partial class AdnCeibaContextProcedures
+    public class AdnCeibaContextProcedures
     {
         private readonly AdnCeibaContext _context;
 

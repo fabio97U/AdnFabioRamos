@@ -16,10 +16,8 @@ namespace estacionamiento_adn.Models
         /// </summary>
         public byte Mes { get; set; }
         [Required]
-        [StringLength(5)]
         public string HoraInicio { get; set; } = "";
         [Required]
-        [StringLength(5)]
         public string HoraFin { get; set; } = "";
         /// <summary>
         /// 1: Lunes ... 7: Domingo
@@ -30,7 +28,6 @@ namespace estacionamiento_adn.Models
         /// Que la placa I: Inicie, F: Finalice
         /// </summary>
         [Required]
-        [StringLength(2)]
         public string DigitoInicioFinal { get; set; } = "";
         [Column(TypeName = "datetime")]
         public DateTime? FechaCreacion { get; set; }
