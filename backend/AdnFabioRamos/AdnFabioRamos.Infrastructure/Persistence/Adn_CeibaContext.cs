@@ -19,113 +19,113 @@ namespace AdnFabioRamos.Infrastructure.Persistence
         {
         }
 
-        public virtual DbSet<cap_capacidad> cap_capacidad { get; set; }
-        public virtual DbSet<dpp_detalle_pico_placa> dpp_detalle_pico_placa { get; set; }
-        public virtual DbSet<movp_movimiento_parqueo> movp_movimiento_parqueo { get; set; }
-        public virtual DbSet<par_parqueo> par_parqueo { get; set; }
-        public virtual DbSet<pp_pico_placa> pp_pico_placa { get; set; }
-        public virtual DbSet<tipt_tipo_transporte> tipt_tipo_transporte { get; set; }
+        public virtual DbSet<Capacidad> Capacidad { get; set; }
+        public virtual DbSet<DetallePicoPlaca> DetallePicoPlaca { get; set; }
+        public virtual DbSet<MovimientoParqueo> MovimientoParqueo { get; set; }
+        public virtual DbSet<Parqueo> Parqueo { get; set; }
+        public virtual DbSet<PicoPlaca> PicoPlaca { get; set; }
+        public virtual DbSet<TipoTransporte> TipoTransporte { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True;multipleactiveresultsets=true;Connection Timeout=0");
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<cap_capacidad>(entity =>
+            modelBuilder.Entity<Capacidad>(entity =>
             {
-                entity.HasKey(e => e.cap_codigo)
-                    .HasName("PK__cap_capa__DFC2D768C5DCCE43");
+                entity.HasKey(e => e.Codigo)
+                    .HasName("PK__Capacida__06370DADDBB27605");
 
-                entity.Property(e => e.cap_fecha_creacion).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
             });
 
-            modelBuilder.Entity<dpp_detalle_pico_placa>(entity =>
+            modelBuilder.Entity<DetallePicoPlaca>(entity =>
             {
-                entity.HasKey(e => e.dpp_codigo)
-                    .HasName("PK__dpp_deta__773CA84ECC64E4FD");
+                entity.HasKey(e => e.Codigo)
+                    .HasName("PK__DetalleP__06370DAD42C8A42E");
 
-                entity.HasIndex(e => new { e.dpp_digito, e.dpp_dia_semana, e.dpp_hora_inicio, e.dpp_hora_fin })
+                entity.HasIndex(e => new { e.Digito, e.DiaSemana, e.HoraInicio, e.HoraFin })
                     .HasName("index_detalle_pico_placa");
 
-                entity.Property(e => e.dpp_dia_semana).HasComment("1: Lunes ... 7: Domingo");
+                entity.Property(e => e.DiaSemana).HasComment("1: Lunes ... 7: Domingo");
 
-                entity.Property(e => e.dpp_digito).HasDefaultValueSql("((1))");
+                entity.Property(e => e.Digito).HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.dpp_digito_inicio_final)
+                entity.Property(e => e.DigitoInicioFinal)
                     .IsUnicode(false)
                     .HasDefaultValueSql("('I')")
                     .HasComment("Que la placa I: Inicie, F: Finalice");
 
-                entity.Property(e => e.dpp_fecha_creacion).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.dpp_hora_fin).IsUnicode(false);
+                entity.Property(e => e.HoraFin).IsUnicode(false);
 
-                entity.Property(e => e.dpp_hora_inicio).IsUnicode(false);
+                entity.Property(e => e.HoraInicio).IsUnicode(false);
 
-                entity.Property(e => e.dpp_mes).HasComment("1: Enero ... 12: Diciembre");
+                entity.Property(e => e.Mes).HasComment("1: Enero ... 12: Diciembre");
             });
 
-            modelBuilder.Entity<movp_movimiento_parqueo>(entity =>
+            modelBuilder.Entity<MovimientoParqueo>(entity =>
             {
-                entity.HasKey(e => e.movp_codigo)
-                    .HasName("PK__movp_mov__3292991CD8AC62B3");
+                entity.HasKey(e => e.Codigo)
+                    .HasName("PK__Movimien__06370DAD8FDEB7C5");
 
-                entity.HasIndex(e => new { e.movp_hora_entrada, e.movp_hora_salida })
+                entity.HasIndex(e => new { e.HoraEntrada, e.HoraSalida })
                     .HasName("index_entrada_salida");
 
-                entity.HasIndex(e => new { e.movp_codpar, e.movp_placa, e.movp_codtipt })
+                entity.HasIndex(e => new { e.CodigoParqueo, e.Placa, e.CodigoTipoTransporte })
                     .HasName("index_busqueda_placa");
 
-                entity.Property(e => e.movp_codigo).HasDefaultValueSql("(newid())");
+                entity.Property(e => e.Codigo).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.movp_cilindraje).HasComment("Las motos con un cilindraje mayor a 500cc tienen un sobrecargo de $2000");
+                entity.Property(e => e.Cilindraje).HasComment("Las motos con un cilindraje mayor a 500cc tienen un sobrecargo de $2000");
 
-                entity.Property(e => e.movp_fecha_creacion).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.movp_hora_entrada).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.HoraEntrada).HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.movp_placa).IsUnicode(false);
+                entity.Property(e => e.Placa).IsUnicode(false);
 
-                entity.Property(e => e.movp_total_pagar).HasDefaultValueSql("((0.0))");
+                entity.Property(e => e.TotalPagar).HasDefaultValueSql("((0.0))");
             });
 
-            modelBuilder.Entity<par_parqueo>(entity =>
+            modelBuilder.Entity<Parqueo>(entity =>
             {
-                entity.HasKey(e => e.par_codigo)
-                    .HasName("PK__par_parq__87288BD9C8B44353");
+                entity.HasKey(e => e.Codigo)
+                    .HasName("PK__Parqueo__06370DADB4218A90");
 
-                entity.Property(e => e.par_direccion).IsUnicode(false);
+                entity.Property(e => e.Direccion).IsUnicode(false);
 
-                entity.Property(e => e.par_fecha_creacion).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.par_nombre).IsUnicode(false);
+                entity.Property(e => e.Nombre).IsUnicode(false);
             });
 
-            modelBuilder.Entity<pp_pico_placa>(entity =>
+            modelBuilder.Entity<PicoPlaca>(entity =>
             {
-                entity.HasKey(e => e.pp_codigo)
-                    .HasName("PK__pp_pico___0720D76C6366372D");
+                entity.HasKey(e => e.Codigo)
+                    .HasName("PK__PicoPlac__06370DADE47F30DD");
 
-                entity.Property(e => e.pp_descripcion).IsUnicode(false);
+                entity.Property(e => e.Descripcion).IsUnicode(false);
 
-                entity.Property(e => e.pp_fecha_creacion).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
             });
 
-            modelBuilder.Entity<tipt_tipo_transporte>(entity =>
+            modelBuilder.Entity<TipoTransporte>(entity =>
             {
-                entity.HasKey(e => e.tipt_codigo)
-                    .HasName("PK__tipt_tip__C4986682D25D1912");
+                entity.HasKey(e => e.Codigo)
+                    .HasName("PK__TipoTran__06370DAD366F3F2C");
 
-                entity.Property(e => e.tipt_descripcion).IsUnicode(false);
+                entity.Property(e => e.Descripcion).IsUnicode(false);
 
-                entity.Property(e => e.tipt_fecha_creacion).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.tipt_tipo).IsUnicode(false);
+                entity.Property(e => e.Tipo).IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

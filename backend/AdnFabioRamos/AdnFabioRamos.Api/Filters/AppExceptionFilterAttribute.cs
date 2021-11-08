@@ -10,7 +10,7 @@ namespace AdnFabioRamos.Api.Filters
     [AttributeUsage(AttributeTargets.All)]
     public sealed class AppExceptionFilterAttribute : ExceptionFilterAttribute
     {
-         private readonly ILogger<Exception> _Logger;
+        private readonly ILogger<Exception> _Logger;
 
         public AppExceptionFilterAttribute(ILogger<Exception> logger)
         {
@@ -22,19 +22,29 @@ namespace AdnFabioRamos.Api.Filters
         {
             if (context != null)
             {
-                context.HttpContext.Response.StatusCode = context.Exception switch
+                //context.HttpContext.Response.StatusCode = context.Exception switch
+                //{
+                //    AppException => ((int)HttpStatusCode.BadRequest),
+                //    _ => ((int)HttpStatusCode.InternalServerError)
+                //};
+
+                switch (context.Exception)
                 {
-                    AppException => ((int)HttpStatusCode.BadRequest),
-                    _            => ((int)HttpStatusCode.InternalServerError)
-                };
+                    case AppException:
+                        context.HttpContext.Response.StatusCode = ((int)HttpStatusCode.BadRequest);
+                        return;
+                    default:
+                        context.HttpContext.Response.StatusCode = ((int)HttpStatusCode.InternalServerError);
+                        break;
+                }
 
                 _Logger.LogError(context.Exception, context.Exception.Message, new[] { context.Exception.StackTrace });
 
                 var msg = new
                 {
-                    context.Exception.Message                    
+                    context.Exception.Message
                 };
-                
+
                 context.Result = new ObjectResult(msg);
             }
         }

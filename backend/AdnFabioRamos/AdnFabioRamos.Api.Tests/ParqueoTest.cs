@@ -52,7 +52,7 @@ namespace AdnFabioRamos.Api.Tests
 
             //Verificacion
             //Assert.AreEqual(true, respuestaPicoPlaca.permitir_salir_ahora);
-            Assert.AreEqual(false, respuestaPicoPlaca.permitir_salir_ahora);
+            Assert.AreEqual(false, respuestaPicoPlaca.PermitirSalirAhora);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace AdnFabioRamos.Api.Tests
             respuestaPicoPlaca = System.Text.Json.JsonSerializer.Deserialize<RespuestaPicoPlaca>(response);
 
             //Verificacion
-            Assert.AreEqual(false, respuestaPicoPlaca.permitir_salir_ahora);
+            Assert.AreEqual(false, respuestaPicoPlaca.PermitirSalirAhora);
         }
 
         [TestMethod]
@@ -79,12 +79,12 @@ namespace AdnFabioRamos.Api.Tests
             //Preparacion
             var movp = new MovimientoVehiculoPostDTO()
             {
-                movp_codpar = movp_codpar,
-                movp_cilindraje = movp_cilindraje,
-                movp_codtipt = movp_codtipt,
-                movp_parqueo_numero = movp_parqueo_numero,
-                movp_placa = movp_placa,
-                fecha_ingreso = DateTime.Now.AddHours(-10)
+                CodigoParqueo = movp_codpar,
+                Cilindraje = movp_cilindraje,
+                CodigoTipoTransporte = movp_codtipt,
+                ParqueoNumero = movp_parqueo_numero,
+                Placa = movp_placa,
+                FechaIngreso = DateTime.Now.AddHours(-10)
             };
 
             //Prueba
@@ -107,18 +107,18 @@ namespace AdnFabioRamos.Api.Tests
             //Preparacion
             var movpPut = new MovimientoVehiculoPutDTO()
             {
-                tipt_codigo = tipt_codigo,
-                cap_valor_hora = cap_valor_hora,
-                cap_valor_dia = cap_valor_dia,
-                movp_cilindraje = movp_cilindraje, 
-                movp_hora_entrada = DateTime.Now.AddHours(horas)
+                CodigoTipoTransporte = tipt_codigo,
+                ValorHora = cap_valor_hora,
+                ValorDia = cap_valor_dia,
+                Cilindraje = movp_cilindraje, 
+                HoraEntrada = DateTime.Now.AddHours(horas)
             };
 
             //Prueba
-            ParqueoLogica.calcularTotalPagar(movpPut);
+            ParqueoLogica.CalcularTotalPagar(movpPut);
 
             //Verificacion
-            Assert.AreEqual(valor_esperado, movpPut.cantidad_pagar);
+            Assert.AreEqual(valor_esperado, movpPut.CantidadPagar);
         }
     }
 }

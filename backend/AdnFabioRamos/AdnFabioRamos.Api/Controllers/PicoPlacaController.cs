@@ -13,21 +13,21 @@ namespace AdnFabioRamos.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class dpp_detalle_pico_placaController : ControllerBase
+    public class PicoPlacaController : ControllerBase
     {
         private readonly IMediator _Mediator;
-        public dpp_detalle_pico_placaController(IMediator mediator)
+        public PicoPlacaController(IMediator mediator)
         {
             _Mediator = mediator;
         }
 
         [HttpGet("consultarPicoPlaca/{tipo_vehiculo}/{placa}")]
         public Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa)
-         => _Mediator.Send(new GetDetallePicoPlacaByPlacaVehiculoQuery { tipo_vehiculo = tipo_vehiculo, placa = placa });
+         => _Mediator.Send(new GetDetallePicoPlacaByPlacaVehiculoQuery { TipoVehiculo = tipo_vehiculo, Placa = placa });
 
 
         [HttpPost]
-        public Task<dpp_detalle_pico_placa> Postdpp_detalle_pico_placa(dpp_detalle_pico_placa dpp_detalle_pico_placa)
-         => _Mediator.Send(new PostDetallePicoPlaca { _dpp_detalle_pico_placa = dpp_detalle_pico_placa });
+        public Task<DetallePicoPlaca> Postdpp_detalle_pico_placa(DetallePicoPlaca dpp_detalle_pico_placa)
+         => _Mediator.Send(new PostDetallePicoPlaca { DetallePicoPlaca = dpp_detalle_pico_placa });
     }
 }

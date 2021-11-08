@@ -1,20 +1,16 @@
 ﻿using AdnFabioRamos.Domain.Ports;
 using estacionamiento_adn.Models;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Application.CQRS.Dpp
 {
-    public class PostDetallePicoPlaca : IRequest<dpp_detalle_pico_placa>
+    public class PostDetallePicoPlaca : IRequest<DetallePicoPlaca>
     {
-        public dpp_detalle_pico_placa _dpp_detalle_pico_placa { get; set; }
+        public DetallePicoPlaca DetallePicoPlaca { get; set; } = new DetallePicoPlaca();
 
-        public class PostDetallePicoPlacaHandler : IRequestHandler<PostDetallePicoPlaca, dpp_detalle_pico_placa>
+        public class PostDetallePicoPlacaHandler : IRequestHandler<PostDetallePicoPlaca, DetallePicoPlaca>
         {
             private readonly IDetallePicoPlaca _DetallePicoPlacaRepository;
             public PostDetallePicoPlacaHandler(IDetallePicoPlaca repository)
@@ -22,9 +18,9 @@ namespace AdnFabioRamos.Application.CQRS.Dpp
                 _DetallePicoPlacaRepository = repository;
             }
 
-            public async Task<dpp_detalle_pico_placa> Handle(PostDetallePicoPlaca request, CancellationToken cancellationToken)
+            public async Task<DetallePicoPlaca> Handle(PostDetallePicoPlaca request, CancellationToken cancellationToken)
             {
-                return await _DetallePicoPlacaRepository.PostDetallePicoPlaca(request._dpp_detalle_pico_placa);
+                return await _DetallePicoPlacaRepository.PostDetallePicoPlaca(request.DetallePicoPlaca);
             }
         }
     }

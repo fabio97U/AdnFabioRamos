@@ -1,9 +1,6 @@
 using System;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using AdnFabioRamos.Api.Filters;
 using AdnFabioRamos.Domain.Ports;
 using AdnFabioRamos.Infrastructure.Adapters;
@@ -12,12 +9,13 @@ using AdnFabioRamos.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text.Json;
 using Prometheus;
+using Newtonsoft.Json.Serialization;
 
 namespace AdnFabioRamos.Api
 {
@@ -31,7 +29,6 @@ namespace AdnFabioRamos.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PersistenceContext>(opt =>
@@ -52,23 +49,6 @@ namespace AdnFabioRamos.Api
             services.AddDbContext<Adn_CeibaContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-
-
-            //// ********************
-            //// Setup CORS
-            //// ********************
-            //var corsBuilder = new CorsPolicyBuilder();
-            //corsBuilder.AllowAnyHeader();
-            //corsBuilder.AllowAnyMethod();
-            //corsBuilder.AllowAnyOrigin(); // For anyone access.
-            ////corsBuilder.WithOrigins("http://localhost:4200"); // for a specific url. Don't add a forward slash on the end!
-            ////corsBuilder.AllowCredentials();
-
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
-            //});
-
             services.AddCors(options =>
             {
                 options.AddPolicy(name: _politicaCors,
@@ -85,6 +65,11 @@ namespace AdnFabioRamos.Api
             {
                 options.Filters.Add(typeof(AppExceptionFilterAttribute));
             });
+
+            services
+        .AddMvc()
+        .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
             services.AddSwaggerDocument(settings =>
             {
                 settings.Title = "Adn API Fabio Ramos";
@@ -100,17 +85,12 @@ namespace AdnFabioRamos.Api
             services.AddScoped<ICapacidadRepository, CapacidadRespository>();
             services.AddScoped<IDetallePicoPlaca, DetallePicoPlacaRepository>();
             services.AddScoped<IMovimientoParqueo, MovimientoParqueo>();
+
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //// ********************
-            //// USE CORS - might not be required.
-            //// ********************
-            //app.UseCors("SiteCorsPolicy");
             app.UseCors(_politicaCors);
-            //app.UseCors("AllowOrigin");
 
             if (env.IsDevelopment())
             {
@@ -121,16 +101,13 @@ namespace AdnFabioRamos.Api
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
-            // app.UseStaticFiles();
+            app.UseStaticFiles();
 
             app.UseRouting();
-
-            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

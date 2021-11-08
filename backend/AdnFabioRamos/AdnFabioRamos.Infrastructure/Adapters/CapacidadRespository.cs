@@ -22,10 +22,10 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             List<VehiculosDisponiblesParqueoDTO> lst_model = new List<VehiculosDisponiblesParqueoDTO>();
             VehiculosDisponiblesParqueoDTO model = new VehiculosDisponiblesParqueoDTO();
             var datos_select =
-                from cap in _context.cap_capacidad
-                join par in _context.par_parqueo on cap.cap_codpar equals par.par_codigo
-                join tipt in _context.tipt_tipo_transporte on cap.cap_codtipt equals tipt.tipt_codigo
-                where par.par_codigo == codigo_parqueo
+                from cap in _context.Capacidad
+                join par in _context.Parqueo on cap.CodigoParqueo equals par.Codigo
+                join tipt in _context.TipoTransporte on cap.CodigoTipoTransporte equals tipt.Codigo
+                where par.Codigo == codigo_parqueo
                 select new { cap, par, tipt };
 
             //if (datos_select.Count() == 0)
@@ -35,13 +35,13 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 
             foreach (var item in datos_select)
             {
-                model.par_codigo = item.par.par_codigo;
-                model.par_nombre = item.par.par_nombre;
-                model.tipt_codigo = item.tipt.tipt_codigo;
-                model.tipt_tipo = item.tipt.tipt_tipo;
-                model.cap_capacidad = item.cap.cap_capacidad1;
-                model.cap_valor_hora = item.cap.cap_valor_hora;
-                model.cap_valor_dia = item.cap.cap_valor_dia;
+                model.CodigoParqueo = item.par.Codigo;
+                model.ParqueoNombre = item.par.Nombre;
+                model.CodigoTipoTransporte = item.tipt.Codigo;
+                model.TipoTransporte = item.tipt.Tipo;
+                model.Capacidad = item.cap.Capacidad1;
+                model.ValorHora = item.cap.ValorHora;
+                model.ValorDia = item.cap.ValorDia;
                 lst_model.Add(model);
                 model = new VehiculosDisponiblesParqueoDTO();
             }

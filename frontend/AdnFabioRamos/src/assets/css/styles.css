@@ -113,7 +113,7 @@ a {
     position: relative;
 }
 .vehiculo_texto_carro {
-    padding-left: 4rem;
+    padding-left: 0.2rem;
 }
 .vehiculo_texto_carro::before {
     content: '';
@@ -129,7 +129,7 @@ a {
 }
 
 .vehiculo_texto_moto {
-    padding-left: 4rem;
+    padding-left: 0.2rem;
 }
 .vehiculo_texto_moto::before {
     content: '';

@@ -4,11 +4,11 @@ namespace estacionamiento_adn.Models.DTOs
 {
     public class MovimientoVehiculoPostDTO
     {
-        public int movp_codpar { get; set; }
-        public string movp_placa { get; set; }
-        public int movp_codtipt { get; set; }
-        public int movp_cilindraje { get; set; }
-        public int movp_parqueo_numero { get; set; }
-        public DateTime fecha_ingreso { get; set;  } = DateTime.Now;
+        public int CodigoParqueo { get; set; }
+        public string Placa { get; set; } = "";
+        public int CodigoTipoTransporte { get; set; }
+        public int Cilindraje { get; set; }
+        public int ParqueoNumero { get; set; }
+        public DateTime FechaIngreso { get; set;  } = DateTime.Now;
     }
 }

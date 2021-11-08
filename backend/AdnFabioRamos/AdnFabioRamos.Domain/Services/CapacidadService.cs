@@ -2,8 +2,6 @@
 using estacionamiento_adn.Models.DTOs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Domain.Services
@@ -15,7 +13,5 @@ namespace AdnFabioRamos.Domain.Services
         {
             return await _repository.GetCapacidadxPorParqueo(codigo_parqueo);
         }
-
-
     }
 }

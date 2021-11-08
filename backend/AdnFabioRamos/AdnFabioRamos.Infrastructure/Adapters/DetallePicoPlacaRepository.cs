@@ -22,22 +22,22 @@ namespace AdnFabioRamos.Infrastructure.Adapters
         }
         public async Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa)
         {
-            var lst_dpp_detalle_pico_placa = _contextProcedures.sp_validar_pico_placaAsync(tipo_vehiculo, placa).Result.ToList();
+            var lst_dpp_detalle_pico_placa = _contextProcedures.SpValidarPicoPlacaAsync(tipo_vehiculo, placa).Result.ToList();
             var respuesta = new RespuestaPicoPlaca();
 
             if (lst_dpp_detalle_pico_placa.Where(x => x.tipo == 0).Count() > 0)//Tiene permitido salir ahora
-                respuesta.permitir_salir_ahora = true;
+                respuesta.PermitirSalirAhora = true;
 
             lst_dpp_detalle_pico_placa.Where(x => x.tipo == 1).ToList().ForEach(x =>
-                respuesta.dias_permitidos_salir += x.dia_nombre + " de " + x.dpp_hora_inicio + " a " + x.dpp_hora_fin + " "
+                respuesta.DiasPermitidosSalir += x.dia_nombre + " de " + x.HoraInicio + " a " + x.HoraFin + " "
             );
 
             return respuesta;
         }
 
-        public async Task<dpp_detalle_pico_placa> PostDetallePicoPlaca(dpp_detalle_pico_placa dpp_Detalle_Pico_Placa)
+        public async Task<DetallePicoPlaca> PostDetallePicoPlaca(DetallePicoPlaca dpp_Detalle_Pico_Placa)
         {
-            _context.dpp_detalle_pico_placa.Add(dpp_Detalle_Pico_Placa);
+            _context.DetallePicoPlaca.Add(dpp_Detalle_Pico_Placa);
             try
             {
                 _context.SaveChanges();

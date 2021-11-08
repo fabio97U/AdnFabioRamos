@@ -14,16 +14,16 @@ namespace AdnFabioRamos.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class cap_capacidadController : ControllerBase
+    public class CapacidadController : ControllerBase
     {
         private readonly IMediator _Mediator;
 
-        public cap_capacidadController(IMediator mediator)
+        public CapacidadController(IMediator mediator)
         {
             _Mediator = mediator;
         }
 
         [HttpGet("{id}")]
-        public Task<IEnumerable<VehiculosDisponiblesParqueoDTO>> Getcap_capacidad(int id) => _Mediator.Send(new GetCapacidadByIdQuery { codigo_parqueo = id });
+        public Task<IEnumerable<VehiculosDisponiblesParqueoDTO>> GetCapacidad(int id) => _Mediator.Send(new GetCapacidadByIdQuery { CodigoParqueo = id });
     }
 }

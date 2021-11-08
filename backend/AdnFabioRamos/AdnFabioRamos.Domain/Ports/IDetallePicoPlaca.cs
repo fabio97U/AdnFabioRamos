@@ -11,6 +11,6 @@ namespace AdnFabioRamos.Domain.Ports
     public interface IDetallePicoPlaca
     {
         Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa);
-        Task<dpp_detalle_pico_placa> PostDetallePicoPlaca(dpp_detalle_pico_placa dpp_Detalle_Pico_Placa);
+        Task<DetallePicoPlaca> PostDetallePicoPlaca(DetallePicoPlaca dpp_Detalle_Pico_Placa);
     }
 }

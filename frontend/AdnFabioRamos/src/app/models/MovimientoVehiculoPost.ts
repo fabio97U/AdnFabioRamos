@@ -1,9 +1,9 @@
 export class MovimientoVehiculoPost {
     constructor(
-        public movp_codpar: number, 
-        public movp_placa: string, 
-        public movp_codtipt: number, 
-        public movp_cilindraje: number, 
-        public movp_parqueo_numero: number,
+        public CodigoParqueo: number,
+        public Placa: string,
+        public CodigoTipoTransporte: number,
+        public Cilindraje: number,
+        public ParqueoNumero: number,
     ) { }
 }

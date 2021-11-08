@@ -4,21 +4,21 @@ namespace estacionamiento_adn.Models.DTOs
 {
     public class MovimientoVehiculoPutDTO
     {
-        public int tipt_codigo { get; set; }
-        public int cap_valor_hora { get; set; }
-        public int cap_valor_dia { get; set; }
-        public Guid movp_codigo { get; set; }
-        public string? movp_placa { get; set; }
+        public int CodigoTipoTransporte { get; set; }
+        public int ValorHora { get; set; }
+        public int ValorDia { get; set; }
+        public Guid CodigoMovimiento { get; set; }
+        public string? Placa { get; set; }
 
-        public int movp_cilindraje { get; set; }
-        public DateTime movp_hora_entrada { get; set; }
+        public int Cilindraje { get; set; }
+        public DateTime HoraEntrada { get; set; }
 
-        public DateTime hora_salida { get; set; }
-        public double cantidad_horas { get; set; }
-        public double dias_9h { get; set; }
-        public double horas_restantes { get; set; }
-        public double total_pagar_dias_9h { get; set; }
-        public double total_pagar_horas_restantes { get; set; }
-        public double cantidad_pagar { get; set; }
+        public DateTime HoraSalida { get; set; }
+        public double CantidadHoras { get; set; }
+        public double Dias9h { get; set; }
+        public double HorasRestantes { get; set; }
+        public double TotalPagarDias9h { get; set; }
+        public double TotalPagarHorasRestantes { get; set; }
+        public double CantidadPagar { get; set; }
     }
 }

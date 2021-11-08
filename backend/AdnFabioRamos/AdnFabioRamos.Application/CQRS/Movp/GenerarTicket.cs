@@ -1,12 +1,8 @@
 ﻿using AdnFabioRamos.Application.Utilidades;
 using AdnFabioRamos.Domain.Ports;
-using AdnFabioRamos.Infrastructure.Persistence;
 using estacionamiento_adn.Models.DTOs;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,8 +11,8 @@ namespace AdnFabioRamos.Application.CQRS.Movp
 
     public class GenerarTicket : IRequest<MovimientoVehiculoPutDTO>
     {
-        public Guid id { get; set; }
-        public MovimientoVehiculoPutDTO movimientoVehiculoPutDTO { get; set; }
+        public Guid IdParqueo { get; set; }
+        public MovimientoVehiculoPutDTO MovimientoVehiculoPut { get; set; } = new MovimientoVehiculoPutDTO();
 
         public class GenerarTicketHandler : IRequestHandler<GenerarTicket, MovimientoVehiculoPutDTO>
         {
@@ -28,9 +24,9 @@ namespace AdnFabioRamos.Application.CQRS.Movp
 
             public async Task<MovimientoVehiculoPutDTO> Handle(GenerarTicket request, CancellationToken cancellationToken)
             {
-                ParqueoLogica.calcularTotalPagar(request.movimientoVehiculoPutDTO);
+                ParqueoLogica.CalcularTotalPagar(request.MovimientoVehiculoPut);
 
-                return await _repository.PutGenerarTicket(request.id, request.movimientoVehiculoPutDTO);
+                return await _repository.PutGenerarTicket(request.IdParqueo, request.MovimientoVehiculoPut);
             }
         }
     }

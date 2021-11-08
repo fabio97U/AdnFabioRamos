@@ -31,6 +31,8 @@ export class ParqueoComponent implements OnInit {
     _VehiculosDisponiblesParqueoService.getCapacidad().subscribe(
       respon => {
         this.lista = respon;
+        console.log(respon);
+        
       },
       error => {
         console.log(error);
@@ -50,15 +52,15 @@ export class ParqueoComponent implements OnInit {
   }
 
   async guardar(modal: any) {
-    if (confirm(`¿Asignar el parqueo de “${this.movp_seleccionado.tipt_tipo}” numero “${this.movp_seleccionado.numero}” al vehículo con placa “${this.movp_seleccionado.movp_placa}”?`)) {
+    if (confirm(`¿Asignar el parqueo de “${this.movp_seleccionado.TipoTransporte}” numero “${this.movp_seleccionado.Numero}” al vehículo con placa “${this.movp_seleccionado.Placa}”?`)) {
 
-      await this._VehiculosDisponiblesParqueoService.consultarPicoPlaca(this.movp_seleccionado.tipt_codigo, this.movp_seleccionado.movp_placa).subscribe(
+      await this._VehiculosDisponiblesParqueoService.consultarPicoPlaca(this.movp_seleccionado.CodigoTipoTransporte, this.movp_seleccionado.Placa).subscribe(
         respon => {
-          if (!respon.permitir_salir_ahora) {
-            alert(`El vehiculo con placa “${this.movp_seleccionado.movp_placa}” no esta en Pico Placa, los dias permitidos son: “${respon.dias_permitidos_salir}”`);
+          if (!respon.PermitirSalirAhora) {
+            alert(`El vehiculo con placa “${this.movp_seleccionado.Placa}” no esta en Pico Placa, los dias permitidos son: “${respon.DiasPermitidosSalir}”`);
           } else {
             this._VehiculosDisponiblesParqueoService.postMovimientoParqueo(new MovimientoVehiculoPost(
-              this.movp_seleccionado.par_codigo, this.movp_seleccionado.movp_placa, this.movp_seleccionado.tipt_codigo, ((this.movp_seleccionado.movp_cilindraje) ? this.movp_seleccionado.movp_cilindraje : 0), this.movp_seleccionado.numero
+              this.movp_seleccionado.CodigoParqueo, this.movp_seleccionado.Placa, this.movp_seleccionado.CodigoTipoTransporte, ((this.movp_seleccionado.Cilindraje) ? this.movp_seleccionado.Cilindraje : 0), this.movp_seleccionado.Numero
             )).subscribe(
               respon => {
                 alert("Parqueo reservado con éxito");
@@ -79,26 +81,26 @@ export class ParqueoComponent implements OnInit {
   }
 
   generarTicket(modal: any) {
-    if (confirm(`¿Generar el ticket de pago parqueadero número “${this.movp_seleccionado.numero}” (${this.movp_seleccionado.tipt_tipo})?`)) {
+    if (confirm(`¿Generar el ticket de pago parqueadero número “${this.movp_seleccionado.Numero}” (${this.movp_seleccionado.TipoTransporte})?`)) {
       this._VehiculosDisponiblesParqueoService.putMovimientoParqueo(new MovimientoVehiculoPut(
-        this.movp_seleccionado.tipt_codigo, this.movp_seleccionado.cap_valor_hora, this.movp_seleccionado.cap_valor_dia, this.movp_seleccionado.movp_codigo,
-        this.movp_seleccionado.movp_placa, this.movp_seleccionado.movp_cilindraje, this.movp_seleccionado.movp_hora_entrada
+        this.movp_seleccionado.CodigoTipoTransporte, this.movp_seleccionado.ValorHora, this.movp_seleccionado.ValorDia, this.movp_seleccionado.CodigoMovimientoParqueo,
+        this.movp_seleccionado.Placa, this.movp_seleccionado.Cilindraje, this.movp_seleccionado.HoraEntrada
       )).subscribe(
         respon => {
           alert(`
                           *Ticket generado con éxito*
-          Hora de salida: ${respon.hora_salida.toLocaleString()}
-          Valor hora: ${respon.cap_valor_hora}
-          Valor dia: ${respon.cap_valor_dia}
-          TOTAL DE HORAS: ${respon.cantidad_horas}
+          Hora de salida: ${respon.HoraSalida.toLocaleString()}
+          Valor hora: ${respon.ValorHora}
+          Valor dia: ${respon.ValorDia}
+          TOTAL DE HORAS: ${respon.CantidadHoras}
           ----------*----------
-          Dias 9h: ${respon.dias_9h}
-          Total a pagar: ${respon.total_pagar_dias_9h}
+          Dias 9h: ${respon.Dias9h}
+          Total a pagar: ${respon.TotalPagarDias9h}
           ----------*----------
-          Horas restantes: ${respon.horas_restantes}
-          Total a pagar: ${respon.total_pagar_horas_restantes}
+          Horas restantes: ${respon.HorasRestantes}
+          Total a pagar: ${respon.TotalPagarHorasRestantes}
           ----------*----------
-          TOTAL A PAGAR (dias + horas): ${respon.cantidad_pagar}`);
+          TOTAL A PAGAR (dias + horas): ${respon.CantidadPagar}`);
           this.cargarCeldas();
           modal.close('Save click');
         },
@@ -120,6 +122,7 @@ export class ParqueoComponent implements OnInit {
     this._VehiculosDisponiblesParqueoService.getParqueos().subscribe(
       respon => {
         this.lista_movp = respon;
+        console.log(respon);
       },
       error => {
         console.log(error);
@@ -128,6 +131,7 @@ export class ParqueoComponent implements OnInit {
   }
   open(content: any, movp: MovimientosVehiculosDisponibles): void {
     this.movp_seleccionado = movp;
+    console.log(this.movp_seleccionado);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

@@ -47,7 +47,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
             _context = context;
         }
 
-        public virtual async Task<List<sp_movimientos_parqueoResult>> sp_movimientos_parqueoAsync(int? codpar, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SpMovimientosParqueoResult>> SpMovimientosParqueoAsync(int? codpar, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterreturnValue = new SqlParameter
             {
@@ -66,14 +66,14 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.SqlQueryAsync<sp_movimientos_parqueoResult>("EXEC @returnValue = [par].[sp_movimientos_parqueo] @codpar", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SpMovimientosParqueoResult>("EXEC @returnValue = [par].[SpMovimientosParqueo] @codpar", sqlParameters, cancellationToken);
 
             returnValue?.SetValue(parameterreturnValue.Value);
 
             return _;
         }
 
-        public virtual async Task<List<sp_validar_pico_placaResult>> sp_validar_pico_placaAsync(int? tipo_vehiculo, string placa, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<List<SpValidarPicoPlacaResult>> SpValidarPicoPlacaAsync(int? tipo_vehiculo, string placa, OutputParameter<int> returnValue = null, CancellationToken cancellationToken = default)
         {
             var parameterreturnValue = new SqlParameter
             {
@@ -99,7 +99,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 },
                 parameterreturnValue,
             };
-            var _ = await _context.SqlQueryAsync<sp_validar_pico_placaResult>("EXEC @returnValue = [pp].[sp_validar_pico_placa] @tipo_vehiculo, @placa", sqlParameters, cancellationToken);
+            var _ = await _context.SqlQueryAsync<SpValidarPicoPlacaResult>("EXEC @returnValue = [pp].[SpValidarPicoPlaca] @tipo_vehiculo, @placa", sqlParameters, cancellationToken);
 
             returnValue?.SetValue(parameterreturnValue.Value);
 
