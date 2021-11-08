@@ -2,7 +2,7 @@
 {
     public class RespuestaPicoPlaca
     {
-        public bool PermitirSalirAhora { get; set; } = false;
+        public bool PermitirSalirAhora { get; set; }
         public string DiasPermitidosSalir { get; set; } = "";
     }
 }

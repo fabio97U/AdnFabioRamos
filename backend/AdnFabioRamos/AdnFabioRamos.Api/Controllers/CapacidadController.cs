@@ -1,13 +1,8 @@
 ﻿using AdnFabioRamos.Application.CQRS.Cap;
-using AdnFabioRamos.Infrastructure.Persistence;
-using estacionamiento_adn.Models;
 using estacionamiento_adn.Models.DTOs;
 using MediatR;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Api.Controllers

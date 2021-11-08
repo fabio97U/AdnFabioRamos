@@ -10,6 +10,10 @@ namespace AdnFabioRamos.Application.Utilidades
             const int TotalHorasDia = 9;
             const int CilindrajeMaximo = 500;
             const int MontoExtraCilindrajeMaximo = 2000;
+            if (movp == null)
+            {
+                return new MovimientoVehiculoPutDTO();
+            }
 
             var hora_entrada = movp.HoraEntrada;
             movp.HoraSalida = DateTime.Now;

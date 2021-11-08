@@ -1,6 +1,6 @@
 ﻿namespace estacionamiento_adn.Models
 {
-    public partial class SpValidarPicoPlacaResult
+    public class SpValidarPicoPlacaResult
     {
         public int Codigo { get; set; }
         public int CodigoPicoPlaca { get; set; }

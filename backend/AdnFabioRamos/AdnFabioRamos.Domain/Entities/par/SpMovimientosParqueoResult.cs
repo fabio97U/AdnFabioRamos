@@ -2,7 +2,7 @@
 
 namespace estacionamiento_adn.Models
 {
-    public partial class SpMovimientosParqueoResult
+    public class SpMovimientosParqueoResult
     {
         public int CodigoParqueo { get; set; }
         public string NombreParqueo { get; set; } = "";

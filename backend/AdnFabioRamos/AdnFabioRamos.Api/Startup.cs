@@ -13,9 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Text.Json;
 using Prometheus;
-using Newtonsoft.Json.Serialization;
 
 namespace AdnFabioRamos.Api
 {
@@ -67,8 +65,8 @@ namespace AdnFabioRamos.Api
             });
 
             services
-        .AddMvc()
-        .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+                .AddMvc()
+                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
             services.AddSwaggerDocument(settings =>
             {

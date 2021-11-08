@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace estacionamiento_adn.Models
 {
     [Table("Capacidad", Schema = "par")]
-    public partial class Capacidad
+    public class Capacidad
     {
         [Key]
         public int Codigo { get; set; }
