@@ -1,0 +1,14 @@
+PARA 29/10/2021
+
+- [x] Integrar pico_placa
+- [x] PK usar Guid()
+- [x] Backend pasar a cleancode
+- [x] Resposividad
+- [x] Pruebas de integracion, unitarias y carga
+- [x] Proceso de integración continua
+- [x] Guia de de anuglar en frond
+
+PARA 08/11/2021
+- [x] integracion continua 
+- [x] Cambiar nombres de los controladores
+- [x] Mostrar numero de placa en front

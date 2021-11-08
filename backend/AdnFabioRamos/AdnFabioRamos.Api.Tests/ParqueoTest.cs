@@ -46,7 +46,7 @@ namespace AdnFabioRamos.Api.Tests
             var respuestaPicoPlaca = new RespuestaPicoPlaca();
 
             //Prueba
-            var c = this.TestClient.GetAsync($"api/dpp_detalle_pico_placa/consultarPicoPlaca/{tipo_vehiculo}/{placa}").Result;
+            var c = this.TestClient.GetAsync($"api/PicoPlaca/consultarPicoPlaca/{tipo_vehiculo}/{placa}").Result;
             var response = c.Content.ReadAsStringAsync().Result;
             respuestaPicoPlaca = System.Text.Json.JsonSerializer.Deserialize<RespuestaPicoPlaca>(response);
 
@@ -64,7 +64,7 @@ namespace AdnFabioRamos.Api.Tests
             var respuestaPicoPlaca = new RespuestaPicoPlaca();
 
             //Prueba
-            var c = this.TestClient.GetAsync($"api/dpp_detalle_pico_placa/consultarPicoPlaca/{tipo_vehiculo}/{placa}").Result;
+            var c = this.TestClient.GetAsync($"api/PicoPlaca/consultarPicoPlaca/{tipo_vehiculo}/{placa}").Result;
             var response = c.Content.ReadAsStringAsync().Result;
             respuestaPicoPlaca = System.Text.Json.JsonSerializer.Deserialize<RespuestaPicoPlaca>(response);
 
@@ -90,7 +90,7 @@ namespace AdnFabioRamos.Api.Tests
             //Prueba
             var stringContent = new StringContent(JsonConvert.SerializeObject(movp), Encoding.UTF8, "application/json");
 
-            var c = this.TestClient.PostAsync($"api/movp_movimiento_parqueo/GuardarMovimientoVehiculo", stringContent).Result;
+            var c = this.TestClient.PostAsync($"api/MovimientosParqueo/GuardarMovimientoVehiculo", stringContent).Result;
             var response = c.Content.ReadAsStringAsync().Result;
             var respuestaMovp = System.Text.Json.JsonSerializer.Deserialize<MovimientoVehiculoPostDTO>(response);
 
