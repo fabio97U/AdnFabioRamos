@@ -23,7 +23,7 @@ namespace estacionamiento_adn.Models
         /// 1: Lunes ... 7: Domingo
         /// </summary>
         public int DiaSemana { get; set; }
-        public short Digito { get; set; }
+        public string Digito { get; set; }
         /// <summary>
         /// Que la placa I: Inicie, F: Finalice
         /// </summary>

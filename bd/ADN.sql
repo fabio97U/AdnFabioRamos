@@ -40,7 +40,7 @@ create table pp.DetallePicoPlaca (
 
 	DiaSemana int not null check (DiaSemana >= 1 and DiaSemana <= 7),
 
-	Digito smallint not null default 1 check (Digito >= 0 and Digito <= 9), 
+	Digito CHAR(1) not null default '1', 
 
 	DigitoInicioFinal varchar(2) not null default 'I' check (DigitoInicioFinal='I' or DigitoInicioFinal='F'),
 
@@ -148,7 +148,7 @@ begin
 end
 GO
 
-	-- exec pp.SpValidarPicoPlaca 2, '841265'
+	-- exec pp.SpValidarPicoPlaca 2, 'A841265'
 create or alter procedure pp.SpValidarPicoPlaca
 	@tipo_vehiculo int = 0, -- codtipt
 	@placa varchar(25) = ''

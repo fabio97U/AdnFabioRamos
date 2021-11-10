@@ -37,7 +37,6 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 entity.HasKey(e => e.Codigo)
                     .HasName("PK__Capacida__06370DADDBB27605");
 
-                entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
             });
 
             modelBuilder.Entity<DetallePicoPlaca>(entity =>
@@ -47,7 +46,10 @@ namespace AdnFabioRamos.Infrastructure.Persistence
 
                 entity.Property(e => e.DiaSemana).HasComment("1: Lunes ... 7: Domingo");
 
-                entity.Property(e => e.Digito).HasDefaultValueSql("((1))");
+                entity.Property(e => e.Digito)
+                    .IsUnicode(false)
+                    .IsFixedLength()
+                    .HasDefaultValueSql("('1')");
 
                 entity.Property(e => e.DigitoInicioFinal)
                     .IsUnicode(false)

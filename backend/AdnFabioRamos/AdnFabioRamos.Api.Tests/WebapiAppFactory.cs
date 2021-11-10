@@ -29,13 +29,10 @@ namespace AdnFabioRamos.Api.Tests
                         services.AddDbContext<AdnCeibaContext>(options =>
                         {
                             //options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True;multipleactiveresultsets=true;Connection Timeout=0");
-                            options.UseInMemoryDatabase(Guid.NewGuid().ToString());
+                            options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString());
                         });
                     });
                 });
-
-            
-
             return host;
         }
     }

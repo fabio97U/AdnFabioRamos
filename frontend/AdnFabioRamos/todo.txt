@@ -12,3 +12,7 @@ PARA 08/11/2021
 - [x] integracion continua 
 - [x] Cambiar nombres de los controladores
 - [x] Mostrar numero de placa en front
+
+
+- [] consultar pico placa e ingresar en solo paso
+- [] 

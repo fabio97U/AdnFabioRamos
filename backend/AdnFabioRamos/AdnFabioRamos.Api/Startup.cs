@@ -29,14 +29,6 @@ namespace AdnFabioRamos.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PersistenceContext>(opt =>
-            {
-                opt.UseSqlServer(Configuration.GetConnectionString("database"), sqlopts =>
-                {
-                    sqlopts.MigrationsHistoryTable("_MigrationHistory", Configuration.GetValue<string>("SchemaName"));
-                });
-            });
-
             services.AddMediatR(Assembly.Load("AdnFabioRamos.Application"), typeof(Startup).Assembly);
             var applicationAssemblyName = typeof(Startup).Assembly.GetReferencedAssemblies()
                 .FirstOrDefault(x => x.Name.Equals("AdnFabioRamos.Application", StringComparison.InvariantCulture));
@@ -76,9 +68,6 @@ namespace AdnFabioRamos.Api
             });
 
             services.AddResponseCompression();
-            services.AddHealthChecks()
-                .AddDbContextCheck<AdnFabioRamos.Infrastructure.Persistence.PersistenceContext>()
-                .ForwardToPrometheus();
 
             services.AddScoped<ICapacidadRepository, CapacidadRespository>();
             services.AddScoped<IDetallePicoPlaca, DetallePicoPlacaRepository>();
