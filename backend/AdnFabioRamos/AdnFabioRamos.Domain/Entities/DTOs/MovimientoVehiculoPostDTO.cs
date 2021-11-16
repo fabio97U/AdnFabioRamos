@@ -4,6 +4,7 @@ namespace estacionamiento_adn.Models.DTOs
 {
     public class MovimientoVehiculoPostDto
     {
+        public Guid Codigo { get; set; }
         public int CodigoParqueo { get; set; }
         public string Placa { get; set; } = "";
         public int CodigoTipoTransporte { get; set; }

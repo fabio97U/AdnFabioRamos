@@ -14,6 +14,25 @@ namespace AdnFabioRamos.Infrastructure.Persistence
         {
             using (var _context = new AdnCeibaContext(serviceProvider.GetRequiredService<DbContextOptions<AdnCeibaContext>>()))
             {
+                int McodigoParqueo = 1;
+                int Manio = 2021;
+                int McodigoPicoPlaca = 1;
+                int McodigoMoto = 1;
+                int McodigoCarro = 2;
+                int MesActual = 11;
+                int MdiaSemanaActual = 1;
+                string MhoraInicio = "00:00";
+                string MhoraFin = "23:59";
+
+                short CapacidadMoto = 10;
+                short CapacidadCarro = 20;
+
+                int ValorHoraMoto = 500;
+                int ValorHoraCarro = 1000;
+
+                int ValorDiaMoto = 4000;
+                int ValorDiaCarro = 8000;
+
                 // Tipos de transporte
                 if (_context.TipoTransporte.Any())
                 {
@@ -34,7 +53,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 }
 
                 _context.PicoPlaca.AddRange(
-                    new PicoPlaca { Anio = 2021, Descripcion = "Pico placa para el año 2021 en Colombia MEMORIA" }
+                    new PicoPlaca { Anio = Manio, Descripcion = "Pico placa para el año 2021 en Colombia MEMORIA" }
                  );
 
                 _context.SaveChanges();
@@ -46,11 +65,11 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 }
 
                 _context.DetallePicoPlaca.AddRange(
-                    new DetallePicoPlaca { CodigoPicoPlaca = 1, CodigoTipoTransporte = 1, Mes = 11, HoraInicio = "00:00", HoraFin = "23:59", Digito = "1", DiaSemana = 1 },
-                    new DetallePicoPlaca { CodigoPicoPlaca = 1, CodigoTipoTransporte = 1, Mes = 11, HoraInicio = "00:00", HoraFin = "23:59", Digito = "2", DiaSemana = 1 },
+                    new DetallePicoPlaca { CodigoPicoPlaca = McodigoPicoPlaca, CodigoTipoTransporte = McodigoMoto, Mes = Convert.ToByte(MesActual), HoraInicio = MhoraInicio, HoraFin = MhoraFin, Digito = "1", DiaSemana = MdiaSemanaActual },
+                    new DetallePicoPlaca { CodigoPicoPlaca = McodigoPicoPlaca, CodigoTipoTransporte = McodigoMoto, Mes = Convert.ToByte(MesActual), HoraInicio = MhoraInicio, HoraFin = MhoraFin, Digito = "2", DiaSemana = MdiaSemanaActual },
 
-                    new DetallePicoPlaca { CodigoPicoPlaca = 1, CodigoTipoTransporte = 2, Mes = 11, HoraInicio = "00:00", HoraFin = "23:59", Digito = "1", DiaSemana = 1 },
-                    new DetallePicoPlaca { CodigoPicoPlaca = 1, CodigoTipoTransporte = 2, Mes = 11, HoraInicio = "00:00", HoraFin = "23:59", Digito = "2", DiaSemana = 1 }
+                    new DetallePicoPlaca { CodigoPicoPlaca = McodigoPicoPlaca, CodigoTipoTransporte = McodigoCarro, Mes = Convert.ToByte(MesActual), HoraInicio = MhoraInicio, HoraFin = MhoraFin, Digito = "1", DiaSemana = MdiaSemanaActual },
+                    new DetallePicoPlaca { CodigoPicoPlaca = McodigoPicoPlaca, CodigoTipoTransporte = McodigoCarro, Mes = Convert.ToByte(MesActual), HoraInicio = MhoraInicio, HoraFin = MhoraFin, Digito = "2", DiaSemana = MdiaSemanaActual }
                  );
 
                 _context.SaveChanges();
@@ -74,8 +93,8 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 }
 
                 _context.Capacidad.AddRange(
-                    new Capacidad { CodigoParqueo = 1, CodigoTipoTransporte = 1, Capacidad1 = 20, ValorHora = 500, ValorDia = 4000 },
-                    new Capacidad { CodigoParqueo = 1, CodigoTipoTransporte = 2, Capacidad1 = 20, ValorHora = 1000, ValorDia = 8000 }
+                    new Capacidad { CodigoParqueo = McodigoParqueo, CodigoTipoTransporte = McodigoMoto, Capacidad1 = CapacidadMoto, ValorHora = ValorHoraMoto, ValorDia = ValorDiaMoto },
+                    new Capacidad { CodigoParqueo = McodigoParqueo, CodigoTipoTransporte = McodigoCarro, Capacidad1 = CapacidadCarro, ValorHora = ValorHoraCarro, ValorDia = ValorDiaCarro }
                  );
 
                 _context.SaveChanges();

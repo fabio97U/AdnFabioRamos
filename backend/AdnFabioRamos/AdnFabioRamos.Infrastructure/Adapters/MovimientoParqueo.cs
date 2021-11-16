@@ -46,6 +46,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             {
                 Console.WriteLine(ex.Message);
             }
+            _movp.Codigo = movp.Codigo;
 
             return _movp;
         }

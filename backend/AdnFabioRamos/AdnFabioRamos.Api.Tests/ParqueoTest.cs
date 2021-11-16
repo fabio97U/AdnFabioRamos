@@ -100,6 +100,53 @@ namespace AdnFabioRamos.Api.Tests
         }
 
         [TestMethod]
+        [DataRow(1, "123", 2, 6500, 1, 500, 4000)]
+        [DataRow(1, "123", 2, 500, 1, 500, 4000)]
+        [DataRow(2, "123", 2, 0, 1, 1000, 8000)]
+        public void GenerarTicketParqueo(int movp_codpar, string movp_placa, int movp_codtipt, int movp_cilindraje, int movp_parqueo_numero, int ValorHora, int ValorDia)
+        {
+            #region Se inserta el movimiento
+            var movpPut = new MovimientoVehiculoPostDto()
+            {
+                CodigoParqueo = movp_codpar,
+                Cilindraje = movp_cilindraje,
+                CodigoTipoTransporte = movp_codtipt,
+                ParqueoNumero = movp_parqueo_numero,
+                Placa = movp_placa,
+                FechaIngreso = DateTime.Now.AddHours(-10)
+            };
+            //Prueba
+            var stringContentPut = new StringContent(JsonConvert.SerializeObject(movpPut), Encoding.UTF8, "application/json");
+
+            var c = this.TestClient.PostAsync($"api/MovimientosParqueo/GuardarMovimientoVehiculo", stringContentPut).Result;
+            var response = c.Content.ReadAsStringAsync().Result;
+            var respuestaMovpPut = System.Text.Json.JsonSerializer.Deserialize<MovimientoVehiculoPostDto>(response);
+            #endregion
+
+            #region Se simula el sacar el vehiculo
+            var movp = new MovimientoVehiculoPutDto()
+            {
+                CodigoMovimiento = respuestaMovpPut.Codigo,
+                HoraEntrada = respuestaMovpPut.FechaIngreso,
+                CodigoTipoTransporte = respuestaMovpPut.CodigoTipoTransporte,
+                Cilindraje = respuestaMovpPut.Cilindraje,
+                ValorDia = ValorDia,
+                ValorHora = ValorHora
+            };
+
+            //Prueba
+            var stringContent = new StringContent(JsonConvert.SerializeObject(movp), Encoding.UTF8, "application/json");
+
+            c = this.TestClient.PutAsync($"api/MovimientosParqueo/GenerarTicket/{respuestaMovpPut.Codigo}", stringContent).Result;
+            response = c.Content.ReadAsStringAsync().Result;
+            var respuestaMovp = System.Text.Json.JsonSerializer.Deserialize<MovimientoVehiculoPutDto>(response);
+            #endregion
+
+            //Verificacion
+            Assert.AreEqual(true, c.IsSuccessStatusCode);
+        }
+
+        [TestMethod]
         [DataRow(1, 500, 4000, 650, -10, 6500)]//Moto cilindraje > 500
         [DataRow(1, 500, 4000, 500, -10, 4500)]//Moto cilindraje < 500
         [DataRow(2, 1000, 8000, 0, -12, 11000)]//Carro
