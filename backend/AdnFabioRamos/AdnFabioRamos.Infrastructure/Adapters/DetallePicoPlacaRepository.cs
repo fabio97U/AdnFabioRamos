@@ -25,7 +25,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             var lst_dpp_detalle_pico_placa = _contextProcedures.SpValidarPicoPlacaAsync(tipo_vehiculo, placa).Result.ToList();
             var respuesta = new RespuestaPicoPlaca();
 
-            if (lst_dpp_detalle_pico_placa.Where(x => x.Tipo == 0).Any())
+            if (lst_dpp_detalle_pico_placa.Any(x => x.Tipo == 0))
             {
                 respuesta.PermitirSalirAhora = true;
             }
@@ -40,14 +40,8 @@ namespace AdnFabioRamos.Infrastructure.Adapters
         public async Task<DetallePicoPlaca> PostDetallePicoPlaca(DetallePicoPlaca dpp_Detalle_Pico_Placa)
         {
             _context.DetallePicoPlaca.Add(dpp_Detalle_Pico_Placa);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException ex)
-            {
 
-            }
+            await _context.SaveChangesAsync();
 
             return dpp_Detalle_Pico_Placa;
         }

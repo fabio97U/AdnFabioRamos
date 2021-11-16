@@ -65,11 +65,47 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 }
 
                 _context.DetallePicoPlaca.AddRange(
-                    new DetallePicoPlaca { CodigoPicoPlaca = McodigoPicoPlaca, CodigoTipoTransporte = McodigoMoto, Mes = Convert.ToByte(MesActual), HoraInicio = MhoraInicio, HoraFin = MhoraFin, Digito = "1", DiaSemana = MdiaSemanaActual },
-                    new DetallePicoPlaca { CodigoPicoPlaca = McodigoPicoPlaca, CodigoTipoTransporte = McodigoMoto, Mes = Convert.ToByte(MesActual), HoraInicio = MhoraInicio, HoraFin = MhoraFin, Digito = "2", DiaSemana = MdiaSemanaActual },
+                    new DetallePicoPlaca
+                    {
+                        CodigoPicoPlaca = McodigoPicoPlaca,
+                        CodigoTipoTransporte = McodigoMoto,
+                        Mes = Convert.ToByte(MesActual),
+                        HoraInicio = MhoraInicio,
+                        HoraFin = MhoraFin,
+                        Digito = "1",
+                        DiaSemana = MdiaSemanaActual
+                    },
+                    new DetallePicoPlaca
+                    {
+                        CodigoPicoPlaca = McodigoPicoPlaca,
+                        CodigoTipoTransporte = McodigoMoto,
+                        Mes = Convert.ToByte(MesActual),
+                        HoraInicio = MhoraInicio,
+                        HoraFin = MhoraFin,
+                        Digito = "2",
+                        DiaSemana = MdiaSemanaActual
+                    },
 
-                    new DetallePicoPlaca { CodigoPicoPlaca = McodigoPicoPlaca, CodigoTipoTransporte = McodigoCarro, Mes = Convert.ToByte(MesActual), HoraInicio = MhoraInicio, HoraFin = MhoraFin, Digito = "1", DiaSemana = MdiaSemanaActual },
-                    new DetallePicoPlaca { CodigoPicoPlaca = McodigoPicoPlaca, CodigoTipoTransporte = McodigoCarro, Mes = Convert.ToByte(MesActual), HoraInicio = MhoraInicio, HoraFin = MhoraFin, Digito = "2", DiaSemana = MdiaSemanaActual }
+                    new DetallePicoPlaca
+                    {
+                        CodigoPicoPlaca = McodigoPicoPlaca,
+                        CodigoTipoTransporte = McodigoCarro,
+                        Mes = Convert.ToByte(MesActual),
+                        HoraInicio = MhoraInicio,
+                        HoraFin = MhoraFin,
+                        Digito = "1",
+                        DiaSemana = MdiaSemanaActual
+                    },
+                    new DetallePicoPlaca
+                    {
+                        CodigoPicoPlaca = McodigoPicoPlaca,
+                        CodigoTipoTransporte = McodigoCarro,
+                        Mes = Convert.ToByte(MesActual),
+                        HoraInicio = MhoraInicio,
+                        HoraFin = MhoraFin,
+                        Digito = "2",
+                        DiaSemana = MdiaSemanaActual
+                    }
                  );
 
                 _context.SaveChanges();
@@ -93,8 +129,22 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 }
 
                 _context.Capacidad.AddRange(
-                    new Capacidad { CodigoParqueo = McodigoParqueo, CodigoTipoTransporte = McodigoMoto, Capacidad1 = CapacidadMoto, ValorHora = ValorHoraMoto, ValorDia = ValorDiaMoto },
-                    new Capacidad { CodigoParqueo = McodigoParqueo, CodigoTipoTransporte = McodigoCarro, Capacidad1 = CapacidadCarro, ValorHora = ValorHoraCarro, ValorDia = ValorDiaCarro }
+                    new Capacidad
+                    {
+                        CodigoParqueo = McodigoParqueo,
+                        CodigoTipoTransporte = McodigoMoto,
+                        Capacidad1 = CapacidadMoto,
+                        ValorHora = ValorHoraMoto,
+                        ValorDia = ValorDiaMoto
+                    },
+                    new Capacidad
+                    {
+                        CodigoParqueo = McodigoParqueo,
+                        CodigoTipoTransporte = McodigoCarro,
+                        Capacidad1 = CapacidadCarro,
+                        ValorHora = ValorHoraCarro,
+                        ValorDia = ValorDiaCarro
+                    }
                  );
 
                 _context.SaveChanges();

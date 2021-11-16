@@ -212,5 +212,21 @@ namespace AdnFabioRamos.Api.Tests
             //Verificacion
             Assert.AreEqual(true, c.IsSuccessStatusCode);
         }
+
+        //[TestMethod]
+        //[DataRow(1)]
+        //public void OptenerLosMovimientosDeParqueo(int CodigoParqueo)
+        //{
+        //    //Preparacion
+        //    IEnumerable<SpMovimientosParqueoResult> MovimientosDisponibles;
+
+        //    //Prueba
+        //    var c = this.TestClient.GetAsync($"api/MovimientosParqueo/codpar/{CodigoParqueo}").Result;
+        //    var response = c.Content.ReadAsStringAsync().Result;
+        //    MovimientosDisponibles = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<SpMovimientosParqueoResult>>(response);
+
+        //    //Verificacion
+        //    Assert.IsTrue(MovimientosDisponibles.Any(x=>x.HoraEntrada != null));
+        //}
     }
 }

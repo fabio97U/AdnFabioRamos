@@ -36,16 +36,11 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             var movp = new estacionamiento_adn.Models.MovimientoParqueo();
 
             _mapper.Map(_movp, movp);
-            
+
             _context.MovimientoParqueo.Add(movp);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException ex)
-            {
-                
-            }
+
+            await _context.SaveChangesAsync();
+
             _movp.Codigo = movp.Codigo;
 
             return _movp;
@@ -60,14 +55,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 
             _context.Entry(movp_movimiento_parqueo).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                
-            }
+            await _context.SaveChangesAsync();
 
             return movp;
         }
