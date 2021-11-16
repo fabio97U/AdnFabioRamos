@@ -20,7 +20,7 @@ export class ParqueoComponent implements OnInit {
 
   public Lista: Array<VehiculosDisponiblesParqueo> = [];
   public ListaMovp: Array<MovimientosVehiculosDisponibles> = [];
-  public Seleccionado: MovimientosVehiculosDisponibles;
+  public Movp: MovimientosVehiculosDisponibles;
 
   constructor(
     private _VehiculosDisponiblesParqueoService: VehiculosDisponiblesParqueoService,
@@ -37,7 +37,7 @@ export class ParqueoComponent implements OnInit {
 
     this.cargarCeldas();
 
-    this.Seleccionado = this.ListaMovp[0];
+    this.Movp = this.ListaMovp[0];
 
     config.backdrop = 'static';
     config.keyboard = false;
@@ -48,15 +48,15 @@ export class ParqueoComponent implements OnInit {
   }
 
   async guardar(modal: any) {
-    if (confirm(`¿Asignar el parqueo de “${this.Seleccionado.TipoTransporte}” numero “${this.Seleccionado.Numero}” al vehículo con placa “${this.Seleccionado.Placa}”?`)) {
+    if (confirm(`¿Asignar el parqueo de “${this.Movp.TipoTransporte}” numero “${this.Movp.Numero}” al vehículo con placa “${this.Movp.Placa}”?`)) {
 
-      await this._VehiculosDisponiblesParqueoService.consultarPicoPlaca(this.Seleccionado.CodigoTipoTransporte, this.Seleccionado.Placa).subscribe(
+      await this._VehiculosDisponiblesParqueoService.consultarPicoPlaca(this.Movp.CodigoTipoTransporte, this.Movp.Placa).subscribe(
         respon => {
           if (!respon.PermitirSalirAhora) {
-            alert(`El vehiculo con placa “${this.Seleccionado.Placa}” no esta en Pico Placa, los dias permitidos son: “${respon.DiasPermitidosSalir}”`);
+            alert(`El vehiculo con placa “${this.Movp.Placa}” no esta en Pico Placa, los dias permitidos son: “${respon.DiasPermitidosSalir}”`);
           } else {
             this._VehiculosDisponiblesParqueoService.postMovimientoParqueo(new MovimientoVehiculoPost(
-              this.Seleccionado.CodigoParqueo, this.Seleccionado.Placa, this.Seleccionado.CodigoTipoTransporte, ((this.Seleccionado.Cilindraje) ? this.Seleccionado.Cilindraje : 0), this.Seleccionado.Numero
+              this.Movp.CodigoParqueo, this.Movp.Placa, this.Movp.CodigoTipoTransporte, ((this.Movp.Cilindraje) ? this.Movp.Cilindraje : 0), this.Movp.Numero
             )).subscribe(
               responParqueo => {
                 alert('Parqueo reservado con éxito');
@@ -77,10 +77,10 @@ export class ParqueoComponent implements OnInit {
   }
 
   generarTicket(modal: any) {
-    if (confirm(`¿Generar el ticket de pago parqueadero número “${this.Seleccionado.Numero}” (${this.Seleccionado.TipoTransporte})?`)) {
+    if (confirm(`¿Generar el ticket de pago parqueadero número “${this.Movp.Numero}” (${this.Movp.TipoTransporte})?`)) {
       this._VehiculosDisponiblesParqueoService.putMovimientoParqueo(new MovimientoVehiculoPut(
-        this.Seleccionado.CodigoTipoTransporte, this.Seleccionado.ValorHora, this.Seleccionado.ValorDia, this.Seleccionado.CodigoMovimientoParqueo,
-        this.Seleccionado.Placa, this.Seleccionado.Cilindraje, this.Seleccionado.HoraEntrada
+        this.Movp.CodigoTipoTransporte, this.Movp.ValorHora, this.Movp.ValorDia, this.Movp.CodigoMovimientoParqueo,
+        this.Movp.Placa, this.Movp.Cilindraje, this.Movp.HoraEntrada
       )).subscribe(
         respon => {
           alert(`
@@ -126,7 +126,7 @@ export class ParqueoComponent implements OnInit {
     );
   }
   open(content: any, movp: MovimientosVehiculosDisponibles): void {
-    this.Seleccionado = movp;
+    this.Movp = movp;
 
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

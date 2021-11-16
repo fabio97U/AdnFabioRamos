@@ -30,15 +30,15 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Parqueo de {{Seleccionado.TipoTransporte}} Numero
-            {{Seleccionado.Numero}}</h4>
+        <h4 class="modal-title" id="modal-basic-title">Parqueo de {{Movp.TipoTransporte}} Numero
+            {{Movp.Numero}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
         <form (ngSubmit)="onSumbit()" #userForm="ngForm">
-            <div class="row" *ngIf="Seleccionado.CodigoMovimientoParqueo">
+            <div class="row" *ngIf="Movp.CodigoMovimientoParqueo">
                 <div class="col-sm">
                 </div>
             </div>
@@ -47,49 +47,49 @@
                     <div class="form-group">
                         <label for="Placa">Placa: </label>
                         <input type="text" name="Placa" #movp_placas="ngModel" class="form-control"
-                            autocomplete="off" [(ngModel)]="Seleccionado.Placa" required pattern="[0-9A-z]+"
-                            disabled="{{Seleccionado.CodigoMovimientoParqueo?true:false}}" />
+                            autocomplete="off" [(ngModel)]="Movp.Placa" required pattern="[0-9A-z]+"
+                            disabled="{{Movp.CodigoMovimientoParqueo?true:false}}" />
                         <small *ngIf="!movp_placas.valid && movp_placas.touched" class="text-danger">
                             La placa no es valido
                         </small>
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="Seleccionado.CodigoTipoTransporte==1">
+            <div class="row" *ngIf="Movp.CodigoTipoTransporte==1">
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="Cilindraje">Cilindraje: </label>
                         <input type="number" name="Cilindraje" #Cilindraje="ngModel" class="form-control"
-                            autocomplete="off" [(ngModel)]="Seleccionado.Cilindraje" required pattern="[0-9]+"
-                            disabled="{{Seleccionado.CodigoMovimientoParqueo?true:false}}" />
+                            autocomplete="off" [(ngModel)]="Movp.Cilindraje" required pattern="[0-9]+"
+                            disabled="{{Movp.CodigoMovimientoParqueo?true:false}}" />
                         <small *ngIf="!Cilindraje.valid && Cilindraje.touched" class="text-danger">
                             El cilindraje no es valido
                         </small>
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="Seleccionado.HoraEntrada">
+            <div class="row" *ngIf="Movp.HoraEntrada">
                 <div class="col-sm">
-                    <label>Hora de entrada: {{Seleccionado.HoraEntrada | date:'short'}}</label>
+                    <label>Hora de entrada: {{Movp.HoraEntrada | date:'short'}}</label>
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-sm">
-                    <label>Valor por hora: $ {{Seleccionado.ValorHora}}</label>
+                    <label>Valor por hora: $ {{Movp.ValorHora}}</label>
                 </div>
                 <div class="col-sm">
-                    <label>Valor por día: $ {{Seleccionado.ValorDia}}</label>
+                    <label>Valor por día: $ {{Movp.ValorDia}}</label>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <div *ngIf="!Seleccionado.CodigoMovimientoParqueo">
+        <div *ngIf="!Movp.CodigoMovimientoParqueo">
             <button type="button" class="btn btn-primary" (click)="guardar(modal)"
                 [disabled]="userForm.invalid">Guardar</button>
         </div>
-        <div *ngIf="Seleccionado.CodigoMovimientoParqueo">
+        <div *ngIf="Movp.CodigoMovimientoParqueo">
             <button type="button" class="btn btn-success" (click)="generarTicket(modal)">Generar Ticket</button>
         </div>
     </div>

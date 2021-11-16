@@ -10,9 +10,9 @@ import { ErrorComponent } from './components/error/error.component';
 const appRoutes: Routes = [
     { path: '', component: ParqueoComponent },
     { path: 'parqueo', component: ParqueoComponent },
-    
+
     { path: '**', component: ErrorComponent }
-]
+];
 
 // Exportar el modulo de rutas
 export const appRoutingProvider: any[] = [];
