@@ -120,5 +120,21 @@ namespace AdnFabioRamos.Api.Tests
             //Verificacion
             Assert.AreEqual(valor_esperado, movpPut.CantidadPagar);
         }
+
+        [TestMethod]
+        [DataRow(1)]
+        public void ValidarCapacidadParqueo(int CodigoParqueo)
+        {
+            //Preparacion
+            IEnumerable<VehiculosDisponiblesParqueoDto> capacidadParqueo;
+
+            //Prueba
+            var c = this.TestClient.GetAsync($"api/Capacidad/{CodigoParqueo}").Result;
+            var response = c.Content.ReadAsStringAsync().Result;
+            capacidadParqueo = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<VehiculosDisponiblesParqueoDto>>(response);
+
+            //Verificacion
+            Assert.IsTrue(capacidadParqueo.Count() > 0);
+        }
     }
 }
