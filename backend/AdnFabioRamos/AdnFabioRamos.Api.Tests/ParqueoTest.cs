@@ -226,7 +226,7 @@ namespace AdnFabioRamos.Api.Tests
         //    MovimientosDisponibles = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<SpMovimientosParqueoResult>>(response);
 
         //    //Verificacion
-        //    Assert.IsTrue(MovimientosDisponibles.Any(x=>x.HoraEntrada != null));
+        //    Assert.IsTrue(MovimientosDisponibles.Any(x => x.HoraEntrada != null));
         //}
     }
 }

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Application.CQRS.Movp
 {
-
     public class GetMovimientosParqueByIdQuery : IRequest<IEnumerable<SpMovimientosParqueoResult>>
     {
         public int CodigoParqueo { get; set; }
