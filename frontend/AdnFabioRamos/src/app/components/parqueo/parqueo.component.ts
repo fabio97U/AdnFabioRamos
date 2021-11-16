@@ -49,7 +49,6 @@ export class ParqueoComponent implements OnInit {
 
   async guardar(modal: any) {
     if (confirm(`¿Asignar el parqueo de “${this.Movp.TipoTransporte}” numero “${this.Movp.Numero}” al vehículo con placa “${this.Movp.Placa}”?`)) {
-
       await this._VehiculosDisponiblesParqueoService.consultarPicoPlaca(this.Movp.CodigoTipoTransporte, this.Movp.Placa).subscribe(
         respon => {
           if (!respon.PermitirSalirAhora) {
