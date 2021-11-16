@@ -2,11 +2,11 @@
     <div class="contenedor">
         <h1 class="bloque_heading">Parqueadero ADN</h1>
         <div class="bloque_grid">
-            <div *ngFor="let l of lista">
+            <div *ngFor="let l of Lista">
                 <h2 class="bloque_heading">{{l.TipoTransporte}}</h2>
                 <div class="vehiculos_grid">
                     <div
-                        *ngFor="let lm of (lista_movp | filtrar:{'columna_filtrar': l.CodigoTipoTransporte.toString(), 'columna_items': 'CodigoTipoTransporte'})">
+                        *ngFor="let lm of (ListaMovp | filtrar:{'columna_filtrar': l.CodigoTipoTransporte.toString(), 'columna_items': 'CodigoTipoTransporte'})">
 
                         <!-- Disponible -->
                         <div class="vehiculo listado_elemento" *ngIf="!lm.CodigoMovimientoParqueo" (click)="open(content, lm)">
@@ -30,15 +30,15 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Parqueo de {{movp_seleccionado.TipoTransporte}} Numero
-            {{movp_seleccionado.Numero}}</h4>
+        <h4 class="modal-title" id="modal-basic-title">Parqueo de {{Seleccionado.TipoTransporte}} Numero
+            {{Seleccionado.Numero}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
         <form (ngSubmit)="onSumbit()" #userForm="ngForm">
-            <div class="row" *ngIf="movp_seleccionado.CodigoMovimientoParqueo">
+            <div class="row" *ngIf="Seleccionado.CodigoMovimientoParqueo">
                 <div class="col-sm">
                 </div>
             </div>
@@ -47,49 +47,49 @@
                     <div class="form-group">
                         <label for="Placa">Placa: </label>
                         <input type="text" name="Placa" #movp_placas="ngModel" class="form-control"
-                            autocomplete="off" [(ngModel)]="movp_seleccionado.Placa" required pattern="[0-9A-z]+"
-                            disabled="{{movp_seleccionado.CodigoMovimientoParqueo?true:false}}" />
+                            autocomplete="off" [(ngModel)]="Seleccionado.Placa" required pattern="[0-9A-z]+"
+                            disabled="{{Seleccionado.CodigoMovimientoParqueo?true:false}}" />
                         <small *ngIf="!movp_placas.valid && movp_placas.touched" class="text-danger">
                             La placa no es valido
                         </small>
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="movp_seleccionado.CodigoTipoTransporte==1">
+            <div class="row" *ngIf="Seleccionado.CodigoTipoTransporte==1">
                 <div class="col-sm">
                     <div class="form-group">
                         <label for="Cilindraje">Cilindraje: </label>
                         <input type="number" name="Cilindraje" #Cilindraje="ngModel" class="form-control"
-                            autocomplete="off" [(ngModel)]="movp_seleccionado.Cilindraje" required pattern="[0-9]+"
-                            disabled="{{movp_seleccionado.CodigoMovimientoParqueo?true:false}}" />
+                            autocomplete="off" [(ngModel)]="Seleccionado.Cilindraje" required pattern="[0-9]+"
+                            disabled="{{Seleccionado.CodigoMovimientoParqueo?true:false}}" />
                         <small *ngIf="!Cilindraje.valid && Cilindraje.touched" class="text-danger">
                             El cilindraje no es valido
                         </small>
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="movp_seleccionado.HoraEntrada">
+            <div class="row" *ngIf="Seleccionado.HoraEntrada">
                 <div class="col-sm">
-                    <label>Hora de entrada: {{movp_seleccionado.HoraEntrada | date:'short'}}</label>
+                    <label>Hora de entrada: {{Seleccionado.HoraEntrada | date:'short'}}</label>
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-sm">
-                    <label>Valor por hora: $ {{movp_seleccionado.ValorHora}}</label>
+                    <label>Valor por hora: $ {{Seleccionado.ValorHora}}</label>
                 </div>
                 <div class="col-sm">
-                    <label>Valor por día: $ {{movp_seleccionado.ValorDia}}</label>
+                    <label>Valor por día: $ {{Seleccionado.ValorDia}}</label>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <div *ngIf="!movp_seleccionado.CodigoMovimientoParqueo">
+        <div *ngIf="!Seleccionado.CodigoMovimientoParqueo">
             <button type="button" class="btn btn-primary" (click)="guardar(modal)"
                 [disabled]="userForm.invalid">Guardar</button>
         </div>
-        <div *ngIf="movp_seleccionado.CodigoMovimientoParqueo">
+        <div *ngIf="Seleccionado.CodigoMovimientoParqueo">
             <button type="button" class="btn btn-success" (click)="generarTicket(modal)">Generar Ticket</button>
         </div>
     </div>

@@ -30,12 +30,12 @@ import { MovimientoVehiculoPut } from '../models/MovimientoVehiculoPut';
   postMovimientoParqueo(Movp: MovimientoVehiculoPost): Observable<MovimientoVehiculoPost> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = JSON.stringify(Movp);
-    return this._httpClient.post<MovimientoVehiculoPost>(`${Global.url_api}/MovimientosParqueo/GuardarMovimientoVehiculo`, params, { headers: headers });
+    return this._httpClient.post<MovimientoVehiculoPost>(`${Global.url_api}/MovimientosParqueo/GuardarMovimientoVehiculo`, params, { headers });
   }
 
   putMovimientoParqueo(Movp: MovimientoVehiculoPut): Observable<MovimientoVehiculoPut> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     let params = JSON.stringify(Movp);
-    return this._httpClient.put<MovimientoVehiculoPut>(`${Global.url_api}/MovimientosParqueo/GenerarTicket/${Movp.CodigoMovimiento}`, params, { headers: headers });
+    return this._httpClient.put<MovimientoVehiculoPut>(`${Global.url_api}/MovimientosParqueo/GenerarTicket/${Movp.CodigoMovimiento}`, params, { headers });
   }
 }
