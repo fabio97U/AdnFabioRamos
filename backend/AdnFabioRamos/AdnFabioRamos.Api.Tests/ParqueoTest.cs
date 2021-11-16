@@ -51,8 +51,8 @@ namespace AdnFabioRamos.Api.Tests
             respuestaPicoPlaca = System.Text.Json.JsonSerializer.Deserialize<RespuestaPicoPlaca>(response);
 
             //Verificacion
-            Assert.AreEqual(true, respuestaPicoPlaca.PermitirSalirAhora);
-            //Assert.AreEqual(false, respuestaPicoPlaca.PermitirSalirAhora);
+            //Assert.AreEqual(true, respuestaPicoPlaca.PermitirSalirAhora);
+            Assert.AreEqual(false, respuestaPicoPlaca.PermitirSalirAhora);
         }
 
         [TestMethod]
@@ -110,7 +110,7 @@ namespace AdnFabioRamos.Api.Tests
                 CodigoTipoTransporte = tipt_codigo,
                 ValorHora = cap_valor_hora,
                 ValorDia = cap_valor_dia,
-                Cilindraje = movp_cilindraje, 
+                Cilindraje = movp_cilindraje,
                 HoraEntrada = DateTime.Now.AddHours(horas)
             };
 

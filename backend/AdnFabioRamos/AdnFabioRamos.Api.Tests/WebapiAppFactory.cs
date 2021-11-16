@@ -17,7 +17,7 @@ namespace AdnFabioRamos.Api.Tests
             Host.CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(builder =>
                 {
-                    builder.UseStartup<TStartup>().ConfigureServices(services =>
+                    builder.UseStartup<Startup>().ConfigureServices(services =>
                     {
                         var dbCtxOpts = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<AdnCeibaContext>));
 
@@ -29,7 +29,7 @@ namespace AdnFabioRamos.Api.Tests
                         services.AddDbContext<AdnCeibaContext>(options =>
                         {
                             //options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True;multipleactiveresultsets=true;Connection Timeout=0");
-                            options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString());
+                            options.UseInMemoryDatabase(databaseName: "MockBD");
                         });
                     });
                 });

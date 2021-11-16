@@ -37,7 +37,13 @@ namespace AdnFabioRamos.Api
 
             services.AddDbContext<AdnCeibaContext>();
             services.AddDbContext<AdnCeibaContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            //options.UseInMemoryDatabase("TESTBD")
+            );
+
+            services.AddHealthChecks()
+                .AddDbContextCheck<AdnCeibaContext>()
+                .ForwardToPrometheus();
 
             services.AddCors(options =>
             {

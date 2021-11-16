@@ -40,7 +40,7 @@
         <form (ngSubmit)="onSumbit()" #userForm="ngForm">
             <div class="row" *ngIf="movp_seleccionado.CodigoMovimientoParqueo">
                 <div class="col-sm">
-                    <label>Codigo: {{movp_seleccionado.CodigoMovimientoParqueo}}</label>
+                    <!-- <label>Codigo: {{movp_seleccionado.CodigoMovimientoParqueo}}</label> -->
                 </div>
             </div>
             <div class="row">
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label for="Placa">Placa: </label>
                         <input type="text" name="Placa" #movp_placas="ngModel" class="form-control"
-                            autocomplete="off" [(ngModel)]="movp_seleccionado.Placa" required pattern="[0-9]+"
+                            autocomplete="off" [(ngModel)]="movp_seleccionado.Placa" required pattern="[0-9A-z]+"
                             disabled="{{movp_seleccionado.CodigoMovimientoParqueo?true:false}}" />
                         <small *ngIf="!movp_placas.valid && movp_placas.touched" class="text-danger">
                             La placa no es valido
