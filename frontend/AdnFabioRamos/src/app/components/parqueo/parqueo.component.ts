@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MovimientosVehiculosDisponibles } from 'src/app/models/MovimientosVehiculosDisponibles';
 
 import { NgbModalConfig, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -7,12 +7,10 @@ import { VehiculosDisponiblesParqueo } from 'src/app/models/VehiculosDisponibles
 import { VehiculosDisponiblesParqueoService } from '../../services/vehiculos-disponibles-parqueo.service';
 import { MovimientoVehiculoPost } from 'src/app/models/MovimientoVehiculoPost';
 import { MovimientoVehiculoPut } from 'src/app/models/MovimientoVehiculoPut';
-import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-parqueo',
   templateUrl: './parqueo.component.html',
-  styleUrls: ['./parqueo.component.css'],
   providers: [VehiculosDisponiblesParqueoService],
 
 })
@@ -31,11 +29,9 @@ export class ParqueoComponent implements OnInit {
     _VehiculosDisponiblesParqueoService.getCapacidad().subscribe(
       respon => {
         this.lista = respon;
-        console.log(respon);
-        
       },
       error => {
-        console.log(error);
+
       }
     );
 
@@ -62,19 +58,19 @@ export class ParqueoComponent implements OnInit {
             this._VehiculosDisponiblesParqueoService.postMovimientoParqueo(new MovimientoVehiculoPost(
               this.movp_seleccionado.CodigoParqueo, this.movp_seleccionado.Placa, this.movp_seleccionado.CodigoTipoTransporte, ((this.movp_seleccionado.Cilindraje) ? this.movp_seleccionado.Cilindraje : 0), this.movp_seleccionado.Numero
             )).subscribe(
-              respon => {
+              responParqueo => {
                 alert("Parqueo reservado con éxito");
                 this.cargarCeldas();
                 modal.close('Save click');
               },
-              error => {
-                console.log(error);
+              errorParqueo => {
+
               }
             );
           }
         },
         error => {
-          console.log(error);
+
         }
       );
     }
@@ -105,7 +101,7 @@ export class ParqueoComponent implements OnInit {
           modal.close('Save click');
         },
         error => {
-          console.log(error);
+
         }
       );
 
@@ -115,23 +111,23 @@ export class ParqueoComponent implements OnInit {
   }
 
   onSumbit(): void {
-    console.log(this.movp_seleccionado);
+
   }
 
   cargarCeldas(): void {
     this._VehiculosDisponiblesParqueoService.getParqueos().subscribe(
       respon => {
         this.lista_movp = respon;
-        console.log(respon);
+
       },
       error => {
-        console.log(error);
+
       }
     );
   }
   open(content: any, movp: MovimientosVehiculosDisponibles): void {
     this.movp_seleccionado = movp;
-    console.log(this.movp_seleccionado);
+
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

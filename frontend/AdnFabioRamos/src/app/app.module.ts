@@ -14,8 +14,8 @@ import { ParqueoComponent } from './components/parqueo/parqueo.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FiltrarPipe } from './pipes/filtrar.pipe';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { NgbPaginationModule, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({

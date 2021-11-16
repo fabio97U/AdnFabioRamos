@@ -1,8 +1,7 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { MovimientosVehiculosDisponibles } from "../models/MovimientosVehiculosDisponibles";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: "filtrar"
+    name: 'filtrar'
 })
 export class FiltrarPipe implements PipeTransform {
 
