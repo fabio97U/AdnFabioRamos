@@ -19,7 +19,14 @@ namespace AdnFabioRamos.Application.CQRS.Movp
 
             public async Task<MovimientoVehiculoPostDto> Handle(CreateMovimiento request, CancellationToken cancellationToken)
             {
-                return await _repository.Post_GuardarMovimientoVehiculo(request.MovimientoVehiculo);
+                if (request != null)
+                {
+                    return await _repository.Post_GuardarMovimientoVehiculo(request.MovimientoVehiculo);
+                }
+                else
+                {
+                    throw new System.ArgumentNullException(nameof(request), "No se envio el Movimiento");
+                }
             }
         }
     }

@@ -24,9 +24,16 @@ namespace AdnFabioRamos.Application.CQRS.Movp
 
             public async Task<MovimientoVehiculoPutDto> Handle(GenerarTicket request, CancellationToken cancellationToken)
             {
-                ParqueoLogica.CalcularTotalPagar(request.MovimientoVehiculoPut);
+                if (request != null)
+                {
+                    ParqueoLogica.CalcularTotalPagar(request.MovimientoVehiculoPut);
 
-                return await _repository.PutGenerarTicket(request.IdParqueo, request.MovimientoVehiculoPut);
+                    return await _repository.PutGenerarTicket(request.IdParqueo, request.MovimientoVehiculoPut);
+                }
+                else
+                {
+                    throw new System.ArgumentNullException(nameof(request), "No se envio el Movimiento y Guid");
+                }
             }
         }
     }

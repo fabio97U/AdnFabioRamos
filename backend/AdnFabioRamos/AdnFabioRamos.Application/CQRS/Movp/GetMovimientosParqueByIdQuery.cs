@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Application.CQRS.Movp
 {
-    
+
     public class GetMovimientosParqueByIdQuery : IRequest<IEnumerable<SpMovimientosParqueoResult>>
     {
         public int CodigoParqueo { get; set; }
@@ -21,7 +21,14 @@ namespace AdnFabioRamos.Application.CQRS.Movp
 
             public async Task<IEnumerable<SpMovimientosParqueoResult>> Handle(GetMovimientosParqueByIdQuery request, CancellationToken cancellationToken)
             {
-                return _repositorio.Getmovp_movimiento_x_parqueo(request.CodigoParqueo);
+                if (request != null)
+                {
+                    return _repositorio.Getmovp_movimiento_x_parqueo(request.CodigoParqueo);
+                }
+                else
+                {
+                    throw new System.ArgumentNullException(nameof(request), "No se envio el Codigo del Parqueo");
+                }
             }
         }
     }

@@ -20,7 +20,14 @@ namespace AdnFabioRamos.Application.CQRS.Dpp
 
             public async Task<RespuestaPicoPlaca> Handle(GetDetallePicoPlacaByPlacaVehiculoQuery request, CancellationToken cancellationToken)
             {
-                return await _DetallePicoPlacaRepository.GetconsultarPicoPlaca(request.TipoVehiculo, request.Placa);
+                if (request != null)
+                {
+                    return await _DetallePicoPlacaRepository.GetconsultarPicoPlaca(request.TipoVehiculo, request.Placa);
+                }
+                else
+                {
+                    throw new System.ArgumentNullException(nameof(request), "No se envio el Tipo Vehiculo y Placa");
+                }
             }
         }
     }

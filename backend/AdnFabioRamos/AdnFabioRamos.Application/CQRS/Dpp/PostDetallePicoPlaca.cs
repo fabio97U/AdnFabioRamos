@@ -20,7 +20,14 @@ namespace AdnFabioRamos.Application.CQRS.Dpp
 
             public async Task<DetallePicoPlaca> Handle(PostDetallePicoPlaca request, CancellationToken cancellationToken)
             {
-                return await _DetallePicoPlacaRepository.PostDetallePicoPlaca(request.DetallePicoPlaca);
+                if (request != null)
+                {
+                    return await _DetallePicoPlacaRepository.PostDetallePicoPlaca(request.DetallePicoPlaca);
+                }
+                else
+                {
+                    throw new System.ArgumentNullException(nameof(request), "No se envio el DetallePicoPlaca");
+                }
             }
         }
     }

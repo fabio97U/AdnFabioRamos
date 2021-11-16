@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using AdnFabioRamos.Application.Utilidades;
 using Microsoft.Extensions.DependencyInjection;
 using AdnFabioRamos.Infrastructure.Persistence;
+using estacionamiento_adn.Models;
 
 namespace AdnFabioRamos.Api.Tests
 {
@@ -135,6 +136,34 @@ namespace AdnFabioRamos.Api.Tests
 
             //Verificacion
             Assert.IsTrue(capacidadParqueo.Count() > 0);
+        }
+
+        [TestMethod]
+        [DataRow(1, 1, 1, "1", "I", "00:00", "23:59", 11)]
+        public void CrearNuevoPicoPlaca(int CodigoPicoPlaca, int CodigoTipoTransporte, int DiaSemana, string Digito, string DigitoInicioFinal, string HoraInicio, string HoraFin, int Mes)
+        {
+            //Preparacion
+            var dpp = new DetallePicoPlaca()
+            {
+                CodigoPicoPlaca = CodigoPicoPlaca,
+                CodigoTipoTransporte = CodigoTipoTransporte,
+                DiaSemana = DiaSemana,
+                Digito = Digito,
+                DigitoInicioFinal = DigitoInicioFinal,
+                HoraInicio = HoraInicio,
+                HoraFin = HoraFin,
+                Mes = Convert.ToByte(Mes)
+            };
+
+            //Prueba
+            var stringContent = new StringContent(JsonConvert.SerializeObject(dpp), Encoding.UTF8, "application/json");
+
+            var c = this.TestClient.PostAsync($"api/PicoPlaca", stringContent).Result;
+            var response = c.Content.ReadAsStringAsync().Result;
+            var respuestaMovp = System.Text.Json.JsonSerializer.Deserialize<DetallePicoPlaca>(response);
+
+            //Verificacion
+            Assert.AreEqual(true, c.IsSuccessStatusCode);
         }
     }
 }
