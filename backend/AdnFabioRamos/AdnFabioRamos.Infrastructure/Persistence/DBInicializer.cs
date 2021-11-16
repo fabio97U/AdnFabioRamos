@@ -14,24 +14,24 @@ namespace AdnFabioRamos.Infrastructure.Persistence
         {
             using (var _context = new AdnCeibaContext(serviceProvider.GetRequiredService<DbContextOptions<AdnCeibaContext>>()))
             {
-                int McodigoParqueo = 1;
-                int Manio = 2021;
-                int McodigoPicoPlaca = 1;
-                int McodigoMoto = 1;
-                int McodigoCarro = 2;
-                int MesActual = 11;
-                int MdiaSemanaActual = 1;
-                string MhoraInicio = "00:00";
-                string MhoraFin = "23:59";
+                const int McodigoParqueo = 1;
+                const int Manio = 2021;
+                const int McodigoPicoPlaca = 1;
+                const int McodigoMoto = 1;
+                const int McodigoCarro = 2;
+                const int MesActual = 11;
+                const int MdiaSemanaActual = 1;
+                const string MhoraInicio = "00:00";
+                const string MhoraFin = "23:59";
 
-                short CapacidadMoto = 10;
-                short CapacidadCarro = 20;
+                const short CapacidadMoto = 10;
+                const short CapacidadCarro = 20;
 
-                int ValorHoraMoto = 500;
-                int ValorHoraCarro = 1000;
+                const int ValorHoraMoto = 500;
+                const int ValorHoraCarro = 1000;
 
-                int ValorDiaMoto = 4000;
-                int ValorDiaCarro = 8000;
+                const int ValorDiaMoto = 4000;
+                const int ValorDiaCarro = 8000;
 
                 // Tipos de transporte
                 if (_context.TipoTransporte.Any())

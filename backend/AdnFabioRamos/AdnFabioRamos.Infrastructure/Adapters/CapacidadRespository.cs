@@ -28,11 +28,6 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                 where par.Codigo == codigo_parqueo
                 select new { cap, par, tipt };
 
-            //if (datos_select.Count() == 0)W
-            //{
-            //    return NotFound(new { respuesta = "No existe capacidad para el parqueo con id " + codigo_parqueo });
-            //}
-
             foreach (var item in datos_select)
             {
                 model.CodigoParqueo = item.par.Codigo;

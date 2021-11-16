@@ -44,7 +44,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             }
             catch (DbUpdateException ex)
             {
-                Console.WriteLine(ex.Message);
+                
             }
             _movp.Codigo = movp.Codigo;
 
@@ -66,7 +66,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             }
             catch (DbUpdateConcurrencyException ex)
             {
-                Console.WriteLine(ex.Message);
+                
             }
 
             return movp;

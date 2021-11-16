@@ -6,4 +6,8 @@
     <ProjectGuid>5c787224-5bf7-4b12-871a-cc766f69cb21</ProjectGuid>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>

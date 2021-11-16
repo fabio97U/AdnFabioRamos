@@ -25,8 +25,10 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             var lst_dpp_detalle_pico_placa = _contextProcedures.SpValidarPicoPlacaAsync(tipo_vehiculo, placa).Result.ToList();
             var respuesta = new RespuestaPicoPlaca();
 
-            if (lst_dpp_detalle_pico_placa.Where(x => x.Tipo == 0).Count() > 0)//Tiene permitido salir ahora
+            if (lst_dpp_detalle_pico_placa.Where(x => x.Tipo == 0).Any())
+            {
                 respuesta.PermitirSalirAhora = true;
+            }
 
             lst_dpp_detalle_pico_placa.Where(x => x.Tipo == 1).ToList().ForEach(x =>
                 respuesta.DiasPermitidosSalir += x.DiaNombre + " de " + x.HoraInicio + " a " + x.HoraFin + " "
@@ -44,7 +46,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             }
             catch (DbUpdateException ex)
             {
-                Console.WriteLine(ex.Message);
+
             }
 
             return dpp_Detalle_Pico_Placa;
