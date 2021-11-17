@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Infrastructure.Persistence
 {
-    public static class ValoresDBInicializer
+    public class ValoresDBInicializer
     {
-        public static int McodigoParqueo = 1;
-        public static int Manio = 2021;
-        public static int McodigoPicoPlaca = 1;
-        public static int McodigoMoto = 1;
-        public static int McodigoCarro = 2;
-        public static int MesActual = 11;
-        public static int MdiaSemanaActual = 1;
-        public static string MhoraInicio = "00:00";
-        public static string MhoraFin = "23:59";
+        public int McodigoParqueo { get; set; } = 1;
+        public int Manio { get; set; } = 2021;
+        public int McodigoPicoPlaca { get; set; } = 1;
+        public int McodigoMoto { get; set; } = 1;
+        public int McodigoCarro { get; set; } = 2;
+        public int MesActual { get; set; } = 11;
+        public int MdiaSemanaActual { get; set; } = 1;
+        public string MhoraInicio { get; set; } = "00:00";
+        public string MhoraFin { get; set; } = "23:59";
 
-        public static short CapacidadMoto = 10;
-        public static short CapacidadCarro = 20;
+        public short CapacidadMoto { get; set; } = 10;
+        public short CapacidadCarro { get; set; } = 20;
 
-        public static int ValorHoraMoto = 500;
-        public static int ValorHoraCarro = 1000;
+        public int ValorHoraMoto { get; set; } = 500;
+        public int ValorHoraCarro { get; set; } = 1000;
 
-        public static int ValorDiaMoto = 4000;
-        public static int ValorDiaCarro = 8000;
+        public int ValorDiaMoto { get; set; } = 4000;
+        public int ValorDiaCarro { get; set; } = 8000;
     }
 }

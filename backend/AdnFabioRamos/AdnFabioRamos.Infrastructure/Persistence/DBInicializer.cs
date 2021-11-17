@@ -14,6 +14,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
         {
             using (var _context = new AdnCeibaContext(serviceProvider.GetRequiredService<DbContextOptions<AdnCeibaContext>>()))
             {
+                ValoresDBInicializer MvaloresDbInicializer = new ValoresDBInicializer();
                 _context.TipoTransporte.AddRange(
                     new TipoTransporte { Tipo = "Moto", Descripcion = "Toda tipo de moto MEMORIA" },
                     new TipoTransporte { Tipo = "Carro", Descripcion = "Toda tipo de carro MEMORIA" }
@@ -22,7 +23,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 _context.SaveChanges();
 
                 _context.PicoPlaca.AddRange(
-                    new PicoPlaca { Anio = ValoresDBInicializer.Manio, Descripcion = "Pico placa para el año 2021 en Colombia MEMORIA" }
+                    new PicoPlaca { Anio = MvaloresDbInicializer.Manio, Descripcion = "Pico placa para el año 2021 en Colombia MEMORIA" }
                  );
 
                 _context.SaveChanges();
@@ -30,24 +31,24 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 _context.DetallePicoPlaca.AddRange(
                     new DetallePicoPlaca
                     {
-                        CodigoPicoPlaca = ValoresDBInicializer.McodigoPicoPlaca,
-                        CodigoTipoTransporte = ValoresDBInicializer.McodigoMoto,
-                        Mes = Convert.ToByte(ValoresDBInicializer.MesActual),
-                        HoraInicio = ValoresDBInicializer.MhoraInicio,
-                        HoraFin = ValoresDBInicializer.MhoraFin,
+                        CodigoPicoPlaca = MvaloresDbInicializer.McodigoPicoPlaca,
+                        CodigoTipoTransporte = MvaloresDbInicializer.McodigoMoto,
+                        Mes = Convert.ToByte(MvaloresDbInicializer.MesActual),
+                        HoraInicio = MvaloresDbInicializer.MhoraInicio,
+                        HoraFin = MvaloresDbInicializer.MhoraFin,
                         Digito = "1",
-                        DiaSemana = ValoresDBInicializer.MdiaSemanaActual
+                        DiaSemana = MvaloresDbInicializer.MdiaSemanaActual
                     },
 
                     new DetallePicoPlaca
                     {
-                        CodigoPicoPlaca = ValoresDBInicializer.McodigoPicoPlaca,
-                        CodigoTipoTransporte = ValoresDBInicializer.McodigoCarro,
-                        Mes = Convert.ToByte(ValoresDBInicializer.MesActual),
-                        HoraInicio = ValoresDBInicializer.MhoraInicio,
-                        HoraFin = ValoresDBInicializer.MhoraFin,
+                        CodigoPicoPlaca = MvaloresDbInicializer.McodigoPicoPlaca,
+                        CodigoTipoTransporte = MvaloresDbInicializer.McodigoCarro,
+                        Mes = Convert.ToByte(MvaloresDbInicializer.MesActual),
+                        HoraInicio = MvaloresDbInicializer.MhoraInicio,
+                        HoraFin = MvaloresDbInicializer.MhoraFin,
                         Digito = "1",
-                        DiaSemana = ValoresDBInicializer.MdiaSemanaActual
+                        DiaSemana = MvaloresDbInicializer.MdiaSemanaActual
                     }
                  );
 
@@ -62,19 +63,19 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 _context.Capacidad.AddRange(
                     new Capacidad
                     {
-                        CodigoParqueo = ValoresDBInicializer.McodigoParqueo,
-                        CodigoTipoTransporte = ValoresDBInicializer.McodigoMoto,
-                        Capacidad1 = ValoresDBInicializer.CapacidadMoto,
-                        ValorHora = ValoresDBInicializer.ValorHoraMoto,
-                        ValorDia = ValoresDBInicializer.ValorDiaMoto
+                        CodigoParqueo = MvaloresDbInicializer.McodigoParqueo,
+                        CodigoTipoTransporte = MvaloresDbInicializer.McodigoMoto,
+                        Capacidad1 = MvaloresDbInicializer.CapacidadMoto,
+                        ValorHora = MvaloresDbInicializer.ValorHoraMoto,
+                        ValorDia = MvaloresDbInicializer.ValorDiaMoto
                     },
                     new Capacidad
                     {
-                        CodigoParqueo = ValoresDBInicializer.McodigoParqueo,
-                        CodigoTipoTransporte = ValoresDBInicializer.McodigoCarro,
-                        Capacidad1 = ValoresDBInicializer.CapacidadCarro,
-                        ValorHora = ValoresDBInicializer.ValorHoraCarro,
-                        ValorDia = ValoresDBInicializer.ValorDiaCarro
+                        CodigoParqueo = MvaloresDbInicializer.McodigoParqueo,
+                        CodigoTipoTransporte = MvaloresDbInicializer.McodigoCarro,
+                        Capacidad1 = MvaloresDbInicializer.CapacidadCarro,
+                        ValorHora = MvaloresDbInicializer.ValorHoraCarro,
+                        ValorDia = MvaloresDbInicializer.ValorDiaCarro
                     }
                  );
 
