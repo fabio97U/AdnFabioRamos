@@ -24,19 +24,18 @@ namespace AdnFabioRamos.Infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (optionsBuilder != null)
+            if (!optionsBuilder.IsConfigured && optionsBuilder != null)
             {
-                if (!optionsBuilder.IsConfigured)
-                {
-                    optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True");
-                }
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True");
             }
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             if (modelBuilder != null)
             {
+                const string GetDate = "(getdate())";
                 modelBuilder.Entity<Capacidad>(entity =>
                 {
                     entity.HasKey(e => e.Codigo)
@@ -61,7 +60,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                         .HasDefaultValueSql("('I')")
                         .HasComment("Que la placa I: Inicie, F: Finalice");
 
-                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
+                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql(GetDate);
 
                     entity.Property(e => e.HoraFin).IsUnicode(false);
 
@@ -80,9 +79,9 @@ namespace AdnFabioRamos.Infrastructure.Persistence
 
                     entity.Property(e => e.Cilindraje).HasComment("Las motos con un cilindraje mayor a 500cc tienen un sobrecargo de $2000");
 
-                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
+                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql(GetDate);
 
-                    entity.Property(e => e.HoraEntrada).HasDefaultValueSql("(getdate())");
+                    entity.Property(e => e.HoraEntrada).HasDefaultValueSql(GetDate);
 
                     entity.Property(e => e.Placa).IsUnicode(false);
 
@@ -96,7 +95,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
 
                     entity.Property(e => e.Direccion).IsUnicode(false);
 
-                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
+                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql(GetDate);
 
                     entity.Property(e => e.Nombre).IsUnicode(false);
                 });
@@ -108,7 +107,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
 
                     entity.Property(e => e.Descripcion).IsUnicode(false);
 
-                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
+                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql(GetDate);
                 });
 
                 modelBuilder.Entity<TipoTransporte>(entity =>
@@ -118,15 +117,11 @@ namespace AdnFabioRamos.Infrastructure.Persistence
 
                     entity.Property(e => e.Descripcion).IsUnicode(false);
 
-                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql("(getdate())");
+                    entity.Property(e => e.FechaCreacion).HasDefaultValueSql(GetDate);
 
                     entity.Property(e => e.Tipo).IsUnicode(false);
                 });
-
-                OnModelCreatingPartial(modelBuilder);
             }
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

@@ -19,6 +19,8 @@ namespace AdnFabioRamos.Application
                 .ForMember(
                 dest => dest.HoraEntrada,
                 org => org.MapFrom(src => src.FechaIngreso));
+
+            CreateMap<RespuestaPicoPlaca, MovimientoVehiculoPostDto>();
         }
     }
 }

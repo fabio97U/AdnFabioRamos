@@ -49,26 +49,20 @@ export class ParqueoComponent implements OnInit {
 
   async guardar(modal: any) {
     if (confirm(`¿Asignar el parqueo de “${this.Movp.TipoTransporte}” numero “${this.Movp.Numero}” al vehículo con placa “${this.Movp.Placa}”?`)) {
-      await this._VehiculosDisponiblesParqueoService.consultarPicoPlaca(this.Movp.CodigoTipoTransporte, this.Movp.Placa).subscribe(
-        respon => {
-          if (!respon.PermitirSalirAhora) {
-            alert(`El vehiculo con placa “${this.Movp.Placa}” no esta en Pico Placa, los dias permitidos son: “${respon.DiasPermitidosSalir}”`);
+      this._VehiculosDisponiblesParqueoService.postMovimientoParqueo(new MovimientoVehiculoPost(
+        this.Movp.CodigoParqueo, this.Movp.Placa, this.Movp.CodigoTipoTransporte, ((this.Movp.Cilindraje) ? this.Movp.Cilindraje : 0), this.Movp.Numero
+        , false, ""
+      )).subscribe(
+        responParqueo => {
+          if (!responParqueo.PermitirSalirAhora) {
+            alert(`El vehiculo con placa “${this.Movp.Placa}” no esta en Pico Placa, los dias permitidos son: “${responParqueo.DiasPermitidosSalir}”`);
           } else {
-            this._VehiculosDisponiblesParqueoService.postMovimientoParqueo(new MovimientoVehiculoPost(
-              this.Movp.CodigoParqueo, this.Movp.Placa, this.Movp.CodigoTipoTransporte, ((this.Movp.Cilindraje) ? this.Movp.Cilindraje : 0), this.Movp.Numero
-            )).subscribe(
-              responParqueo => {
-                alert('Parqueo reservado con éxito');
-                this.cargarCeldas();
-                modal.close('Save click');
-              },
-              errorParqueo => {
-
-              }
-            );
+            alert('Parqueo reservado con éxito');
+            this.cargarCeldas();
+            modal.close('Save click');
           }
         },
-        error => {
+        errorParqueo => {
 
         }
       );

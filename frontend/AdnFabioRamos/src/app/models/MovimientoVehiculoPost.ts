@@ -5,5 +5,8 @@ export class MovimientoVehiculoPost {
         public CodigoTipoTransporte: number,
         public Cilindraje: number,
         public ParqueoNumero: number,
+        
+        public PermitirSalirAhora: boolean,
+        public DiasPermitidosSalir: string,
     ) { }
 }
