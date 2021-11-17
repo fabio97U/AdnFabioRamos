@@ -41,7 +41,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 
             await _context.SaveChangesAsync();
 
-            _movp.Codigo = movp.Codigo;
+            _mapper.Map(movp, _movp);
 
             return _movp;
         }

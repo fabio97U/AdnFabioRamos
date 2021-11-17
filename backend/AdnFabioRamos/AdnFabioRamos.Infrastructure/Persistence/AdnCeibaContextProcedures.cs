@@ -15,7 +15,10 @@ namespace AdnFabioRamos.Infrastructure.Persistence
         {
             get
             {
-                if (_procedures is null) _procedures = new AdnCeibaContextProcedures(this);
+                if (_procedures is null)
+                {
+                    _procedures = new AdnCeibaContextProcedures(this);
+                }
                 return _procedures;
             }
             set

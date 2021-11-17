@@ -12,9 +12,7 @@ namespace AdnFabioRamos.Infrastructure.Extensions
         public static IServiceCollection AddDomainServices(this IServiceCollection services)
         {
             var _services = AppDomain.CurrentDomain.GetAssemblies()
-#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
                 .Where(assembly => assembly.FullName.Contains("Domain", StringComparison.InvariantCulture))
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
                 .SelectMany(s => s.GetTypes())
                 .Where(p => p.CustomAttributes.Any(x => x.AttributeType == typeof(DomainServiceAttribute)));
 

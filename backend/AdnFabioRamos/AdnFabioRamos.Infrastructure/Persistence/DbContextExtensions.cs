@@ -14,10 +14,8 @@ namespace AdnFabioRamos.Infrastructure.Persistence
     {
         public static async Task<List<T>> SqlQueryAsync<T>(this DbContext db, string sql, object[] parameters = null, CancellationToken cancellationToken = default) where T : class
         {
-            if (parameters is null)
-            {
-                parameters = new object[] { };
-            }
+
+            parameters = parameters ?? new object[] { };
 
             if (typeof(T).GetProperties().Any())
             {
