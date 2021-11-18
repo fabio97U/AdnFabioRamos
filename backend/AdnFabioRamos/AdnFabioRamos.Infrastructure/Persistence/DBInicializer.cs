@@ -37,7 +37,8 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                         HoraInicio = MvaloresDbInicializer.MhoraInicio,
                         HoraFin = MvaloresDbInicializer.MhoraFin,
                         Digito = "1",
-                        DiaSemana = MvaloresDbInicializer.MdiaSemanaActual
+                        DiaSemana = MvaloresDbInicializer.MdiaSemanaActual,
+                        DigitoInicioFinal = MvaloresDbInicializer.MDigitoInicioFinal
                     },
 
                     new DetallePicoPlaca
@@ -48,7 +49,8 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                         HoraInicio = MvaloresDbInicializer.MhoraInicio,
                         HoraFin = MvaloresDbInicializer.MhoraFin,
                         Digito = "1",
-                        DiaSemana = MvaloresDbInicializer.MdiaSemanaActual
+                        DiaSemana = MvaloresDbInicializer.MdiaSemanaActual,
+                        DigitoInicioFinal = MvaloresDbInicializer.MDigitoInicioFinal
                     }
                  );
 

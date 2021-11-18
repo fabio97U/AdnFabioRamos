@@ -140,15 +140,16 @@ begin
 		inner join par.Parqueo on Capacidad.CodigoParqueo = Parqueo.Codigo
 		inner join par.TipoTransporte on CodigoTipoTransporte = TipoTransporte.Codigo
 		inner join @tbl_contador t on numero <= Capacidad
+
 		left join par.MovimientoParqueo on Capacidad.CodigoParqueo = MovimientoParqueo.CodigoParqueo 
-			and ParqueoNumero = numero and TipoTransporte.Codigo = MovimientoParqueo.CodigoTipoTransporte and HoraSalida is null
+			and MovimientoParqueo.ParqueoNumero = t.numero and TipoTransporte.Codigo = MovimientoParqueo.CodigoTipoTransporte and HoraSalida is null
 	where Parqueo.Codigo = @codpar
 	order by Tipo, numero
 
 end
 GO
 
-	-- exec pp.SpValidarPicoPlaca 2, 'A841265'
+	-- exec pp.SpValidarPicoPlaca 2, '123'
 create or alter procedure pp.SpValidarPicoPlaca
 	@tipo_vehiculo int = 0, -- codtipt
 	@placa varchar(25) = ''
@@ -162,7 +163,7 @@ begin
 	insert into @tbl_dias (dia_numero, dia_nombre) 
 	values (1, 'lunes'), (2, 'martes'), (3, 'miercoles'), (4, 'jueves'), (5, 'viernes'), (6, 'sabado'), (7, 'domingo')
 
-	select @codpp = Codigo from pp.PicoPlaca where YEAR(GETDATE()) = Anio
+	select @codpp = Codigo from pp.PicoPlaca where YEAR(@fecha_actual) = Anio
 
 	select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, 
 	DiaSemana, dia_nombre 'DiaNombre', Digito, DigitoInicioFinal, salida 'Salida', tipo 'Tipo'
@@ -171,7 +172,7 @@ begin
 		select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, DiaSemana, Digito, DigitoInicioFinal,
 		'Puede salir el vehiculo este dia y hora' 'salida', 0 tipo
 		from pp.DetallePicoPlaca 
-		where CodigoPicoPlaca = @codpp and MONTH(getdate()) = Mes
+		where CodigoPicoPlaca = @codpp and MONTH(@fecha_actual) = Mes
 		and CodigoTipoTransporte = @tipo_vehiculo
 		and CAST(@fecha_actual as time) between HoraInicio and HoraFin
 		and Digito in (
@@ -189,7 +190,7 @@ begin
 		select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, DiaSemana, Digito, DigitoInicioFinal,
 		'Dias y horas que puede salir el vehiculo' 'salida', 1 tipo
 		from pp.DetallePicoPlaca 
-		where CodigoPicoPlaca = @codpp and MONTH(getdate()) = Mes
+		where CodigoPicoPlaca = @codpp and MONTH(@fecha_actual) = Mes
 		and CodigoTipoTransporte = @tipo_vehiculo
 		and Digito in (
 			case 

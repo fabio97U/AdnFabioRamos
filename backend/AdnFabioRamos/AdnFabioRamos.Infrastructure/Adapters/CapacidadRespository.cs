@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdnFabioRamos.Infrastructure.Adapters
 {
@@ -22,9 +23,9 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             List<VehiculosDisponiblesParqueoDto> lst_model = new List<VehiculosDisponiblesParqueoDto>();
             VehiculosDisponiblesParqueoDto model = new VehiculosDisponiblesParqueoDto();
             var datos_select =
-                from cap in _context.Capacidad
-                join par in _context.Parqueo on cap.CodigoParqueo equals par.Codigo
-                join tipt in _context.TipoTransporte on cap.CodigoTipoTransporte equals tipt.Codigo
+                from cap in await _context.Capacidad.ToListAsync()
+                join par in await _context.Parqueo.ToListAsync() on cap.CodigoParqueo equals par.Codigo
+                join tipt in await _context.TipoTransporte.ToListAsync() on cap.CodigoTipoTransporte equals tipt.Codigo
                 where par.Codigo == codigo_parqueo
                 select new { cap, par, tipt };
 

@@ -5,6 +5,7 @@ using estacionamiento_adn.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,15 +15,129 @@ namespace AdnFabioRamos.Infrastructure.Adapters
     public class DetallePicoPlacaRepository : IDetallePicoPlaca
     {
         readonly AdnCeibaContext _context;
-        private readonly AdnCeibaContextProcedures _contextProcedures;
         public DetallePicoPlacaRepository(AdnCeibaContext context)
         {
             _context = context;
-            _contextProcedures = new AdnCeibaContextProcedures(context);
+        }
+
+        public string diaSemana(int numero)
+        {
+            string dia = "";
+            switch (numero)
+            {
+                case 1:
+                    dia = "lunes";
+                    break;
+                case 2:
+                    dia = "martes";
+                    break;
+                case 3:
+                    dia = "miercoles";
+                    break;
+                case 4:
+                    dia = "jueves";
+                    break;
+                case 5:
+                    dia = "viernes";
+                    break;
+                case 6:
+                    dia = "sabado";
+                    break;
+                case 7:
+                    dia = "domingo";
+                    break;
+                default:
+                    dia = "";
+                    break;
+
+            }
+
+            return dia;
         }
         public async Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa)
         {
-            var lst_dpp_detalle_pico_placa = _contextProcedures.SpValidarPicoPlacaAsync(tipo_vehiculo, placa).Result.ToList();
+            //var lst_dpp_detalle_pico_placa = _contextProcedures.SpValidarPicoPlacaAsync(tipo_vehiculo, placa).Result.ToList();
+
+            List<SpValidarPicoPlacaResult> lst_dpp_detalle_pico_placa = new List<SpValidarPicoPlacaResult>();
+            var model = new SpValidarPicoPlacaResult();
+
+            int codigo_picoplaca = 1;
+            var fecha_actual = DateTime.Now;
+            var dia_semana_actual = (int)fecha_actual.DayOfWeek;
+
+            var datos_select =
+                (
+                from dpp in await _context.DetallePicoPlaca.ToListAsync()
+                where dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
+                && dpp.CodigoTipoTransporte == tipo_vehiculo
+
+                && fecha_actual >= DateTime.ParseExact(dpp.HoraInicio, "HH:mm", CultureInfo.InvariantCulture)
+                && fecha_actual <= DateTime.ParseExact(dpp.HoraFin, "HH:mm", CultureInfo.InvariantCulture)
+
+                && dpp.Digito.Contains(
+                    (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1))
+                    )
+                && dpp.DiaSemana.ToString().Contains(dia_semana_actual.ToString())
+
+                select new
+                {
+                    Codigo = dpp.Codigo,
+                    CodigoPicoPlaca = dpp.CodigoPicoPlaca,
+                    CodigoTipoTransporte = dpp.CodigoTipoTransporte,
+                    Mes = dpp.Mes,
+                    HoraInicio = dpp.HoraInicio,
+                    HoraFin = dpp.HoraFin,
+                    DiaSemana = dpp.DiaSemana,
+                    DiaNombre = diaSemana(dpp.DiaSemana),
+                    Digito = dpp.Digito,
+                    DigitoInicioFinal = dpp.DigitoInicioFinal,
+                    Salida = "Puede salir el vehiculo este dia y hora",
+                    Tipo = 0
+                })
+
+                .Concat(
+                    from dpp in await _context.DetallePicoPlaca.ToListAsync()
+                    where dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
+                    && dpp.CodigoTipoTransporte == tipo_vehiculo
+
+                    && dpp.Digito.Contains(
+                        (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1))
+                        )
+                    select new
+                    {
+                        Codigo = dpp.Codigo,
+                        CodigoPicoPlaca = dpp.CodigoPicoPlaca,
+                        CodigoTipoTransporte = dpp.CodigoTipoTransporte,
+                        Mes = dpp.Mes,
+                        HoraInicio = dpp.HoraInicio,
+                        HoraFin = dpp.HoraFin,
+                        DiaSemana = dpp.DiaSemana,
+                        DiaNombre = diaSemana(dpp.DiaSemana),
+                        Digito = dpp.Digito,
+                        DigitoInicioFinal = dpp.DigitoInicioFinal,
+                        Salida = "Dias y horas que puede salir el vehiculo",
+                        Tipo = 1
+                    }
+                    );
+
+            foreach (var item in datos_select)
+            {
+                model.Codigo = item.Codigo;
+                model.CodigoPicoPlaca = item.CodigoPicoPlaca;
+                model.CodigoTipoTransporte = item.CodigoTipoTransporte;
+                model.Mes = item.Mes;
+                model.HoraInicio = item.HoraInicio;
+                model.HoraFin = item.HoraFin;
+                model.DiaSemana = item.DiaSemana;
+                model.DiaNombre = item.DiaNombre;
+                model.Digito = item.Digito;
+                model.DigitoInicioFinal = item.DigitoInicioFinal;
+                model.Salida = item.Salida;
+                model.Tipo = item.Tipo;
+                lst_dpp_detalle_pico_placa.Add(model);
+                model = new SpValidarPicoPlacaResult();
+            }
+
             var respuesta = new RespuestaPicoPlaca();
 
             if (lst_dpp_detalle_pico_placa.Any(x => x.Tipo == 0))
@@ -45,5 +160,11 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 
             return dpp_Detalle_Pico_Placa;
         }
+    }
+
+    public class Dias
+    {
+        public int dia_numero { get; set; }
+        public string dia_nombre { get; set; }
     }
 }

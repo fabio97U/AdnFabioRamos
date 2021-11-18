@@ -14,9 +14,10 @@ namespace AdnFabioRamos.Infrastructure.Persistence
         public int McodigoMoto { get; set; } = 1;
         public int McodigoCarro { get; set; } = 2;
         public int MesActual { get; set; } = 11;
-        public int MdiaSemanaActual { get; set; } = 1;
+        public int MdiaSemanaActual { get; set; } = 4;
         public string MhoraInicio { get; set; } = "00:00";
         public string MhoraFin { get; set; } = "23:59";
+        public string MDigitoInicioFinal { get; set; } = "I";
 
         public short CapacidadMoto { get; set; } = 10;
         public short CapacidadCarro { get; set; } = 20;
