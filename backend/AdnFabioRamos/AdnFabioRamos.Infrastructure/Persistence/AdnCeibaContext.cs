@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Infrastructure.Persistence
 {
-    public partial class AdnCeibaContext : DbContext
+    public class AdnCeibaContext : DbContext
     {
         public AdnCeibaContext(DbContextOptions<AdnCeibaContext> options)
             : base(options)

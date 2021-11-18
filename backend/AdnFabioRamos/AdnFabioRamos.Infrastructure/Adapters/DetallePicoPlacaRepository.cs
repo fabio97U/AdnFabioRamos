@@ -19,31 +19,32 @@ namespace AdnFabioRamos.Infrastructure.Adapters
         {
             _context = context;
         }
+        public enum DiasSemana { LUNES = 1, MARTES = 2, MIERCOLES = 3, JUEVES = 4, VIERNES = 5, SABADO = 6, DOMINGO = 7 }
 
-        public string diaSemana(int numero)
+        public static string DiaSemana(int numero)
         {
             string dia = "";
             switch (numero)
             {
-                case 1:
+                case (int)DiasSemana.LUNES:
                     dia = "lunes";
                     break;
-                case 2:
+                case (int)DiasSemana.MARTES:
                     dia = "martes";
                     break;
-                case 3:
+                case (int)DiasSemana.MIERCOLES:
                     dia = "miercoles";
                     break;
-                case 4:
+                case (int)DiasSemana.JUEVES:
                     dia = "jueves";
                     break;
-                case 5:
+                case (int)DiasSemana.VIERNES:
                     dia = "viernes";
                     break;
-                case 6:
+                case (int)DiasSemana.SABADO:
                     dia = "sabado";
                     break;
-                case 7:
+                case (int)DiasSemana.DOMINGO:
                     dia = "domingo";
                     break;
                 default:
@@ -88,7 +89,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                     HoraInicio = dpp.HoraInicio,
                     HoraFin = dpp.HoraFin,
                     DiaSemana = dpp.DiaSemana,
-                    DiaNombre = diaSemana(dpp.DiaSemana),
+                    DiaNombre = DiaSemana(dpp.DiaSemana),
                     Digito = dpp.Digito,
                     DigitoInicioFinal = dpp.DigitoInicioFinal,
                     Salida = "Puede salir el vehiculo este dia y hora",
@@ -112,7 +113,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                         HoraInicio = dpp.HoraInicio,
                         HoraFin = dpp.HoraFin,
                         DiaSemana = dpp.DiaSemana,
-                        DiaNombre = diaSemana(dpp.DiaSemana),
+                        DiaNombre = DiaSemana(dpp.DiaSemana),
                         Digito = dpp.Digito,
                         DigitoInicioFinal = dpp.DigitoInicioFinal,
                         Salida = "Dias y horas que puede salir el vehiculo",

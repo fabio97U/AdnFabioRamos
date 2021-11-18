@@ -23,33 +23,44 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             _mapper = mapper;
         }
 
+        public static int[] LimiteParqueosVirtuales()
+        {
+            const int Limite = 50;
+
+            var Marray = new int[Limite];
+            for (int i = 0; i < Limite; i++)
+            {
+                Marray[i] = i + 1;
+            }
+            return Marray;
+        }
+
         public async Task<IEnumerable<SpMovimientosParqueoResult>> Getmovp_movimiento_x_parqueo(int id)
         {
-            //var movp_movimiento_parqueo = _contextProcedures.SpMovimientosParqueoAsync(id).Result.ToList();
             List<SpMovimientosParqueoResult> lst_model = new List<SpMovimientosParqueoResult>();
             var model = new SpMovimientosParqueoResult();
 
-            int[] cont = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50 };
+            int[] cont = LimiteParqueosVirtuales();
 
             var datos_select =
                  from cap in await _context.Capacidad.ToListAsync()
                  join par in await _context.Parqueo.ToListAsync() on cap.CodigoParqueo equals par.Codigo
                  join tt in await _context.TipoTransporte.ToListAsync() on cap.CodigoTipoTransporte equals tt.Codigo
-                 from num in cont.ToList().Where(t => t <= cap.Capacidad1)
+                 from num in cont.AsEnumerable().Where(t => t <= cap.Capacidad1)
 
                  join _movp in _context.MovimientoParqueo
                  on new
                  {
-                     codpar = (int)(cap.CodigoParqueo),
-                     movp_numero = (int)num,
+                     codpar = cap.CodigoParqueo,
+                     movp_numero = num,
                      codtt = tt.Codigo,
                      hora_salida = true
                  }
                  equals new
                  {
-                     codpar = (int)(_movp.CodigoParqueo),
+                     codpar = _movp.CodigoParqueo,
                      movp_numero = (int)_movp.ParqueoNumero,
-                     codtt = (int)_movp.CodigoTipoTransporte,
+                     codtt = _movp.CodigoTipoTransporte,
                      hora_salida = (_movp.HoraSalida == null)
                  }
                  into movp_
@@ -86,7 +97,6 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                 lst_model.Add(model);
                 model = new SpMovimientosParqueoResult();
             }
-            //return movp_movimiento_parqueo;
             return lst_model;
         }
 
@@ -109,14 +119,22 @@ namespace AdnFabioRamos.Infrastructure.Adapters
         {
             var movp_movimiento_parqueo = await _context.MovimientoParqueo.FindAsync(id);
 
-            movp_movimiento_parqueo.TotalPagar = movp.CantidadPagar;
-            movp_movimiento_parqueo.HoraSalida = movp.HoraSalida;
+            if (movp != null)
+            {
+                movp_movimiento_parqueo.TotalPagar = movp.CantidadPagar;
+                movp_movimiento_parqueo.HoraSalida = movp.HoraSalida;
 
-            _context.Entry(movp_movimiento_parqueo).State = EntityState.Modified;
+                _context.Entry(movp_movimiento_parqueo).State = EntityState.Modified;
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-            return movp;
+                return movp;
+            }
+            else
+            {
+                throw new System.ArgumentNullException(nameof(movp), "No se envio el MovimientoVehiculoPutDto");
+            }
+
         }
     }
 }
