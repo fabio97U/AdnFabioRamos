@@ -71,6 +71,7 @@ namespace AdnFabioRamos.Api.Tests
 
         [TestMethod]
         [DataRow(1, "123", 2, 0, 1)]
+        [DataRow(1, "1423", 2, 0, 1)]
         public void IngresarVehiculoParqueo(int movp_codpar, string movp_placa, int movp_codtipt, int movp_cilindraje, int movp_parqueo_numero)
         {
             //Preparacion

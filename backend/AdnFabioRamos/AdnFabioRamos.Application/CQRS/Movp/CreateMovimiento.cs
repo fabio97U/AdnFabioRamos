@@ -1,9 +1,12 @@
 ﻿using AdnFabioRamos.Domain.Ports;
 using AutoMapper;
+using estacionamiento_adn.Models;
 using estacionamiento_adn.Models.DTOs;
 using MediatR;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace AdnFabioRamos.Application.CQRS.Movp
 {
@@ -27,14 +30,23 @@ namespace AdnFabioRamos.Application.CQRS.Movp
             {
                 if (request != null)
                 {
-                    var respuestaPicoPlaca = await _detallePicoPlaca.GetconsultarPicoPlaca(request.MovimientoVehiculo.CodigoTipoTransporte, request.MovimientoVehiculo.Placa);
+                    IEnumerable<SpMovimientosParqueoResult> rowsParqueos = await _repository.Getmovp_movimiento_x_parqueo(request.MovimientoVehiculo.CodigoParqueo);
 
-                    request.MovimientoVehiculo.PermitirSalirAhora = respuestaPicoPlaca.PermitirSalirAhora;
-                    request.MovimientoVehiculo.DiasPermitidosSalir = respuestaPicoPlaca.DiasPermitidosSalir;
+                    if (rowsParqueos.Any(x => x.CodigoTipoTransporte == request.MovimientoVehiculo.CodigoTipoTransporte && x.HoraEntrada == null))
+                    {
+                        var respuestaPicoPlaca = await _detallePicoPlaca.GetconsultarPicoPlaca(request.MovimientoVehiculo.CodigoTipoTransporte, request.MovimientoVehiculo.Placa);
 
-                    return respuestaPicoPlaca.PermitirSalirAhora
-                        ? await _repository.Post_GuardarMovimientoVehiculo(request.MovimientoVehiculo)
-                        : request.MovimientoVehiculo;
+                        request.MovimientoVehiculo.PermitirSalirAhora = respuestaPicoPlaca.PermitirSalirAhora;
+                        request.MovimientoVehiculo.DiasPermitidosSalir = respuestaPicoPlaca.DiasPermitidosSalir;
+
+                        return respuestaPicoPlaca.PermitirSalirAhora
+                            ? await _repository.Post_GuardarMovimientoVehiculo(request.MovimientoVehiculo)
+                            : request.MovimientoVehiculo;
+                    }
+                    else
+                    {
+                        throw new System.ArgumentNullException(nameof(request), "Capacidad excedida");
+                    }                 
                 }
                 else
                 {
