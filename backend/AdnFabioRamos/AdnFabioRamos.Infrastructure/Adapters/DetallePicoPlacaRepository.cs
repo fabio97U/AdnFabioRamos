@@ -107,7 +107,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                     from dpp in await _context.DetallePicoPlaca.ToListAsync()
                     where
                     FiltrarEncabezadoPicoPlaca(dpp, codigo_picoplaca, fecha_actual, tipo_vehiculo)
-                    && string.Compare(dpp.Digito, (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
+                    && string.Compare(String.Format(CultureInfo.InvariantCulture, "{0}", dpp.Digito), (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.CurrentCulture) == 0
                     select new
                     {
                         Codigo = dpp.Codigo,
