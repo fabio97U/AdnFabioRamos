@@ -72,7 +72,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                 && fecha_actual >= DateTime.ParseExact(dpp.HoraInicio, "HH:mm", CultureInfo.InvariantCulture)
                 && fecha_actual <= DateTime.ParseExact(dpp.HoraFin, "HH:mm", CultureInfo.InvariantCulture)
 
-                && string.Compare(dpp.Digito.ToString(), (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
+                && string.Compare(dpp.Digito, (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
                 && string.Compare(dpp.DiaSemana.ToString(), dia_semana_actual.ToString(), false, CultureInfo.InvariantCulture) == 0
 
                 select new
@@ -96,7 +96,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                     where dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
                     && dpp.CodigoTipoTransporte == tipo_vehiculo
 
-                    && string.Compare(dpp.Digito.ToString(), (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
+                    && string.Compare(dpp.Digito, (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
                     select new
                     {
                         Codigo = dpp.Codigo,
@@ -114,7 +114,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                     }
                     );
 
-            foreach (var item in datos_select)
+            datos_select.ToList().ForEach(item =>
             {
                 model.Codigo = item.Codigo;
                 model.CodigoPicoPlaca = item.CodigoPicoPlaca;
@@ -130,14 +130,11 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                 model.Tipo = item.Tipo;
                 lst_dpp_detalle_pico_placa.Add(model);
                 model = new SpValidarPicoPlacaResult();
-            }
+            });
 
             var respuesta = new RespuestaPicoPlaca();
 
-            if (lst_dpp_detalle_pico_placa.Any(x => x.Tipo == 0))
-            {
-                respuesta.PermitirSalirAhora = true;
-            }
+            respuesta.PermitirSalirAhora = (lst_dpp_detalle_pico_placa.Any(x => x.Tipo == 0));
 
             lst_dpp_detalle_pico_placa.Where(x => x.Tipo == 1).ToList().ForEach(x =>
                 respuesta.DiasPermitidosSalir += x.DiaNombre + " de " + x.HoraInicio + " a " + x.HoraFin + " "

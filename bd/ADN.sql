@@ -38,7 +38,7 @@ create table pp.DetallePicoPlaca (
 	HoraInicio varchar(5) not null,
 	HoraFin varchar(5) not null,
 
-	DiaSemana int not null check (DiaSemana >= 1 and DiaSemana <= 7),
+	DiaSemana int not null check (DiaSemana >= 0 and DiaSemana <= 6),
 
 	Digito CHAR(1) not null default '1', 
 
@@ -48,9 +48,9 @@ create table pp.DetallePicoPlaca (
 )
 -- select * from pp.DetallePicoPlaca
 insert into pp.DetallePicoPlaca (CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, Digito, DiaSemana)
-values (1, 2, 11, '00:00', '23:59', 1, 7), (1, 2, 11, '00:00', '23:59', 1, 1), (1, 2, 11, '00:00', '23:59', 8, 3), (1, 2, 11, '00:00', '23:59', 9, 4)
+values (1, 2, 11, '00:00', '23:59', 1, 0), (1, 2, 11, '00:00', '23:59', 1, 1), (1, 2, 11, '00:00', '23:59', 8, 3), (1, 2, 11, '00:00', '23:59', 9, 4)
 insert into pp.DetallePicoPlaca (CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, Digito, DiaSemana)
-values (1, 1, 11, '00:00', '23:59', 1, 7), (1, 1, 11, '00:00', '23:59', 1, 1)
+values (1, 1, 11, '00:00', '23:59', 1, 0), (1, 1, 11, '00:00', '23:59', 1, 1)
 
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1: Enero ... 12: Diciembre' , 
 	@level0type=N'SCHEMA',@level0name=N'pp', @level1type=N'TABLE',@level1name=N'DetallePicoPlaca', 
@@ -60,7 +60,7 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Que la placa I
 	@level0type=N'SCHEMA',@level0name=N'pp', @level1type=N'TABLE',@level1name=N'DetallePicoPlaca', 
 	@level2type=N'COLUMN',@level2name=N'DigitoInicioFinal'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1: Lunes ... 7: Domingo' , 
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'0: Domingo ... 6: Sabado' , 
 	@level0type=N'SCHEMA',@level0name=N'pp', @level1type=N'TABLE',@level1name=N'DetallePicoPlaca', 
 	@level2type=N'COLUMN',@level2name=N'DiaSemana'
 GO
@@ -117,88 +117,88 @@ create index index_busqueda_placa on par.MovimientoParqueo (CodigoParqueo, Placa
 create index index_entrada_salida on par.MovimientoParqueo (HoraEntrada, HoraSalida);
 go
 
-	-- exec par.SpMovimientosParqueo 1
-create or alter procedure par.SpMovimientosParqueo
-	@codpar int
-as
-begin
-	declare @tbl_contador as table (numero int)
-	insert into @tbl_contador (numero) 
-	values (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), 
-	(11), (12), (13), (14), (15), (16), (17), (18), (19), (20), 
-	(21), (22), (23), (24), (25), (26), (27), (28), (29), (30),
-	(31), (32), (33), (34), (35), (36), (37), (38), (39), (40), 
-	(41), (42), (43), (44), (45), (46), (47), (48), (49), (50)
+--	-- exec par.SpMovimientosParqueo 1
+--create or alter procedure par.SpMovimientosParqueo
+--	@codpar int
+--as
+--begin
+--	declare @tbl_contador as table (numero int)
+--	insert into @tbl_contador (numero) 
+--	values (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), 
+--	(11), (12), (13), (14), (15), (16), (17), (18), (19), (20), 
+--	(21), (22), (23), (24), (25), (26), (27), (28), (29), (30),
+--	(31), (32), (33), (34), (35), (36), (37), (38), (39), (40), 
+--	(41), (42), (43), (44), (45), (46), (47), (48), (49), (50)
 
-	select Parqueo.Codigo 'CodigoParqueo', Nombre 'NombreParqueo', TipoTransporte.Codigo 'CodigoTipoTransporte', 
-	Tipo 'TipoTransporte', Capacidad, ValorHora, ValorDia, t.numero 'Numero', 
+--	select Parqueo.Codigo 'CodigoParqueo', Nombre 'NombreParqueo', TipoTransporte.Codigo 'CodigoTipoTransporte', 
+--	Tipo 'TipoTransporte', Capacidad, ValorHora, ValorDia, t.numero 'Numero', 
 
-	MovimientoParqueo.Codigo 'CodigoMovimientoParqueo', MovimientoParqueo.CodigoParqueo 'MovimientoCodigoParqueo', Placa, 
-	MovimientoParqueo.CodigoTipoTransporte 'MovimientoCodigoTipoTransporte', Cilindraje, MovimientoParqueo.ParqueoNumero, HoraEntrada, 
-	HoraSalida, TotalPagar, MovimientoParqueo.FechaCreacion
-	from par.Capacidad
-		inner join par.Parqueo on Capacidad.CodigoParqueo = Parqueo.Codigo
-		inner join par.TipoTransporte on CodigoTipoTransporte = TipoTransporte.Codigo
-		inner join @tbl_contador t on numero <= Capacidad
+--	MovimientoParqueo.Codigo 'CodigoMovimientoParqueo', MovimientoParqueo.CodigoParqueo 'MovimientoCodigoParqueo', Placa, 
+--	MovimientoParqueo.CodigoTipoTransporte 'MovimientoCodigoTipoTransporte', Cilindraje, MovimientoParqueo.ParqueoNumero, HoraEntrada, 
+--	HoraSalida, TotalPagar, MovimientoParqueo.FechaCreacion
+--	from par.Capacidad
+--		inner join par.Parqueo on Capacidad.CodigoParqueo = Parqueo.Codigo
+--		inner join par.TipoTransporte on CodigoTipoTransporte = TipoTransporte.Codigo
+--		inner join @tbl_contador t on numero <= Capacidad
 
-		left join par.MovimientoParqueo on Capacidad.CodigoParqueo = MovimientoParqueo.CodigoParqueo 
-			and MovimientoParqueo.ParqueoNumero = t.numero and TipoTransporte.Codigo = MovimientoParqueo.CodigoTipoTransporte and HoraSalida is null
-	where Parqueo.Codigo = @codpar
-	order by Tipo, numero
+--		left join par.MovimientoParqueo on Capacidad.CodigoParqueo = MovimientoParqueo.CodigoParqueo 
+--			and MovimientoParqueo.ParqueoNumero = t.numero and TipoTransporte.Codigo = MovimientoParqueo.CodigoTipoTransporte and HoraSalida is null
+--	where Parqueo.Codigo = @codpar
+--	order by Tipo, numero
 
-end
-GO
+--end
+--GO
 
-	-- exec pp.SpValidarPicoPlaca 2, '123'
-create or alter procedure pp.SpValidarPicoPlaca
-	@tipo_vehiculo int = 0, -- codtipt
-	@placa varchar(25) = ''
-as
-begin
-	set datefirst 1
-	declare @Codigo int = 1,
-	@codpp int = 0, @fecha_actual datetime = getdate(), @dia_semana int = 0
-	select @dia_semana = datepart(dw, @fecha_actual)
-	declare @tbl_dias as table (dia_numero int, dia_nombre varchar(15)) 
-	insert into @tbl_dias (dia_numero, dia_nombre) 
-	values (1, 'lunes'), (2, 'martes'), (3, 'miercoles'), (4, 'jueves'), (5, 'viernes'), (6, 'sabado'), (7, 'domingo')
+--	-- exec pp.SpValidarPicoPlaca 2, '123'
+--create or alter procedure pp.SpValidarPicoPlaca
+--	@tipo_vehiculo int = 0, -- codtipt
+--	@placa varchar(25) = ''
+--as
+--begin
+--	set datefirst 1
+--	declare @Codigo int = 1,
+--	@codpp int = 0, @fecha_actual datetime = getdate(), @dia_semana int = 0
+--	select @dia_semana = datepart(dw, @fecha_actual)
+--	declare @tbl_dias as table (dia_numero int, dia_nombre varchar(15)) 
+--	insert into @tbl_dias (dia_numero, dia_nombre) 
+--	values (1, 'lunes'), (2, 'martes'), (3, 'miercoles'), (4, 'jueves'), (5, 'viernes'), (6, 'sabado'), (7, 'domingo')
 
-	select @codpp = Codigo from pp.PicoPlaca where YEAR(@fecha_actual) = Anio
+--	select @codpp = Codigo from pp.PicoPlaca where YEAR(@fecha_actual) = Anio
 
-	select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, 
-	DiaSemana, dia_nombre 'DiaNombre', Digito, DigitoInicioFinal, salida 'Salida', tipo 'Tipo'
-	from (
-		--Devuelve >= 1 rows cuando puede salir el vehiculo @tipo_vehiculo con placas @placa
-		select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, DiaSemana, Digito, DigitoInicioFinal,
-		'Puede salir el vehiculo este dia y hora' 'salida', 0 tipo
-		from pp.DetallePicoPlaca 
-		where CodigoPicoPlaca = @codpp and MONTH(@fecha_actual) = Mes
-		and CodigoTipoTransporte = @tipo_vehiculo
-		and CAST(@fecha_actual as time) between HoraInicio and HoraFin
-		and Digito in (
-			case 
-				when DigitoInicioFinal = 'I' then SUBSTRING(@placa, 1, 1) 
-				when DigitoInicioFinal = 'F' then SUBSTRING(@placa, len(@placa), len(@placa)-1) 
-				else '0' 
-			end
-		)
-		and DiaSemana in (@dia_semana)
+--	select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, 
+--	DiaSemana, dia_nombre 'DiaNombre', Digito, DigitoInicioFinal, salida 'Salida', tipo 'Tipo'
+--	from (
+--		--Devuelve >= 1 rows cuando puede salir el vehiculo @tipo_vehiculo con placas @placa
+--		select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, DiaSemana, Digito, DigitoInicioFinal,
+--		'Puede salir el vehiculo este dia y hora' 'salida', 0 tipo
+--		from pp.DetallePicoPlaca 
+--		where CodigoPicoPlaca = @codpp and MONTH(@fecha_actual) = Mes
+--		and CodigoTipoTransporte = @tipo_vehiculo
+--		and CAST(@fecha_actual as time) between HoraInicio and HoraFin
+--		and Digito in (
+--			case 
+--				when DigitoInicioFinal = 'I' then SUBSTRING(@placa, 1, 1) 
+--				when DigitoInicioFinal = 'F' then SUBSTRING(@placa, len(@placa), len(@placa)-1) 
+--				else '0' 
+--			end
+--		)
+--		and DiaSemana in (@dia_semana)
 	
-			union all
+--			union all
 
-		--Dias que puede salir
-		select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, DiaSemana, Digito, DigitoInicioFinal,
-		'Dias y horas que puede salir el vehiculo' 'salida', 1 tipo
-		from pp.DetallePicoPlaca 
-		where CodigoPicoPlaca = @codpp and MONTH(@fecha_actual) = Mes
-		and CodigoTipoTransporte = @tipo_vehiculo
-		and Digito in (
-			case 
-				when DigitoInicioFinal = 'I' then SUBSTRING(@placa, 1, 1) 
-				when DigitoInicioFinal = 'F' then SUBSTRING(@placa, len(@placa), len(@placa)-1) 
-				else '0' 
-			end
-		)
-	) t
-	inner join @tbl_dias on dia_numero = DiaSemana
-end
+--		--Dias que puede salir
+--		select Codigo, CodigoPicoPlaca, CodigoTipoTransporte, Mes, HoraInicio, HoraFin, DiaSemana, Digito, DigitoInicioFinal,
+--		'Dias y horas que puede salir el vehiculo' 'salida', 1 tipo
+--		from pp.DetallePicoPlaca 
+--		where CodigoPicoPlaca = @codpp and MONTH(@fecha_actual) = Mes
+--		and CodigoTipoTransporte = @tipo_vehiculo
+--		and Digito in (
+--			case 
+--				when DigitoInicioFinal = 'I' then SUBSTRING(@placa, 1, 1) 
+--				when DigitoInicioFinal = 'F' then SUBSTRING(@placa, len(@placa), len(@placa)-1) 
+--				else '0' 
+--			end
+--		)
+--	) t
+--	inner join @tbl_dias on dia_numero = DiaSemana
+--end
