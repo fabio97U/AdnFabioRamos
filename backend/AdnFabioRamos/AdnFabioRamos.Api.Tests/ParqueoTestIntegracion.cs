@@ -14,11 +14,11 @@ using System.Text;
 namespace AdnFabioRamos.Api.Tests
 {
     [TestClass]
-    public class ParqueoTest
+    public class ParqueoTestIntegracion
     {
         readonly WebapiAppFactory<Startup> _AppFactory;
         protected HttpClient TestClient;
-        public ParqueoTest()
+        public ParqueoTestIntegracion()
         {
             _AppFactory = new WebapiAppFactory<Startup>();
             TestClient = _AppFactory.CreateClient();
@@ -140,29 +140,6 @@ namespace AdnFabioRamos.Api.Tests
 
             //Verificacion
             Assert.AreEqual(true, c.IsSuccessStatusCode);
-        }
-
-        [TestMethod]
-        [DataRow(1, 500, 4000, 650, -10, 6500)]//Moto cilindraje > 500
-        [DataRow(1, 500, 4000, 500, -10, 4500)]//Moto cilindraje < 500
-        [DataRow(2, 1000, 8000, 0, -12, 11000)]//Carro
-        public void ValidarSalidaVehiculoParqueo(int tipt_codigo, int cap_valor_hora, int cap_valor_dia, int movp_cilindraje, int horas, int valor_esperado)
-        {
-            //Preparacion
-            var movpPut = new MovimientoVehiculoPutDto()
-            {
-                CodigoTipoTransporte = tipt_codigo,
-                ValorHora = cap_valor_hora,
-                ValorDia = cap_valor_dia,
-                Cilindraje = movp_cilindraje,
-                HoraEntrada = DateTime.Now.AddHours(horas)
-            };
-
-            //Prueba
-            ParqueoLogica.CalcularTotalPagar(movpPut);
-
-            //Verificacion
-            Assert.AreEqual(valor_esperado, movpPut.CantidadPagar);
         }
 
         [TestMethod]

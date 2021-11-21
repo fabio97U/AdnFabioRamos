@@ -54,6 +54,16 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             return dia;
         }
 
+        public bool FiltrarEncabezadoPicoPlaca(DetallePicoPlaca dpp, int codigo_picoplaca, DateTime fecha_actual, int tipo_vehiculo)
+        {
+            return dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
+                && dpp.CodigoTipoTransporte == tipo_vehiculo;
+        }
+        public bool FiltrarFechasBetween(DetallePicoPlaca dpp, DateTime fecha_actual)
+        {
+            return fecha_actual >= DateTime.ParseExact(dpp.HoraInicio, "HH:mm", CultureInfo.InvariantCulture)
+                && fecha_actual <= DateTime.ParseExact(dpp.HoraFin, "HH:mm", CultureInfo.InvariantCulture);
+        }
         public async Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa)
         {
             List<SpValidarPicoPlacaResult> lst_dpp_detalle_pico_placa = new List<SpValidarPicoPlacaResult>();
@@ -66,11 +76,9 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             var datos_select =
                 (
                 from dpp in await _context.DetallePicoPlaca.ToListAsync()
-                where dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
-                && dpp.CodigoTipoTransporte == tipo_vehiculo
-
-                && fecha_actual >= DateTime.ParseExact(dpp.HoraInicio, "HH:mm", CultureInfo.InvariantCulture)
-                && fecha_actual <= DateTime.ParseExact(dpp.HoraFin, "HH:mm", CultureInfo.InvariantCulture)
+                where
+                FiltrarEncabezadoPicoPlaca(dpp, codigo_picoplaca, fecha_actual, tipo_vehiculo)
+                && FiltrarFechasBetween(dpp, fecha_actual)
 
                 && string.Compare(dpp.Digito, (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
                 && string.Compare(dpp.DiaSemana.ToString(), dia_semana_actual.ToString(), false, CultureInfo.InvariantCulture) == 0
@@ -93,9 +101,8 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 
                 .Concat(
                     from dpp in await _context.DetallePicoPlaca.ToListAsync()
-                    where dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
-                    && dpp.CodigoTipoTransporte == tipo_vehiculo
-
+                    where
+                    FiltrarEncabezadoPicoPlaca(dpp, codigo_picoplaca, fecha_actual, tipo_vehiculo)
                     && string.Compare(dpp.Digito, (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
                     select new
                     {
