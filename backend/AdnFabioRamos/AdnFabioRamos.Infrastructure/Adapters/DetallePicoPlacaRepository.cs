@@ -56,28 +56,17 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 
         public static bool FiltrarEncabezadoPicoPlaca(DetallePicoPlaca dpp, int codigo_picoplaca, DateTime fecha_actual, int tipo_vehiculo)
         {
-            if (dpp != null)
-            {
-                return dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
-                && dpp.CodigoTipoTransporte == tipo_vehiculo;
-            }
-            else
-            {
-                return false;
-            }
-
+            return dpp != null
+                && dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
+                                && dpp.CodigoTipoTransporte == tipo_vehiculo
+                ;
         }
         public static bool FiltrarFechasBetween(DetallePicoPlaca dpp, DateTime fecha_actual)
         {
-            if (dpp != null)
-            {
-                return fecha_actual >= DateTime.ParseExact(dpp.HoraInicio, "HH:mm", CultureInfo.InvariantCulture)
-                && fecha_actual <= DateTime.ParseExact(dpp.HoraFin, "HH:mm", CultureInfo.InvariantCulture);
-            }
-            else
-            {
-                return false;
-            }
+            return dpp != null
+                && fecha_actual >= DateTime.ParseExact(dpp.HoraInicio, "HH:mm", CultureInfo.InvariantCulture)
+                                && fecha_actual <= DateTime.ParseExact(dpp.HoraFin, "HH:mm", CultureInfo.InvariantCulture)
+                ;
         }
         public async Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa)
         {

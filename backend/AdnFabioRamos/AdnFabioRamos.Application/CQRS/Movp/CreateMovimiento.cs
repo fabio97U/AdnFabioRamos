@@ -32,14 +32,9 @@ namespace AdnFabioRamos.Application.CQRS.Movp
                     request.MovimientoVehiculo.PermitirSalirAhora = respuestaPicoPlaca.PermitirSalirAhora;
                     request.MovimientoVehiculo.DiasPermitidosSalir = respuestaPicoPlaca.DiasPermitidosSalir;
 
-                    if (respuestaPicoPlaca.PermitirSalirAhora)
-                    {
-                        return await _repository.Post_GuardarMovimientoVehiculo(request.MovimientoVehiculo);
-                    }
-                    else
-                    {
-                        return request.MovimientoVehiculo;
-                    }
+                    return respuestaPicoPlaca.PermitirSalirAhora
+                        ? await _repository.Post_GuardarMovimientoVehiculo(request.MovimientoVehiculo)
+                        : request.MovimientoVehiculo;
                 }
                 else
                 {
