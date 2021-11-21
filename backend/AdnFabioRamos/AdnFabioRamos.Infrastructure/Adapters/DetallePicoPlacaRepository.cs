@@ -54,15 +54,30 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             return dia;
         }
 
-        public bool FiltrarEncabezadoPicoPlaca(DetallePicoPlaca dpp, int codigo_picoplaca, DateTime fecha_actual, int tipo_vehiculo)
+        public static bool FiltrarEncabezadoPicoPlaca(DetallePicoPlaca dpp, int codigo_picoplaca, DateTime fecha_actual, int tipo_vehiculo)
         {
-            return dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
+            if (dpp != null)
+            {
+                return dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
                 && dpp.CodigoTipoTransporte == tipo_vehiculo;
+            }
+            else
+            {
+                return false;
+            }
+
         }
-        public bool FiltrarFechasBetween(DetallePicoPlaca dpp, DateTime fecha_actual)
+        public static bool FiltrarFechasBetween(DetallePicoPlaca dpp, DateTime fecha_actual)
         {
-            return fecha_actual >= DateTime.ParseExact(dpp.HoraInicio, "HH:mm", CultureInfo.InvariantCulture)
+            if (dpp != null)
+            {
+                return fecha_actual >= DateTime.ParseExact(dpp.HoraInicio, "HH:mm", CultureInfo.InvariantCulture)
                 && fecha_actual <= DateTime.ParseExact(dpp.HoraFin, "HH:mm", CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                return false;
+            }
         }
         public async Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa)
         {
@@ -80,8 +95,8 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                 FiltrarEncabezadoPicoPlaca(dpp, codigo_picoplaca, fecha_actual, tipo_vehiculo)
                 && FiltrarFechasBetween(dpp, fecha_actual)
 
-                && string.Compare(dpp.Digito, (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
-                && string.Compare(dpp.DiaSemana.ToString(), dia_semana_actual.ToString(), false, CultureInfo.InvariantCulture) == 0
+                && string.Compare(dpp.Digito, (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.CurrentCulture) == 0
+                && string.Compare(dpp.DiaSemana.ToString(), dia_semana_actual.ToString(), false, CultureInfo.CurrentCulture) == 0
 
                 select new
                 {
@@ -103,7 +118,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                     from dpp in await _context.DetallePicoPlaca.ToListAsync()
                     where
                     FiltrarEncabezadoPicoPlaca(dpp, codigo_picoplaca, fecha_actual, tipo_vehiculo)
-                    && string.Compare(dpp.Digito, (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
+                    && string.Compare(dpp.Digito, (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.CurrentCulture) == 0
                     select new
                     {
                         Codigo = dpp.Codigo,

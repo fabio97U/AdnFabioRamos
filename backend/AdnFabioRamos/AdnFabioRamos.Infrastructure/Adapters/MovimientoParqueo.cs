@@ -110,12 +110,16 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 
             await _context.SaveChangesAsync();
 
-            if (_movp.Codigo != Guid.Empty)
+            if (_movp != null)
             {
-                _movp.Codigo = movp.Codigo;
+                if (_movp.Codigo != Guid.Empty)
+                {
+                    _movp.Codigo = movp.Codigo;
+                }
+                return _movp;
             }
 
-            return _movp;
+            return new MovimientoVehiculoPostDto();
         }
 
         public async Task<MovimientoVehiculoPutDto> PutGenerarTicket(Guid id, MovimientoVehiculoPutDto movp)
