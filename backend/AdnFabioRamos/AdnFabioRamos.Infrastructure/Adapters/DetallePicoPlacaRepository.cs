@@ -59,7 +59,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             List<SpValidarPicoPlacaResult> lst_dpp_detalle_pico_placa = new List<SpValidarPicoPlacaResult>();
             var model = new SpValidarPicoPlacaResult();
 
-            var codigo_picoplaca = 1;
+            const int codigo_picoplaca = 1;
             var fecha_actual = DateTime.Now;
             var dia_semana_actual = (int)fecha_actual.DayOfWeek;
 
@@ -158,11 +158,5 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 
             return dpp_Detalle_Pico_Placa;
         }
-    }
-
-    public class Dias
-    {
-        public int dia_numero { get; set; }
-        public string dia_nombre { get; set; }
     }
 }

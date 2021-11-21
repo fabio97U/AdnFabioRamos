@@ -29,7 +29,8 @@ namespace AdnFabioRamos.Application.CQRS.Movp
                 {
                     var respuestaPicoPlaca = await _detallePicoPlaca.GetconsultarPicoPlaca(request.MovimientoVehiculo.CodigoTipoTransporte, request.MovimientoVehiculo.Placa);
 
-                    _mapper.Map(respuestaPicoPlaca, request.MovimientoVehiculo);
+                    request.MovimientoVehiculo.PermitirSalirAhora = respuestaPicoPlaca.PermitirSalirAhora;
+                    request.MovimientoVehiculo.DiasPermitidosSalir = respuestaPicoPlaca.DiasPermitidosSalir;
 
                     if (respuestaPicoPlaca.PermitirSalirAhora)
                     {

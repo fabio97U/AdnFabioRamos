@@ -110,7 +110,10 @@ namespace AdnFabioRamos.Infrastructure.Adapters
 
             await _context.SaveChangesAsync();
 
-            _movp.Codigo = movp.Codigo;
+            if (_movp.Codigo != Guid.Empty)
+            {
+                _movp.Codigo = movp.Codigo;
+            }
 
             return _movp;
         }
