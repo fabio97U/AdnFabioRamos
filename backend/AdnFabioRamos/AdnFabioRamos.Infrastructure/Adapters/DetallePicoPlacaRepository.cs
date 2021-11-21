@@ -72,10 +72,8 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                 && fecha_actual >= DateTime.ParseExact(dpp.HoraInicio, "HH:mm", CultureInfo.InvariantCulture)
                 && fecha_actual <= DateTime.ParseExact(dpp.HoraFin, "HH:mm", CultureInfo.InvariantCulture)
 
-                && dpp.Digito.Contains(
-                    (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1))
-                    )
-                && dpp.DiaSemana.ToString().Contains(dia_semana_actual.ToString())
+                && string.Compare(dpp.Digito.ToString(), (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
+                && string.Compare(dpp.DiaSemana.ToString(), dia_semana_actual.ToString(), false, CultureInfo.InvariantCulture) == 0
 
                 select new
                 {
@@ -98,9 +96,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                     where dpp.CodigoPicoPlaca == codigo_picoplaca && dpp.Mes == fecha_actual.Month
                     && dpp.CodigoTipoTransporte == tipo_vehiculo
 
-                    && dpp.Digito.Contains(
-                        (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1))
-                        )
+                    && string.Compare(dpp.Digito.ToString(), (dpp.DigitoInicioFinal == "I" ? placa.Substring(0, 1) : placa.Substring(placa.Length - 1, 1)), false, CultureInfo.InvariantCulture) == 0
                     select new
                     {
                         Codigo = dpp.Codigo,
