@@ -21,7 +21,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 _context.SaveChanges();
 
                 _context.PicoPlaca.AddRange(
-                    new PicoPlaca { Anio = MvaloresDbInicializer.Manio, Descripcion = "Pico placa para el año 2021 en Colombia MEMORIA" }
+                    new PicoPlaca { Anio = MvaloresDbInicializer.Anio, Descripcion = "Pico placa para el año 2021 en Colombia MEMORIA", FechaCreacion = DateTime.Now }
                  );
 
                 _context.SaveChanges();
@@ -29,26 +29,26 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 _context.DetallePicoPlaca.AddRange(
                     new DetallePicoPlaca
                     {
-                        CodigoPicoPlaca = MvaloresDbInicializer.McodigoPicoPlaca,
-                        CodigoTipoTransporte = MvaloresDbInicializer.McodigoMoto,
+                        CodigoPicoPlaca = MvaloresDbInicializer.CodigoPicoPlaca,
+                        CodigoTipoTransporte = MvaloresDbInicializer.CodigoMoto,
                         Mes = Convert.ToByte(MvaloresDbInicializer.MesActual),
-                        HoraInicio = MvaloresDbInicializer.MhoraInicio,
-                        HoraFin = MvaloresDbInicializer.MhoraFin,
+                        HoraInicio = MvaloresDbInicializer.HoraInicio,
+                        HoraFin = MvaloresDbInicializer.HoraFin,
                         Digito = "1",
-                        DiaSemana = MvaloresDbInicializer.MdiaSemanaActual,
-                        DigitoInicioFinal = MvaloresDbInicializer.MDigitoInicioFinal
+                        DiaSemana = MvaloresDbInicializer.DiaSemanaActual,
+                        DigitoInicioFinal = MvaloresDbInicializer.DigitoInicioFinal
                     },
 
                     new DetallePicoPlaca
                     {
-                        CodigoPicoPlaca = MvaloresDbInicializer.McodigoPicoPlaca,
-                        CodigoTipoTransporte = MvaloresDbInicializer.McodigoCarro,
+                        CodigoPicoPlaca = MvaloresDbInicializer.CodigoPicoPlaca,
+                        CodigoTipoTransporte = MvaloresDbInicializer.CodigoCarro,
                         Mes = Convert.ToByte(MvaloresDbInicializer.MesActual),
-                        HoraInicio = MvaloresDbInicializer.MhoraInicio,
-                        HoraFin = MvaloresDbInicializer.MhoraFin,
+                        HoraInicio = MvaloresDbInicializer.HoraInicio,
+                        HoraFin = MvaloresDbInicializer.HoraFin,
                         Digito = "1",
-                        DiaSemana = MvaloresDbInicializer.MdiaSemanaActual,
-                        DigitoInicioFinal = MvaloresDbInicializer.MDigitoInicioFinal
+                        DiaSemana = MvaloresDbInicializer.DiaSemanaActual,
+                        DigitoInicioFinal = MvaloresDbInicializer.DigitoInicioFinal
                     }
                  );
 
@@ -63,16 +63,16 @@ namespace AdnFabioRamos.Infrastructure.Persistence
                 _context.Capacidad.AddRange(
                     new Capacidad
                     {
-                        CodigoParqueo = MvaloresDbInicializer.McodigoParqueo,
-                        CodigoTipoTransporte = MvaloresDbInicializer.McodigoMoto,
+                        CodigoParqueo = MvaloresDbInicializer.CodigoParqueo,
+                        CodigoTipoTransporte = MvaloresDbInicializer.CodigoMoto,
                         Capacidad1 = MvaloresDbInicializer.CapacidadMoto,
                         ValorHora = MvaloresDbInicializer.ValorHoraMoto,
                         ValorDia = MvaloresDbInicializer.ValorDiaMoto
                     },
                     new Capacidad
                     {
-                        CodigoParqueo = MvaloresDbInicializer.McodigoParqueo,
-                        CodigoTipoTransporte = MvaloresDbInicializer.McodigoCarro,
+                        CodigoParqueo = MvaloresDbInicializer.CodigoParqueo,
+                        CodigoTipoTransporte = MvaloresDbInicializer.CodigoCarro,
                         Capacidad1 = MvaloresDbInicializer.CapacidadCarro,
                         ValorHora = MvaloresDbInicializer.ValorHoraCarro,
                         ValorDia = MvaloresDbInicializer.ValorDiaCarro

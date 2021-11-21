@@ -1,17 +1,19 @@
-﻿namespace AdnFabioRamos.Infrastructure.Persistence
+﻿using System;
+
+namespace AdnFabioRamos.Infrastructure.Persistence
 {
     public class ValoresDBInicializer
     {
-        public int McodigoParqueo { get; set; } = 1;
-        public int Manio { get; set; } = 2021;
-        public int McodigoPicoPlaca { get; set; } = 1;
-        public int McodigoMoto { get; set; } = 1;
-        public int McodigoCarro { get; set; } = 2;
+        public int CodigoParqueo { get; set; } = 1;
+        public int CodigoPicoPlaca { get; set; } = 1;
+        public int Anio { get; set; } = 2021;
+        public int CodigoMoto { get; set; } = 1;
+        public int CodigoCarro { get; set; } = 2;
         public int MesActual { get; set; } = 11;
-        public int MdiaSemanaActual { get; set; } = 0;
-        public string MhoraInicio { get; set; } = "00:00";
-        public string MhoraFin { get; set; } = "23:59";
-        public string MDigitoInicioFinal { get; set; } = "I";
+        public int DiaSemanaActual { get; set; } = (int)DateTime.Now.DayOfWeek;
+        public string HoraInicio { get; set; } = "00:00";
+        public string HoraFin { get; set; } = "23:59";
+        public string DigitoInicioFinal { get; set; } = "I";
 
         public short CapacidadMoto { get; set; } = 10;
         public short CapacidadCarro { get; set; } = 20;

@@ -16,13 +16,5 @@ namespace AdnFabioRamos.Infrastructure.Persistence
         public virtual DbSet<Parqueo> Parqueo { get; set; }
         public virtual DbSet<PicoPlaca> PicoPlaca { get; set; }
         public virtual DbSet<TipoTransporte> TipoTransporte { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True");
-            }
-        }
     }
 }

@@ -6,6 +6,7 @@ using AdnFabioRamos.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,10 +36,8 @@ namespace AdnFabioRamos.Api
 
             services.AddAutoMapper(Assembly.Load(applicationAssemblyName.FullName));
 
-            services.AddDbContext<AdnCeibaContext>();
             services.AddDbContext<AdnCeibaContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            //options.UseInMemoryDatabase("TESTBD")
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
             services.AddHealthChecks()
@@ -78,7 +77,6 @@ namespace AdnFabioRamos.Api
             services.AddScoped<ICapacidadRepository, CapacidadRespository>();
             services.AddScoped<IDetallePicoPlaca, DetallePicoPlacaRepository>();
             services.AddScoped<IMovimientoParqueo, MovimientoParqueo>();
-
         }
 
         public void Configure(IApplicationBuilder app, Microsoft.Extensions.Hosting.IHostEnvironment env)

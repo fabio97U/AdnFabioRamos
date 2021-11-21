@@ -182,7 +182,7 @@ namespace AdnFabioRamos.Api.Tests
         }
 
         [TestMethod]
-        [DataRow(1, 1, 1, "1", "I", "00:00", "23:59", 11)]
+        [DataRow(2, 1, 1, "1", "I", "00:00", "23:59", 11)]
         public void CrearNuevoPicoPlaca(int CodigoPicoPlaca, int CodigoTipoTransporte, int DiaSemana, string Digito, string DigitoInicioFinal, string HoraInicio, string HoraFin, int Mes)
         {
             //Preparacion
