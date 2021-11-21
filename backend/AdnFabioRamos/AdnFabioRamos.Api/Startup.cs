@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Reflection;
 using AdnFabioRamos.Api.Filters;
 using AdnFabioRamos.Domain.Ports;
 using AdnFabioRamos.Infrastructure.Adapters;
@@ -14,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Prometheus;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace AdnFabioRamos.Api
 {

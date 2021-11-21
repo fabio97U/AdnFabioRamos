@@ -1,9 +1,7 @@
+using AdnFabioRamos.Domain.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using AdnFabioRamos.Domain.Ports;
-using AdnFabioRamos.Domain.Services;
-using AdnFabioRamos.Infrastructure.Adapters;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AdnFabioRamos.Infrastructure.Extensions
 {

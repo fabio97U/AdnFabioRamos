@@ -10,7 +10,7 @@ namespace estacionamiento_adn.Models.DTOs
         public int CodigoTipoTransporte { get; set; }
         public int Cilindraje { get; set; }
         public int ParqueoNumero { get; set; }
-        public DateTime FechaIngreso { get; set;  } = DateTime.Now;
+        public DateTime FechaIngreso { get; set; } = DateTime.Now;
 
         public bool PermitirSalirAhora { get; set; }
         public string DiasPermitidosSalir { get; set; } = "";

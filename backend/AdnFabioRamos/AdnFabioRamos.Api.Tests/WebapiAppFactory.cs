@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Linq;
 
 namespace AdnFabioRamos.Api.Tests
@@ -13,7 +12,7 @@ namespace AdnFabioRamos.Api.Tests
     {
         protected override IHostBuilder CreateHostBuilder()
         {
-            var host = 
+            var host =
             Host.CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(builder =>
                 {

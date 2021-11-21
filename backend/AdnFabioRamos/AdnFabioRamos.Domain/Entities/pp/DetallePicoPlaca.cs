@@ -20,7 +20,7 @@ namespace estacionamiento_adn.Models
         [Required]
         public string HoraFin { get; set; } = "";
         /// <summary>
-        /// 1: Lunes ... 7: Domingo
+        /// 0: Domingo ... 6: Sabado
         /// </summary>
         public int DiaSemana { get; set; }
         public string Digito { get; set; }

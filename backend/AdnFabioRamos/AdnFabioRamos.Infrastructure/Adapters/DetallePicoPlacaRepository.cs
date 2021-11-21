@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Infrastructure.Adapters
@@ -19,7 +18,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
         {
             _context = context;
         }
-        public enum DiasSemana { LUNES = 1, MARTES = 2, MIERCOLES = 3, JUEVES = 4, VIERNES = 5, SABADO = 6, DOMINGO = 7 }
+        public enum DiasSemana { LUNES = 1, MARTES = 2, MIERCOLES = 3, JUEVES = 4, VIERNES = 5, SABADO = 6, DOMINGO = 0 }
 
         public static string DiaSemana(int numero)
         {
@@ -52,17 +51,15 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                     break;
 
             }
-
             return dia;
         }
+
         public async Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa)
         {
-            //var lst_dpp_detalle_pico_placa = _contextProcedures.SpValidarPicoPlacaAsync(tipo_vehiculo, placa).Result.ToList();
-
             List<SpValidarPicoPlacaResult> lst_dpp_detalle_pico_placa = new List<SpValidarPicoPlacaResult>();
             var model = new SpValidarPicoPlacaResult();
 
-            int codigo_picoplaca = 1;
+            var codigo_picoplaca = 1;
             var fecha_actual = DateTime.Now;
             var dia_semana_actual = (int)fecha_actual.DayOfWeek;
 

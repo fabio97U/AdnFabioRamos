@@ -1,18 +1,15 @@
-﻿
-using Microsoft.Extensions.Configuration;
+﻿using AdnFabioRamos.Application.Utilidades;
+using AdnFabioRamos.Infrastructure.Persistence;
+using estacionamiento_adn.Models;
 using estacionamiento_adn.Models.DTOs;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using AdnFabioRamos.Application.Utilidades;
-using Microsoft.Extensions.DependencyInjection;
-using AdnFabioRamos.Infrastructure.Persistence;
-using estacionamiento_adn.Models;
 
 namespace AdnFabioRamos.Api.Tests
 {
@@ -33,7 +30,7 @@ namespace AdnFabioRamos.Api.Tests
             using (var scope = provider.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<AdnCeibaContext>();
+                services.GetRequiredService<AdnCeibaContext>();
                 DBInicializer.Initialize(services);
             }
         }
@@ -53,7 +50,6 @@ namespace AdnFabioRamos.Api.Tests
 
             //Verificacion
             Assert.AreEqual(true, respuestaPicoPlaca.PermitirSalirAhora);
-            //Assert.AreEqual(false, respuestaPicoPlaca.PermitirSalirAhora);
         }
 
         [TestMethod]

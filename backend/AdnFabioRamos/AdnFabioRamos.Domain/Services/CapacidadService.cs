@@ -1,6 +1,5 @@
 ﻿using AdnFabioRamos.Domain.Ports;
 using estacionamiento_adn.Models.DTOs;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,7 +13,7 @@ namespace AdnFabioRamos.Domain.Services
             _repository = repository;
         }
 
-        public async Task<IEnumerable<VehiculosDisponiblesParqueoDto>> GetCapacidadxPorParqueo(int codigo_parqueo)
+        public async Task<IEnumerable<VehiculosDisponiblesParqueoDto>> GetCapacidadxPorParqueoAsync(int codigo_parqueo)
         {
             return await _repository.GetCapacidadxPorParqueo(codigo_parqueo);
         }

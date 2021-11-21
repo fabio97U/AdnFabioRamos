@@ -1,9 +1,7 @@
-using System;
-using System.Net;
-using AdnFabioRamos.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace AdnFabioRamos.Api.Filters
 {

@@ -2,9 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AdnFabioRamos.Infrastructure.Persistence
 {
@@ -15,6 +12,7 @@ namespace AdnFabioRamos.Infrastructure.Persistence
             using (var _context = new AdnCeibaContext(serviceProvider.GetRequiredService<DbContextOptions<AdnCeibaContext>>()))
             {
                 ValoresDBInicializer MvaloresDbInicializer = new ValoresDBInicializer();
+
                 _context.TipoTransporte.AddRange(
                     new TipoTransporte { Tipo = "Moto", Descripcion = "Toda tipo de moto MEMORIA" },
                     new TipoTransporte { Tipo = "Carro", Descripcion = "Toda tipo de carro MEMORIA" }

@@ -1,16 +1,14 @@
 ﻿using AdnFabioRamos.Domain.Ports;
 using AdnFabioRamos.Infrastructure.Persistence;
 using estacionamiento_adn.Models.DTOs;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace AdnFabioRamos.Infrastructure.Adapters
 {
-    public class CapacidadRespository: ICapacidadRepository
+    public class CapacidadRespository : ICapacidadRepository
     {
         readonly AdnCeibaContext _context;
         public CapacidadRespository(AdnCeibaContext context)
