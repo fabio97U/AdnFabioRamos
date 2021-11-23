@@ -23,7 +23,7 @@ namespace AdnFabioRamos.Api.Controllers
 
 
         [HttpPost]
-        public Task<DetallePicoPlaca> PostDetallePicoPlaca(DetallePicoPlaca dpp_detalle_pico_placa)
-         => _Mediator.Send(new PostDetallePicoPlaca { DetallePicoPlaca = dpp_detalle_pico_placa });
+        public Task<DetallePicoPlaca> PostDetallePicoPlaca(DetallePicoPlaca detallePicoPlaca)
+         => _Mediator.Send(new PostDetallePicoPlaca { DetallePicoPlaca = detallePicoPlaca });
     }
 }

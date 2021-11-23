@@ -6,7 +6,7 @@ namespace AdnFabioRamos.Domain.Ports
 {
     public interface IDetallePicoPlaca
     {
-        Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa);
-        Task<DetallePicoPlaca> PostDetallePicoPlaca(DetallePicoPlaca dpp_Detalle_Pico_Placa);
+        Task<RespuestaPicoPlaca> GetconsultarPicoPlacaAsync(int tipo_vehiculo, string placa);
+        Task<DetallePicoPlaca> PostDetallePicoPlacaAsync(DetallePicoPlaca dpp_Detalle_Pico_Placa);
     }
 }

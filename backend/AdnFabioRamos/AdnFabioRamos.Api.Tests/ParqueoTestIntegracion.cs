@@ -38,13 +38,13 @@ namespace AdnFabioRamos.Api.Tests
         [TestMethod]
         [DataRow(1, "123")]
         [DataRow(2, "1234")]
-        public void ValidarVehiculoEstaEnPicoPlaca(int tipo_vehiculo, string placa)
+        public void ValidarVehiculoEstaEnPicoPlaca(int CodigoTipoTransporte, string Placa)
         {
             //Preparacion
             var respuestaPicoPlaca = new RespuestaPicoPlaca();
 
             //Prueba
-            var c = this.TestClient.GetAsync($"api/PicoPlaca/consultarPicoPlaca/{tipo_vehiculo}/{placa}").Result;
+            var c = this.TestClient.GetAsync($"api/PicoPlaca/consultarPicoPlaca/{CodigoTipoTransporte}/{Placa}").Result;
             var response = c.Content.ReadAsStringAsync().Result;
             respuestaPicoPlaca = System.Text.Json.JsonSerializer.Deserialize<RespuestaPicoPlaca>(response);
 
@@ -55,14 +55,14 @@ namespace AdnFabioRamos.Api.Tests
         [TestMethod]
         [DataRow(1, "223")]
         [DataRow(2, "2234")]
-        public void ValidarVehiculoNoEstaEnPicoPlaca(int tipo_vehiculo, string placa)
+        public void ValidarVehiculoNoEstaEnPicoPlaca(int CodigoTipoTransporte, string Placa)
         {
             //Preparacion
             var respuestaPicoPlaca = new RespuestaPicoPlaca();
 
             //Prueba
-            var c = this.TestClient.GetAsync($"api/PicoPlaca/consultarPicoPlaca/{tipo_vehiculo}/{placa}").Result;
-            var response = c.Content.ReadAsStringAsync().Result;
+            var clienteHttp = this.TestClient.GetAsync($"api/PicoPlaca/consultarPicoPlaca/{CodigoTipoTransporte}/{Placa}").Result;
+            var response = clienteHttp.Content.ReadAsStringAsync().Result;
             respuestaPicoPlaca = System.Text.Json.JsonSerializer.Deserialize<RespuestaPicoPlaca>(response);
 
             //Verificacion
@@ -72,51 +72,51 @@ namespace AdnFabioRamos.Api.Tests
         [TestMethod]
         [DataRow(1, "123", 2, 0, 1)]
         [DataRow(1, "1423", 2, 0, 1)]
-        public void IngresarVehiculoParqueo(int movp_codpar, string movp_placa, int movp_codtipt, int movp_cilindraje, int movp_parqueo_numero)
+        public void IngresarVehiculoParqueo(int CodigoParqueo, string Placa, int CodigoTipoTransporte, int Cilindraje, int ParqueoNumero)
         {
             //Preparacion
-            var movp = new MovimientoVehiculoPostDto()
+            var movimiento = new MovimientoVehiculoPostDto()
             {
-                CodigoParqueo = movp_codpar,
-                Cilindraje = movp_cilindraje,
-                CodigoTipoTransporte = movp_codtipt,
-                ParqueoNumero = movp_parqueo_numero,
-                Placa = movp_placa,
+                CodigoParqueo = CodigoParqueo,
+                Cilindraje = Cilindraje,
+                CodigoTipoTransporte = CodigoTipoTransporte,
+                ParqueoNumero = ParqueoNumero,
+                Placa = Placa,
                 FechaIngreso = DateTime.Now.AddHours(-10)
             };
 
             //Prueba
-            var stringContent = new StringContent(JsonConvert.SerializeObject(movp), Encoding.UTF8, "application/json");
+            var stringContent = new StringContent(JsonConvert.SerializeObject(movimiento), Encoding.UTF8, "application/json");
 
-            var c = this.TestClient.PostAsync($"api/MovimientosParqueo/GuardarMovimientoVehiculo", stringContent).Result;
-            var response = c.Content.ReadAsStringAsync().Result;
-            var respuestaMovp = System.Text.Json.JsonSerializer.Deserialize<MovimientoVehiculoPostDto>(response);
+            var clienteHttp = this.TestClient.PostAsync($"api/MovimientosParqueo/GuardarMovimientoVehiculo", stringContent).Result;
+            var response = clienteHttp.Content.ReadAsStringAsync().Result;
+            var respuestaMovimiento = System.Text.Json.JsonSerializer.Deserialize<MovimientoVehiculoPostDto>(response);
 
             //Verificacion
-            Assert.AreEqual(true, c.IsSuccessStatusCode);
+            Assert.AreEqual(true, clienteHttp.IsSuccessStatusCode);
         }
 
         [TestMethod]
         [DataRow(1, "123", 2, 6500, 1, 500, 4000)]
         //[DataRow(1, "123", 2, 500, 1, 500, 4000)]
         //[DataRow(2, "123", 2, 0, 1, 1000, 8000)]
-        public void GenerarTicketParqueo(int movp_codpar, string movp_placa, int movp_codtipt, int movp_cilindraje, int movp_parqueo_numero, int ValorHora, int ValorDia)
+        public void GenerarTicketParqueo(int CodigoParqueo, string Placa, int CodigoTipoTransporte, int Cilindraje, int ParqueoNumero, int ValorHora, int ValorDia)
         {
             #region Se inserta el movimiento
             var movpPut = new MovimientoVehiculoPostDto()
             {
-                CodigoParqueo = movp_codpar,
-                Cilindraje = movp_cilindraje,
-                CodigoTipoTransporte = movp_codtipt,
-                ParqueoNumero = movp_parqueo_numero,
-                Placa = movp_placa,
+                CodigoParqueo = CodigoParqueo,
+                Cilindraje = Cilindraje,
+                CodigoTipoTransporte = CodigoTipoTransporte,
+                ParqueoNumero = ParqueoNumero,
+                Placa = Placa,
                 FechaIngreso = DateTime.Now.AddHours(-10)
             };
             //Prueba
             var stringContentPut = new StringContent(JsonConvert.SerializeObject(movpPut), Encoding.UTF8, "application/json");
 
-            var c = this.TestClient.PostAsync($"api/MovimientosParqueo/GuardarMovimientoVehiculo", stringContentPut).Result;
-            var response = c.Content.ReadAsStringAsync().Result;
+            var clienteHttp = this.TestClient.PostAsync($"api/MovimientosParqueo/GuardarMovimientoVehiculo", stringContentPut).Result;
+            var response = clienteHttp.Content.ReadAsStringAsync().Result;
             var respuestaMovpPut = System.Text.Json.JsonSerializer.Deserialize<MovimientoVehiculoPostDto>(response);
             #endregion
 
@@ -134,13 +134,13 @@ namespace AdnFabioRamos.Api.Tests
             //Prueba
             var stringContent = new StringContent(JsonConvert.SerializeObject(movp), Encoding.UTF8, "application/json");
 
-            c = this.TestClient.PutAsync($"api/MovimientosParqueo/GenerarTicket/{respuestaMovpPut.Codigo}", stringContent).Result;
-            response = c.Content.ReadAsStringAsync().Result;
+            clienteHttp = this.TestClient.PutAsync($"api/MovimientosParqueo/GenerarTicket/{respuestaMovpPut.Codigo}", stringContent).Result;
+            response = clienteHttp.Content.ReadAsStringAsync().Result;
             var respuestaMovp = System.Text.Json.JsonSerializer.Deserialize<MovimientoVehiculoPutDto>(response);
             #endregion
 
             //Verificacion
-            Assert.AreEqual(true, c.IsSuccessStatusCode);
+            Assert.AreEqual(true, clienteHttp.IsSuccessStatusCode);
         }
 
         [TestMethod]
@@ -151,12 +151,12 @@ namespace AdnFabioRamos.Api.Tests
             IEnumerable<VehiculosDisponiblesParqueoDto> capacidadParqueo;
 
             //Prueba
-            var c = this.TestClient.GetAsync($"api/Capacidad/{CodigoParqueo}").Result;
-            var response = c.Content.ReadAsStringAsync().Result;
+            var clienteHttp = this.TestClient.GetAsync($"api/Capacidad/{CodigoParqueo}").Result;
+            var response = clienteHttp.Content.ReadAsStringAsync().Result;
             capacidadParqueo = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<VehiculosDisponiblesParqueoDto>>(response);
 
             //Verificacion
-            Assert.IsTrue(capacidadParqueo.Count() > 0);
+            Assert.IsTrue(capacidadParqueo.Any());
         }
 
         [TestMethod]
@@ -179,12 +179,11 @@ namespace AdnFabioRamos.Api.Tests
             //Prueba
             var stringContent = new StringContent(JsonConvert.SerializeObject(dpp), Encoding.UTF8, "application/json");
 
-            var c = this.TestClient.PostAsync($"api/PicoPlaca", stringContent).Result;
-            var response = c.Content.ReadAsStringAsync().Result;
-            var respuestaMovp = System.Text.Json.JsonSerializer.Deserialize<DetallePicoPlaca>(response);
+            var clienteHttp = this.TestClient.PostAsync($"api/PicoPlaca", stringContent).Result;
+            var response = clienteHttp.Content.ReadAsStringAsync().Result;
 
             //Verificacion
-            Assert.AreEqual(true, c.IsSuccessStatusCode);
+            Assert.AreEqual(true, clienteHttp.IsSuccessStatusCode);
         }
 
         [TestMethod]
@@ -195,8 +194,8 @@ namespace AdnFabioRamos.Api.Tests
             IEnumerable<SpMovimientosParqueoResult> MovimientosDisponibles;
 
             //Prueba
-            var c = this.TestClient.GetAsync($"api/MovimientosParqueo/codpar/{CodigoParqueo}").Result;
-            var response = c.Content.ReadAsStringAsync().Result;
+            var clienteHttp = this.TestClient.GetAsync($"api/MovimientosParqueo/Codigo/{CodigoParqueo}").Result;
+            var response = clienteHttp.Content.ReadAsStringAsync().Result;
             MovimientosDisponibles = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<SpMovimientosParqueoResult>>(response);
 
             //Verificacion

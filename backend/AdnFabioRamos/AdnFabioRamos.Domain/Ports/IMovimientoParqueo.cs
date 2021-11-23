@@ -8,8 +8,8 @@ namespace AdnFabioRamos.Domain.Ports
 {
     public interface IMovimientoParqueo
     {
-        Task<IEnumerable<SpMovimientosParqueoResult>> Getmovp_movimiento_x_parqueo(int id);
-        Task<MovimientoVehiculoPostDto> Post_GuardarMovimientoVehiculo(MovimientoVehiculoPostDto _movp);
-        Task<MovimientoVehiculoPutDto> PutGenerarTicket(Guid id, MovimientoVehiculoPutDto movp);
+        Task<IEnumerable<SpMovimientosParqueoResult>> GetMovimientosxParqueoAsync(int id);
+        Task<MovimientoVehiculoPostDto> PostGuardarMovimientoVehiculoAsync(MovimientoVehiculoPostDto movimientoPost);
+        Task<MovimientoVehiculoPutDto> PutGenerarTicketAsync(Guid id, MovimientoVehiculoPutDto movimientoPut);
     }
 }

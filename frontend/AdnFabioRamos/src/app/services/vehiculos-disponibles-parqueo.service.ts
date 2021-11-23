@@ -20,7 +20,7 @@ import { MovimientoVehiculoPut } from '../models/MovimientoVehiculoPut';
   }
 
   getParqueos(): Observable<Array<MovimientosVehiculosDisponibles>> {
-    return this._httpClient.get<Array<MovimientosVehiculosDisponibles>>(`${Global.url_api}/MovimientosParqueo/codpar/1`);
+    return this._httpClient.get<Array<MovimientosVehiculosDisponibles>>(`${Global.url_api}/MovimientosParqueo/Codigo/1`);
   }
 
   consultarPicoPlaca(TipoVehiculo: number, Placa: string): Observable<RespuestaPicoPlaca> {

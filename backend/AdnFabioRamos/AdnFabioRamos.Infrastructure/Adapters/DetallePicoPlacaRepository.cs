@@ -68,9 +68,9 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                                 && fecha_actual <= DateTime.ParseExact(dpp.HoraFin, "HH:mm", CultureInfo.InvariantCulture)
                 ;
         }
-        public async Task<RespuestaPicoPlaca> GetconsultarPicoPlaca(int tipo_vehiculo, string placa)
+        public async Task<RespuestaPicoPlaca> GetconsultarPicoPlacaAsync(int tipo_vehiculo, string placa)
         {
-            List<SpValidarPicoPlacaResult> lst_dpp_detalle_pico_placa = new List<SpValidarPicoPlacaResult>();
+            List<SpValidarPicoPlacaResult> lst_detalle_pico_placa = new List<SpValidarPicoPlacaResult>();
             var model = new SpValidarPicoPlacaResult();
 
             const int codigo_picoplaca = 1;
@@ -140,22 +140,22 @@ namespace AdnFabioRamos.Infrastructure.Adapters
                 model.DigitoInicioFinal = item.DigitoInicioFinal;
                 model.Salida = item.Salida;
                 model.Tipo = item.Tipo;
-                lst_dpp_detalle_pico_placa.Add(model);
+                lst_detalle_pico_placa.Add(model);
                 model = new SpValidarPicoPlacaResult();
             });
 
             var respuesta = new RespuestaPicoPlaca();
 
-            respuesta.PermitirSalirAhora = (lst_dpp_detalle_pico_placa.Any(x => x.Tipo == 0));
+            respuesta.PermitirSalirAhora = (lst_detalle_pico_placa.Any(x => x.Tipo == 0));
 
-            lst_dpp_detalle_pico_placa.Where(x => x.Tipo == 1).ToList().ForEach(x =>
+            lst_detalle_pico_placa.Where(x => x.Tipo == 1).ToList().ForEach(x =>
                 respuesta.DiasPermitidosSalir += x.DiaNombre + " de " + x.HoraInicio + " a " + x.HoraFin + " "
             );
 
             return respuesta;
         }
 
-        public async Task<DetallePicoPlaca> PostDetallePicoPlaca(DetallePicoPlaca dpp_Detalle_Pico_Placa)
+        public async Task<DetallePicoPlaca> PostDetallePicoPlacaAsync(DetallePicoPlaca dpp_Detalle_Pico_Placa)
         {
             _context.DetallePicoPlaca.Add(dpp_Detalle_Pico_Placa);
 

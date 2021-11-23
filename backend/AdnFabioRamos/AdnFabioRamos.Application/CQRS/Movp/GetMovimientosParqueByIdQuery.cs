@@ -22,7 +22,7 @@ namespace AdnFabioRamos.Application.CQRS.Movp
             {
                 if (request != null)
                 {
-                    return await _repositorio.Getmovp_movimiento_x_parqueo(request.CodigoParqueo);
+                    return await _repositorio.GetMovimientosxParqueoAsync(request.CodigoParqueo);
                 }
                 else
                 {

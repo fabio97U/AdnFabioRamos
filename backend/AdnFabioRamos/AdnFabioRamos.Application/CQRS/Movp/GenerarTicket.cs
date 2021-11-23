@@ -28,7 +28,7 @@ namespace AdnFabioRamos.Application.CQRS.Movp
                 {
                     ParqueoLogica.CalcularTotalPagar(request.MovimientoVehiculoPut);
 
-                    return await _repository.PutGenerarTicket(request.IdParqueo, request.MovimientoVehiculoPut);
+                    return await _repository.PutGenerarTicketAsync(request.IdParqueo, request.MovimientoVehiculoPut);
                 }
                 else
                 {

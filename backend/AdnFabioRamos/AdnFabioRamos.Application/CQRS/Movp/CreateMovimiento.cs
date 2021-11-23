@@ -30,17 +30,17 @@ namespace AdnFabioRamos.Application.CQRS.Movp
             {
                 if (request != null)
                 {
-                    IEnumerable<SpMovimientosParqueoResult> rowsParqueos = await _repository.Getmovp_movimiento_x_parqueo(request.MovimientoVehiculo.CodigoParqueo);
+                    IEnumerable<SpMovimientosParqueoResult> rowsParqueos = await _repository.GetMovimientosxParqueoAsync(request.MovimientoVehiculo.CodigoParqueo);
 
                     if (rowsParqueos.Any(x => x.CodigoTipoTransporte == request.MovimientoVehiculo.CodigoTipoTransporte && x.HoraEntrada == null))
                     {
-                        var respuestaPicoPlaca = await _detallePicoPlaca.GetconsultarPicoPlaca(request.MovimientoVehiculo.CodigoTipoTransporte, request.MovimientoVehiculo.Placa);
+                        var respuestaPicoPlaca = await _detallePicoPlaca.GetconsultarPicoPlacaAsync(request.MovimientoVehiculo.CodigoTipoTransporte, request.MovimientoVehiculo.Placa);
 
                         request.MovimientoVehiculo.PermitirSalirAhora = respuestaPicoPlaca.PermitirSalirAhora;
                         request.MovimientoVehiculo.DiasPermitidosSalir = respuestaPicoPlaca.DiasPermitidosSalir;
 
                         return respuestaPicoPlaca.PermitirSalirAhora
-                            ? await _repository.Post_GuardarMovimientoVehiculo(request.MovimientoVehiculo)
+                            ? await _repository.PostGuardarMovimientoVehiculoAsync(request.MovimientoVehiculo)
                             : request.MovimientoVehiculo;
                     }
                     else

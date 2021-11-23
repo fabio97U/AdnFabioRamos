@@ -35,7 +35,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             return Marray;
         }
 
-        public async Task<IEnumerable<SpMovimientosParqueoResult>> Getmovp_movimiento_x_parqueo(int id)
+        public async Task<IEnumerable<SpMovimientosParqueoResult>> GetMovimientosxParqueoAsync(int id)
         {
             List<SpMovimientosParqueoResult> lst_model = new List<SpMovimientosParqueoResult>();
             var model = new SpMovimientosParqueoResult();
@@ -100,7 +100,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             return lst_model;
         }
 
-        public async Task<MovimientoVehiculoPostDto> Post_GuardarMovimientoVehiculo(MovimientoVehiculoPostDto _movp)
+        public async Task<MovimientoVehiculoPostDto> PostGuardarMovimientoVehiculoAsync(MovimientoVehiculoPostDto _movp)
         {
             var movp = new estacionamiento_adn.Models.MovimientoParqueo();
 
@@ -122,7 +122,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             return new MovimientoVehiculoPostDto();
         }
 
-        public async Task<MovimientoVehiculoPutDto> PutGenerarTicket(Guid id, MovimientoVehiculoPutDto movp)
+        public async Task<MovimientoVehiculoPutDto> PutGenerarTicketAsync(Guid id, MovimientoVehiculoPutDto movp)
         {
             var movp_movimiento_parqueo = await _context.MovimientoParqueo.FindAsync(id);
 

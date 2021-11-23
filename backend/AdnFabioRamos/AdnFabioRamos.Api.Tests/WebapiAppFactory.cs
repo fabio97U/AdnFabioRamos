@@ -27,8 +27,7 @@ namespace AdnFabioRamos.Api.Tests
 
                         services.AddDbContext<AdnCeibaContext>(options =>
                         {
-                            //options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=adn_ceiba;Integrated Security=True;multipleactiveresultsets=true;Connection Timeout=0");
-                            options.UseInMemoryDatabase(databaseName: "MockBD");
+                            options.UseInMemoryDatabase(databaseName: "MockParqueoBD");
                         });
                     });
                 });

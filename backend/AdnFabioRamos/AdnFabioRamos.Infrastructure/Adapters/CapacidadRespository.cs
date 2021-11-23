@@ -16,7 +16,7 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             _context = context;
         }
 
-        public async Task<IEnumerable<VehiculosDisponiblesParqueoDto>> GetCapacidadxPorParqueo(int codigo_parqueo)
+        public async Task<IEnumerable<VehiculosDisponiblesParqueoDto>> GetCapacidadxPorParqueoAsync(int codigo_parqueo)
         {
             List<VehiculosDisponiblesParqueoDto> lst_model = new List<VehiculosDisponiblesParqueoDto>();
             VehiculosDisponiblesParqueoDto model = new VehiculosDisponiblesParqueoDto();

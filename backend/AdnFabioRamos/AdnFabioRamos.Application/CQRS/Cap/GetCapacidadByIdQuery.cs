@@ -22,7 +22,7 @@ namespace AdnFabioRamos.Application.CQRS.Cap
             {
                 if (request != null)
                 {
-                    return await _capacidadRepository.GetCapacidadxPorParqueo(request.CodigoParqueo);
+                    return await _capacidadRepository.GetCapacidadxPorParqueoAsync(request.CodigoParqueo);
                 }
                 else
                 {

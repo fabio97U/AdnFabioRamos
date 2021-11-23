@@ -22,7 +22,7 @@ namespace AdnFabioRamos.Application.CQRS.Dpp
             {
                 if (request != null)
                 {
-                    return await _DetallePicoPlacaRepository.GetconsultarPicoPlaca(request.TipoVehiculo, request.Placa);
+                    return await _DetallePicoPlacaRepository.GetconsultarPicoPlacaAsync(request.TipoVehiculo, request.Placa);
                 }
                 else
                 {
