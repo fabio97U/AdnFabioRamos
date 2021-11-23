@@ -100,46 +100,46 @@ namespace AdnFabioRamos.Infrastructure.Adapters
             return lst_model;
         }
 
-        public async Task<MovimientoVehiculoPostDto> PostGuardarMovimientoVehiculoAsync(MovimientoVehiculoPostDto _movp)
+        public async Task<MovimientoVehiculoPostDto> PostGuardarMovimientoVehiculoAsync(MovimientoVehiculoPostDto movimientoPost)
         {
             var movp = new estacionamiento_adn.Models.MovimientoParqueo();
 
-            _mapper.Map(_movp, movp);
+            _mapper.Map(movimientoPost, movp);
 
             _context.MovimientoParqueo.Add(movp);
 
             await _context.SaveChangesAsync();
 
-            if (_movp != null)
+            if (movimientoPost != null)
             {
-                if (_movp.Codigo != Guid.Empty)
+                if (movimientoPost.Codigo != Guid.Empty)
                 {
-                    _movp.Codigo = movp.Codigo;
+                    movimientoPost.Codigo = movp.Codigo;
                 }
-                return _movp;
+                return movimientoPost;
             }
 
             return new MovimientoVehiculoPostDto();
         }
 
-        public async Task<MovimientoVehiculoPutDto> PutGenerarTicketAsync(Guid id, MovimientoVehiculoPutDto movp)
+        public async Task<MovimientoVehiculoPutDto> PutGenerarTicketAsync(Guid id, MovimientoVehiculoPutDto movimientoPut)
         {
             var movp_movimiento_parqueo = await _context.MovimientoParqueo.FindAsync(id);
 
-            if (movp != null)
+            if (movimientoPut != null)
             {
-                movp_movimiento_parqueo.TotalPagar = movp.CantidadPagar;
-                movp_movimiento_parqueo.HoraSalida = movp.HoraSalida;
+                movp_movimiento_parqueo.TotalPagar = movimientoPut.CantidadPagar;
+                movp_movimiento_parqueo.HoraSalida = movimientoPut.HoraSalida;
 
                 _context.Entry(movp_movimiento_parqueo).State = EntityState.Modified;
 
                 await _context.SaveChangesAsync();
 
-                return movp;
+                return movimientoPut;
             }
             else
             {
-                throw new System.ArgumentNullException(nameof(movp), "No se envio el MovimientoVehiculoPutDto");
+                throw new System.ArgumentNullException(nameof(movimientoPut), "No se envio el MovimientoVehiculoPutDto");
             }
 
         }
